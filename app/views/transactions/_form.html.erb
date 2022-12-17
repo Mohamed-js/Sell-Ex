@@ -1,0 +1,41 @@
+<%= form_with(model: transaction) do |form| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+        <% transaction.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if params[:type] == 'increase' %>
+    <div class="field form-group">
+      <%= form.label 'المعاملة' %>
+      <input type="hidden" value="increase" name="transaction[transaction_type]" />
+      <%= select_tag "transaction[title]", options_for_select([ "فودافون كاش", "صيانة" ,"استثمار" ,"أخرى"]), class:"form-control", prompt: "اختر المعاملة", required: true %>
+    </div>
+  <% else %>
+    <div class="field form-group">
+      <%= form.label 'المعاملة' %>
+      <input type="hidden" value="decrease" name="transaction[transaction_type]" />
+      <%= select_tag "transaction[title]", options_for_select([ "دفع عمالة", "دفع كهرباء", "دفع الإيجار", "دفع ضرايب" ,"أخرى"]), class:"form-control", prompt: "اختر المعاملة", required: true %>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label 'القيمة' %>
+    <%= form.number_field :transaction_value, class:"form-control" , step: :any, required: true %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label 'تفاصيل' %>
+    <%= form.text_field :notes, class:"form-control" ,  required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'إجراء المعاملة', class: "bg-gradient white btn" %>
+  </div>
+<% end %>

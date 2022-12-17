@@ -1,0 +1,25 @@
+<h1 class="text-center mb-3">المديونيات</h1>
+
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">الاسم</th>
+      <th scope="col">قيمة المديونية</th>
+      <th scope="col">الفاتورة</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @debts.each do |debt| %>
+      <tr scope="row">
+        <td><%= debt.debtor %></td>
+        <td><%= debt.dept_value %></td>
+        <td><%= link_to "عرض", bill_path(debt.bill.id) %></td>
+        <td><%= link_to "سداد جزء", edit_debt_path(debt.id), class:"btn bg-gradient-secondary white" %></td>
+        <td><%= link_to "سداد بالكامل", debt_path(debt.id), class:"btn bg-gradient-danger white", method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

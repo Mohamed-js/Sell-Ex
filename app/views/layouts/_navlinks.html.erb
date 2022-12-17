@@ -1,0 +1,59 @@
+<% home = current_page?(root_url) ? "active": "" %>
+<% bill = current_page?("/bills/search") ? "active": "" %>
+<% transactions = current_page?("/transactions/all") ? "active": "" %>
+<% debts = current_page?("/debts") ? "active": "" %>
+<% products = current_page?(products_url) ? "active": "" %>
+<% charges = current_page?(charges_url) ? "active": "" %>
+
+<div class="flex-col mt-2 h-100">
+    <div class="sidebar-links flex-col mt-2 w-100">
+        <%= link_to root_url do %>
+            <div class="sidebar-link flex-row align-center px-3 py-2 <%= home %>">
+                <%= fa_icon "home" %>
+                الصفحة الرئيسية
+            </div>
+        <% end %>
+        <%= link_to "/bills/search" do %>
+            <div class="sidebar-link flex-row align-center px-3 py-2 <%= bill %>">
+                <%= fa_icon "search" %>
+                بحث فاتورة
+            </div>
+        <% end %>
+        <%= link_to "/transactions/all" do %>
+            <div class="sidebar-link flex-row align-center px-3 py-2 <%= transactions %>">
+                <%= fa_icon "money-bill" %>
+                الدرج
+            </div>
+        <% end %>
+        <%# Admin specific!!!!!!!!!!!!!!! %>
+        <% if current_user.admin %>
+            <%= link_to products_url do %>
+                <div class="sidebar-link flex-row align-center px-3 py-2 <%= products %>">
+                    <%= fa_icon "diamond" %>
+                    المنتجات
+                </div>
+            <% end %>
+            <%= link_to "/debts" do %>
+                <div class="sidebar-link flex-row align-center px-3 py-2 <%= debts %>">
+                    <%= fa_icon "credit-card" %>
+                    المديونيات
+                </div>
+            <% end %>
+        <% end %>
+        <%# Admin specific!!!!!!!!!!!!!!! %>
+        <%= link_to charges_url do %>
+            <div class="sidebar-link flex-row align-center px-3 py-2 <%= charges %>">
+                <%= fa_icon "dollar" %>
+                الشحن
+            </div>
+        <% end %>
+    </div>
+
+    <%# LOGOUT %>
+    <%= button_to '/users/sign_out', class: "btn" , method: :delete do %>
+            <div class=" flex-row align-center px-3 py-2">
+                <%= fa_icon "sign-out" %>
+                <span class="px-2">تسجيل الخروج</span>
+            </div>
+    <% end %>
+</div>

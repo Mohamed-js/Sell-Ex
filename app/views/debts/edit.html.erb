@@ -1,0 +1,29 @@
+<h1 class="text-center mb-3">سداد جزء من مديونية</h1>
+<p id="notice" class="text-center alert"><%= notice %></p>
+<div class="container mt-3">
+
+<%= form_with(model: @debt) do |form| %>
+  <% if @debt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
+
+      <ul>
+        <% @debt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label "المبلغ المراد سداده" %>
+    <%= form.number_field :money, class:"form-control" %>
+  </div>
+
+  <div class="actions form-group">
+    <%= form.submit "سداد", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+  </div>
+<% end %>
+
+<%= link_to 'الغاء ورجوع', debts_path %>
+</div>

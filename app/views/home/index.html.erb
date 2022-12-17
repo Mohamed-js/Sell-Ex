@@ -1,0 +1,104 @@
+<div class="text-center bg-dark btn-dark p-3">
+    <h4>مرحبا بك في</h4>
+    <h1>لوحة التحكم</h1>
+</div>
+
+
+
+<%= link_to 'تسجيل الخروج', '/users/sign_out', class:"btn bg-gradient-danger white m-2", method: :delete %>
+
+
+<div class="row max-width">
+
+    <% if !current_user.admin %>
+        <div class="col-6 mt-3">
+            <a href="/sales" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-sack-dollar big-icon green"></i>
+                <h3 class="text-center mt-2">
+                    المبيعات
+                </h3>
+            </a>
+        </div>
+        <div class="col-6 mt-3">
+            <a href="/charges" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-signal big-icon green"></i>
+                <h3 class="text-center mt-2">
+                    شحن علي الهواء
+                </h3>
+            </a>
+        </div>
+        <div class="col-6 mt-3">
+            <a href="/transactions/all" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-money-bill-wave big-icon yellow"></i>
+                <h3 class="text-center mt-2">
+                    الدرج ( سحب - إيداع - مصروفات )
+                </h3>
+            </a>
+        </div>
+        <div class="col-6 mt-3">
+            <a href="/bills/search" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-money-bill-wave big-icon yellow"></i>
+                <h3 class="text-center mt-2">
+                    بحث فاتورة
+                </h3>
+            </a>
+        </div>
+    <% end %>
+
+
+    
+    <% if current_user.admin %>
+        <div class="col-6 mt-3">
+            <a href="/sales" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-sack-dollar big-icon green"></i>
+                <h3 class="text-center mt-2">
+                    المبيعات
+                </h3>
+            </a>
+        </div>
+        <div class="col-6 mt-3">
+            <a href="/charges" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-signal big-icon green"></i>
+                <h3 class="text-center mt-2">
+                    شحن علي الهواء
+                </h3>
+            </a>
+        </div>
+
+        <div class="col-6 mt-3">
+            <a href="/products" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-keyboard big-icon white"></i>
+                <h3 class="text-center mt-2">
+                    المنتجات
+                </h3>
+            </a>
+        </div>
+
+        <div class="col-6 mt-3">
+            <a href="/debts" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-credit-card big-icon white"></i>
+                <h3 class="text-center mt-2">
+                    المديونيات
+                </h3>
+            </a>
+        </div>
+
+        <div class="col-6 mt-3">
+            <a href="/transactions/all" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-money-bill-wave big-icon yellow"></i>
+                <h3 class="text-center mt-2">
+                    الدرج ( سحب - إيداع - مصروفات )
+                </h3>
+            </a>
+        </div>
+
+        <div class="col-6 mt-3">
+            <a href="/bills/search" class="btn btn-block bg-gradient white p-4">
+                <i class="fa fa-search big-icon yellow"></i>
+                <h3 class="text-center mt-2">
+                    بحث فاتورة
+                </h3>
+            </a>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,18 @@
+<% if params[:type] == 'increase' %>
+<h1 class="text-center mb-3">
+  معاملة إيداع
+</h1>
+<% else %>
+<h1 class="text-center mb-3">
+  معاملة سحب
+</h1>
+<% end %>
+
+
+<div class="max-width">
+  <%= render 'form', transaction: @transaction %>
+  <br>
+  <%= link_to 'إلغاء و رجوع', transactions_path %>
+</div>
+
+

@@ -1,0 +1,28 @@
+<h1 class="text-center mb-3">تعديل الكمية</h1>
+<p id="notice" class="text-center alert"><%= notice %></p>
+<div class="container mt-3">
+<%= form_with(model: @sale) do |form| %>
+  <% if @sale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+      <ul>
+        <% @sale.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label "الكمية" %>
+    <%= form.number_field :quantity, class:"form-control" %>
+  </div>
+
+  <div class="actions form-group">
+    <%= form.submit "تعديل", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+  </div>
+<% end %>
+
+<%= link_to 'الغاء التعديل', sales_path %>
+</div>

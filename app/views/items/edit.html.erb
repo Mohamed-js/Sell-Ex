@@ -1,0 +1,32 @@
+<h1 class="text-center mb-3">تعديل العنصر</h1>
+
+
+<div class="container">
+<%= form_with(model: @item) do |form| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% @item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field mb-3">
+    <%= form.label "سعر الشراء" %>
+    <%= form.number_field :buying_price, class:"form-control", step: :any %>
+  </div>
+
+  <div class="actions my-3">
+    <%= form.submit 'تعديل', class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+  </div>
+<% end %>
+</div>
+
+<div class="container">
+    <%= link_to 'عرض المنتج', @item.product %> |
+    <%= link_to 'الرجوع', products_path %>
+</div>

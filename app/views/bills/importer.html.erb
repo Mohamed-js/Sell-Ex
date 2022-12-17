@@ -1,0 +1,7 @@
+<h1>importer</h1>
+<p id="notice" class="text-center"><%= notice %></p>
+
+<%= form_with url: "/import", method: :post do |form| %>
+  <%= form.file_field :csv_file %>
+  <%= form.submit "Import" %>
+<% end %>

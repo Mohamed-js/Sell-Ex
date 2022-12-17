@@ -1,0 +1,57 @@
+<h1 class="text-center mb-3">المنتجات</h1>
+
+<div class="text-center mb-2">
+  <%= link_to 'اضافة منتج +', new_product_path,  class:"btn bg-gradient-tertiary white" %>
+  <button onclick='printDiv("table")'>طباعة</button>
+</div>
+<div class="container my-2">
+    <%= link_to 'رجوع للخلف', root_path, class:"btn btn-secondary" %>
+</div>
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">الاسم</th>
+      <th scope="col">سعر البيع</th>
+      <th scope="col">سعر الجملة</th>
+      <th scope="col" small='true'>الكمية في المخزن</th>
+      
+    </tr>
+  </thead>
+
+  <tbody id='table'>
+    <% @products.each do |product| %>
+      <tr scope="row">
+        <td><%= product.name %></td>
+        <td><%= product.selling_price %> ج.م</td>
+        <td><%= product.whole_sale_price %> ج.م</td>
+        <td><%= product.items.count %> قطعة</td>
+        <% if current_user.admin %>
+          <td><%= link_to 'عرض البضاعة', product, class:"btn bg-gradient-tertiary white" %></td>
+          <td><%= button_to 'حذف المنتج نهائيا', product, method: :delete, data: { confirm: 'هل أنت متأكد ؟' }, class:"btn bg-gradient-danger white" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<script>
+ function printDiv(divID) {
+        //Get the HTML of div
+        var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body.innerHTML;
+        //Reset the page's HTML with div's HTML only
+        document.body.innerHTML = 
+          "<html><head> <link rel='stylesheet' href='https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css' integrity='sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe' crossorigin='anonymous'></head><body>" + 
+          divElements + "</body>";
+        //Print Page
+        window.print();
+        //Restore orignal HTML
+        document.body.innerHTML = oldPage;
+    }
+</script>
+
+

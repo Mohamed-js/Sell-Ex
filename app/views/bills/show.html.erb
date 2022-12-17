@@ -1,0 +1,88 @@
+<h1 class="text-center mb-3">Computech</h1>
+<div class="text-center mt-3 d-flex justify-content-between max-width p-2">
+  <p>
+    <span> التاريخ: </span>
+    <span> <%= @bill.created_at.strftime('%d/%m/%Y') %></span>
+    <br/>
+    <span> الساعة: </span>
+    <span> <%= @bill.created_at.strftime('%I %p') %></span>
+  </p>
+</div>
+
+
+<div class="text-center mt-3 d-flex justify-content-between max-width p-2">
+  <h5>
+    <span> اسم المشتري: </span>
+    <span> <%= @bill.buyer %></span>
+  </h5>
+  <h5>
+    <span> الفاتورة رقم: </span>
+    <span> <%= @bill.id %> </span>
+  </h5>
+  <h5>
+    <span> مجمل سعر الفاتورة: </span>
+    <span> <%= @bill.sales.sum('(selling_price * quantity) - discount') %> ج.م</span>
+  </h5>
+</div>
+
+
+
+<div class="text-center mb-2 d-flex justify-content-between max-width p-2">
+  <%if @bill.debt %>
+    <h5>
+      <span> الحالة : </span>
+      <span>ناقصة الحساب </span>
+    </h5>
+    <h5>
+      <span> الباقي : </span>
+      <span> <%= @bill.debt.dept_value %> ج.م</span>
+    </h5>
+    <h5>
+      <span> المدفوع : </span>
+      <span> <%= @bill.sales.sum('(selling_price * quantity) - discount') - @bill.debt.dept_value %> ج.م</span>
+    </h5>
+  <% else %>
+    <h5>
+      <span> الحالة : </span>
+      <span> مدفوعة كاملا</span>
+    </h5>
+    <h5>
+      <span>المدفوع : </span>
+      <span> <%= @bill.sales.sum('(selling_price * quantity) - discount') %> ج.م</span>
+    </h5>
+  <% end %>
+  
+</div>
+
+
+
+
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">الاسم</th>
+      <th scope="col">الكمية</th>
+      <th scope="col">سعر بيع القطعة</th>
+      <th scope="col">المجمل</th>
+      <th colspan="2">ادارة</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bill.sales.each do |sale| %>
+      <tr scope="row">
+        <td><%= sale.name %></td>
+        <td><%= sale.quantity %></td>
+        <td><%= sale.selling_price %> ج.م</td>
+        <td><%= sale.quantity * sale.selling_price - sale.discount %> ج.م</td>
+        <% if current_user.admin %>
+          <td><%= link_to 'تعديل', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1" %></td>
+          <td><%= link_to 'عمل مرتجع', sale, method: :delete, data: { confirm: 'Are you sure?' } , class:"btn bg-gradient-danger white p-1"%></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="text-center">
+  <%= link_to 'الرجوع', sales_path, class:"btn btn-secondary" %>
+</div>

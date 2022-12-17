@@ -1,0 +1,36 @@
+<h1 class="text-center mb-3">Computech</h1>
+
+<div class="max-width">
+    <form method="GET" action="/bills/search" >
+        <input type="text" name='q' placeholder="ابحث باستخدام اسم صاحب الفاتورة أو رقم الفاتورة" class="form-control" />
+        <input type="submit" value="بحث" class="btn bg-gradient white m-2" />
+    </form>
+
+
+    
+    <% if @bills %>
+        <table class="table table-bordered table-sm table-striped max-width">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">رقم الفاتورة</th>
+                    <th scope="col">صاحب الفاتورة</th>
+                    <th scope="col">البائع</th>
+                    <th scope="col">تاريخ البيع</th>
+                    <th scope="col">عرض الفاتورة</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @bills.each do |bill| %>
+                <tr scope="row">
+                    <td><%= bill.id %></td>
+                    <td><%= bill.buyer %> </td>
+                    <td><%= bill.seller %></td>
+                    <td><%= bill.created_at.strftime('%F || %I:%M || %p') %></td>
+                    <td><%= button_to "تفاصيل الفاتورة" , bill_path(bill.id), method: "get", class:"btn blue-link" %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% end %>
+</div>

@@ -1,0 +1,54 @@
+<h1 class="text-center mb-3">
+    المبيعات  
+</h1>
+
+<br>
+<div class="row m-1 max-width m-auto">
+  <div  class="col-lg-3 col-md-4 p-0">
+    <a href="/sales">الرجوع</a>
+  </div>
+</div>
+<br>
+
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" small='true'>الفاتورة</th>
+      <th scope="col">الاسم</th>
+      <th scope="col" small='true'>الكمية</th>
+      <th scope="col">سعر بيع القطعة</th>
+      <th scope="col">المجمل بعد الخصم</th>
+      <th scope="col">البائع</th>
+      <th scope="col">تاريخ البيع</th>
+      <% if current_user.admin %>
+      <th colspan="2">ادارة</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sales.each do |sale| %>
+      <tr  scope="row">
+        <td><%= button_to sale.bill.id , bill_path(sale.bill.id), method: "get", class:"btn blue-link" %> </td>
+        <% if sale.product %>
+          <td><%= button_to sale.name , product_path(sale.product.id), method: "get", class:"btn blue-link" %></td>
+        <% else %>
+          <td><%= sale.name %></td>
+        <% end %>
+        <td><%= sale.quantity %></td>
+        <td><%= sale.selling_price %> ج.م  <%= " - " + sale.sale_type if sale.sale_type %> </td>
+        <td><%= sale.quantity * sale.selling_price - sale.discount %> ج.م</td>
+        <% if sale.bill.seller %>
+          <td><%= sale.bill.seller %></td>
+          <% else %>
+          <td><%= sale.seller %></td>
+        <% end %>
+        <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
+        <% if current_user.admin %>
+          <td><%= button_to 'تعديل', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1", method: "get" %></td>
+          <td><%= button_to 'عمل مرتجع', sale, method: :delete, data: { confirm: 'هل أنت متأكد ؟' } , class:"btn bg-gradient-danger white p-1" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

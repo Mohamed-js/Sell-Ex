@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @transaction.title %>
+</p>
+
+<p>
+  <strong>Transaction value:</strong>
+  <%= @transaction.transaction_value %>
+</p>
+
+<p>
+  <strong>Dorg was:</strong>
+  <%= @transaction.dorg_was %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

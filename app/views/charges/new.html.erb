@@ -1,0 +1,41 @@
+<h1 class="text-center mb-3">
+    حفظ شحنة
+</h1>
+
+<%= form_with(model: @charge, class:"container") do |form| %>
+  <% if @charge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@charge.errors.count, "error") %> prohibited this charge from being saved:</h2>
+
+      <ul>
+        <% @charge.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br>
+  <div class="field form-group">
+    <%= form.label "الشركة" %>
+    <%= select_tag "charge[network]", options_for_select([ "اتصالات", "أورانج", "فودافون" ]), class:"form-control", prompt: "اختر المنتج", required: true %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "مجمل المدفوع" %>
+    <%= form.number_field :cash, class:"form-control" , step: :any, required: true %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "الربح" %>
+    <%= form.number_field :profit, class:"form-control" , step: :any, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "اضافة الشحنة", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+  </div>
+<% end %>
+
+<div class="container mt-2">
+    <%= link_to 'رجوع للخلف', root_path, class:"btn btn-secondary" %>
+</div>

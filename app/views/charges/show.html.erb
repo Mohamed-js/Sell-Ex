@@ -1,0 +1,32 @@
+<h1 class="text-center mb-3">شحنات شركة <%= @charges[0].network %></h1>
+
+<div class="row max-width my-3">
+    <div class="col-6">
+        <%= link_to 'ادخال شحنة جديدة +', '/charges/new', class:"btn bg-gradient-tertiary white" %>
+    </div>
+    <div class="col-6">
+        <%= link_to 'رجوع للخلف', charges_path, class:"btn btn-secondary" %>
+    </div>
+</div>
+
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">القيمة</th>
+      <th scope="col">ربح الشحنة</th>
+      <th scope="col">التاريخ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @charges.each do |product| %>
+      <tr scope="row">
+        <td><%= product.cash %> ج.م</td>
+        <td><%= product.profit %> ج.م</td>
+        <td><%= product.created_at.strftime('%F || %I:%M || %p') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

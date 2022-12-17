@@ -1,0 +1,41 @@
+<h1 class="text-center mb-3">تعديل المنتج</h1>
+
+<%= form_with(model: @product, class:"container") do |form| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="field form-group">
+    <%= form.label "اسم المنتج" %>
+    <%= form.text_field :name, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "سعر البيع" %>
+    <%= form.number_field :selling_price, class:"form-control" , step: :any %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label "سعر بيع الجملة" %>
+    <%= form.number_field :whole_sale_price, class:"form-control" , step: :any %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "تعديل المنتج", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+  </div>
+<% end %>
+
+
+
+<div class="container mt-5">
+    <%= link_to 'عرض المنتج', @product, class:"btn bg-gradient-secondary white" %> |
+    <%= link_to 'رجوع للخلف', products_path, class:"btn btn-secondary" %>
+</div>
