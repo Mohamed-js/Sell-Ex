@@ -15,7 +15,7 @@
  */
 
 body {
-  direction: rtl;
+  direction: ltr;
 }
 
 table {
@@ -139,4 +139,17 @@ a[href='/users/password/new'] {
 
 h2 {
   text-align: center;
+}
+
+.logout-container .logout-btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  color: aliceblue;
+  /* padding-left: 4px; */
+  background-color: transparent;
+}
+
+.logout-container form {
+  text-align: start;
 }

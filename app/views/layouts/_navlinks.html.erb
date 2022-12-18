@@ -3,7 +3,7 @@
 <% transactions = current_page?("/transactions/all") ? "active": "" %>
 <% debts = current_page?("/debts") ? "active": "" %>
 <% products = current_page?(products_url) ? "active": "" %>
-<% charges = current_page?(charges_url) ? "active": "" %>
+
 
 <div class="flex-col mt-2 h-100">
     <div class="sidebar-links flex-col mt-2 w-100">
@@ -40,13 +40,17 @@
                 </div>
             <% end %>
         <% end %>
+
+        <div class = 'logout-container'>
+            <%= button_to '/users/sign_out', class: "logout-btn" , method: :delete do %>
+                <div class=" flex-row align-center px-3 py-2">
+                    <%= fa_icon "sign-out" %>
+                    <span class="px-1">Logout</span>
+                </div>
+            <% end %>
+        </div>
     </div>
 
     <%# LOGOUT %>
-    <%= button_to '/users/sign_out', class: "btn" , method: :delete do %>
-            <div class=" flex-row align-center px-3 py-2">
-                <%= fa_icon "sign-out" %>
-                <span class="px-2">Logout</span>
-            </div>
-    <% end %>
+    
 </div>

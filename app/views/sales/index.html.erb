@@ -3,50 +3,43 @@
 </h1>
 <p id="notice" class="text-center"><%= notice %></p>
 <br>
-<div class="max-width row">
-<div  class="col-lg-3 col-md-4 p-0 flex-row align-center justify-center"><%= button_to 'رجوع ##### الرئيسية', root_path, class:"btn btn-secondary mb-4", method: "get" %></div>
-  <div  class="col-lg-9 col-md-8 row py-1 rounded p-0">
-    <div  class="col-5 text-center p-1  white rounded mr-2 white bg-gradient-tertiary flex-col align-center justify-center">
-      <p class="m-0">Cash</p>
-      <h2>$<%= Store.first.dorg %></h2>
-    </div>
-    <% if current_user.admin %>
-      <div  class="col-5 text-center p-1 bg-gradient-secondary white rounded mr-2 white">
-        <p class="m-0">Products Capital</p>
-        # <h4><%= @products_value %> ج.م</h4> مقدار الزكاة <h4><%= @products_value/40 %> ج.م</h4>
-      </div>
-    <% end %>
-  </div>
-  
-</div>
-<div class="row m-1 max-width m-auto">
-  <div  class="col-lg-3 col-md-4 p-0 flex-row align-center justify-center">
-    <%= button_to 'Sell +', '/sell', class:"btn bg-gradient-tertiary white mx-1 py-2 mb-2", method: "get" %>
-  </div>
-  <% if current_user.admin %>
-  <div  class="col-lg-9 col-md-8 row py-1 rounded p-0">
-    <div  class="col-5 text-center p-1 bg-gradient white rounded mr-2 white">
-      <p class="m-0"> Month Sales </p>
-      <h4><%= @month_sales %> ج.م</h4>
+
+<div class="row m-1 max-width m-auto justify-content-center">
+  <div  class="col-12 justify-content-center row py-1 rounded p-0">
+    <div  class="col-5 text-center p-1 bg-gradient-tertiary white rounded ml-2 white">
+      <p class="m-0"> Cash </p>
+      <h4>$<%= Store.first.dorg %></h4>
     </div>
    
     <div  class="col-5 text-center p-1 bg-gradient white rounded white"> 
-      <p class="m-0">  Month Profits </p>
-      <h4>$<%= @month_profit %> </h4>
+      <p class="m-0">  Products Capital </p>
+      <h4>$<%= @products_value %></h4>
    </div>
   </div>
-  <div class="col-lg-3 col-md-4 p-0"></div>
-  <div class="col-lg-9 col-md-8 row py-1 rounded p-0">
-    <div class="col-5 text-center p-1 bg-gradient white rounded mr-2 white">
-      <p class="m-0">  Total  </p>
-      <h4>$<%= @total_sales %></h4>
+  <% if current_user.admin %>
+    <div class="col-12 justify-content-center row py-1 rounded p-0">
+      <div class="col-5 text-center p-1 bg-gradient white rounded ml-2 white">
+        <p class="m-0"> Month Sales </p>
+        <h4>$<%= @month_sales %></h4>
+      </div>
+    
+      <div  class="col-5 text-center p-1 bg-gradient white rounded white"> 
+        <p class="m-0">  Month Profits </p>
+        <h4>$<%= @month_profit %> </h4>
+    </div>
     </div>
     
-    <div class="col-5 text-center p-1 bg-gradient white rounded white">
-      <p class="m-0">Total Profits </p>
-      <h4>$<%= @total_profit %></h4>
+    <div class="col-12 justify-content-center row py-1 rounded p-0">
+      <div class="col-5 text-center p-1 bg-gradient white rounded ml-2 white">
+        <p class="m-0">  Total  </p>
+        <h4>$<%= @total_sales %></h4>
+      </div>
+      
+      <div class="col-5 text-center p-1 bg-gradient white rounded white">
+        <p class="m-0">Total Profits </p>
+        <h4>$<%= @total_profit %></h4>
+      </div>
     </div>
-  </div>
   <% end %>
 </div>
 
