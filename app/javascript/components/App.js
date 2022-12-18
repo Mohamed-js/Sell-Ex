@@ -163,7 +163,7 @@ function App({ products }) {
             className="btn m-2 bg-gradient-tertiary white"
             onClick={() => setContinues(true)}
           />
-          <a href="/sales">Cancel Operation</a>
+          <a href="/sales">Cancel</a>
         </form>
       </div>
     </>
