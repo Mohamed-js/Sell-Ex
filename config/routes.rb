@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     end
   end
   resources :products
-  resources :charges, only: [:index, :show, :new, :create]
+  # resources :charges, only: [:index, :show, :new, :create]
   resources :clients
 end

@@ -1,11 +1,11 @@
 <h1 class="text-center mb-3">
-    المبيعات  
+    Sales  
 </h1>
 
 <br>
 <div class="row m-1 max-width m-auto">
   <div  class="col-lg-3 col-md-4 p-0">
-    <a href="/sales">الرجوع</a>
+    <a href="/sales">Back</a>
   </div>
 </div>
 <br>
@@ -13,15 +13,15 @@
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" small='true'>الفاتورة</th>
-      <th scope="col">الاسم</th>
-      <th scope="col" small='true'>الكمية</th>
-      <th scope="col">سعر بيع القطعة</th>
-      <th scope="col">المجمل بعد الخصم</th>
-      <th scope="col">البائع</th>
-      <th scope="col">تاريخ البيع</th>
+      <th scope="col" small='true'>Bill</th>
+      <th scope="col">Product</th>
+      <th scope="col" small='true'>Quantity</th>
+      <th scope="col">Selling Price</th>
+      <th scope="col">After Discount</th>
+      <th scope="col">Seller</th>
+      <th scope="col">Selling Date</th>
       <% if current_user.admin %>
-      <th colspan="2">ادارة</th>
+      <th colspan="2">Controls</th>
       <% end %>
     </tr>
   </thead>
@@ -36,8 +36,8 @@
           <td><%= sale.name %></td>
         <% end %>
         <td><%= sale.quantity %></td>
-        <td><%= sale.selling_price %> ج.م  <%= " - " + sale.sale_type if sale.sale_type %> </td>
-        <td><%= sale.quantity * sale.selling_price - sale.discount %> ج.م</td>
+        <td>$<%= sale.selling_price %> <%= " - " + sale.sale_type if sale.sale_type %> </td>
+        <td>$<%= sale.quantity * sale.selling_price - sale.discount %></td>
         <% if sale.bill.seller %>
           <td><%= sale.bill.seller %></td>
           <% else %>
@@ -45,8 +45,8 @@
         <% end %>
         <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
         <% if current_user.admin %>
-          <td><%= button_to 'تعديل', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1", method: "get" %></td>
-          <td><%= button_to 'عمل مرتجع', sale, method: :delete, data: { confirm: 'هل أنت متأكد ؟' } , class:"btn bg-gradient-danger white p-1" %></td>
+          <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1", method: "get" %></td>
+          <td><%= button_to 'ٌReturn', sale, method: :delete, data: { confirm: 'Are you sure..?' } , class:"btn bg-gradient-danger white p-1" %></td>
         <% end %>
       </tr>
     <% end %>

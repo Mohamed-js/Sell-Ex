@@ -6,12 +6,12 @@
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">المعاملة</th>
-      <th scope="col">قيمة المعاملة</th>
-      <th scope="col">التفاصيل</th>
-      <th scope="col">الدرج قبل المعاملة</th>
-      <th scope="col">الدرج بعد المعاملة</th>
-      <th scope="col">التاريخ</th>
+      <th scope="col">Transaction</th>
+      <th scope="col">Value</th>
+      <th scope="col">Details</th>
+      <th scope="col">Cash Before</th>
+      <th scope="col">Cash After</th>
+      <th scope="col">Date</th>
       <%# <th scope="col"></th> %>
     </tr>
   </thead>
@@ -23,18 +23,15 @@
         <td><%= transaction.transaction_value %></td>
         <td><%= transaction.notes %></td>
         <td><%= transaction.dorg_was %></td>
-        
         <% if transaction.transaction_type == 'decrease' %>
           <td><%= transaction.dorg_was - transaction.transaction_value %></td>
           <% else %>
           <td><%= transaction.dorg_was + transaction.transaction_value %></td>
         <% end %>
         <td><%= transaction.created_at.strftime('%F || %I:%M || %p') %></td>
-
       </tr>
     <% end %>
   </tbody>
 </table>
-
 <br>
 

@@ -13,29 +13,29 @@
 
   <% if params[:type] == 'increase' %>
     <div class="field form-group">
-      <%= form.label 'المعاملة' %>
+      <%= form.label 'Transaction Type' %>
       <input type="hidden" value="increase" name="transaction[transaction_type]" />
-      <%= select_tag "transaction[title]", options_for_select([ "فودافون كاش", "صيانة" ,"استثمار" ,"أخرى"]), class:"form-control", prompt: "اختر المعاملة", required: true %>
+      <%= select_tag "transaction[title]", options_for_select(["Investment" ,"Other"]), class:"form-control", prompt: "Choose transaction type", required: true %>
     </div>
   <% else %>
     <div class="field form-group">
-      <%= form.label 'المعاملة' %>
+      <%= form.label 'Transaction Type' %>
       <input type="hidden" value="decrease" name="transaction[transaction_type]" />
-      <%= select_tag "transaction[title]", options_for_select([ "دفع عمالة", "دفع كهرباء", "دفع الإيجار", "دفع ضرايب" ,"أخرى"]), class:"form-control", prompt: "اختر المعاملة", required: true %>
+      <%= select_tag "transaction[title]", options_for_select([ "Employment", "Electricity", "Rental", "Taxes" ,"Other"]), class:"form-control", prompt: "Choose transaction type", required: true %>
     </div>
   <% end %>
 
   <div class="field form-group">
-    <%= form.label 'القيمة' %>
+    <%= form.label 'Value' %>
     <%= form.number_field :transaction_value, class:"form-control" , step: :any, required: true %>
   </div>
 
   <div class="field form-group">
-    <%= form.label 'تفاصيل' %>
+    <%= form.label 'Details' %>
     <%= form.text_field :notes, class:"form-control" ,  required: true %>
   </div>
 
   <div class="actions">
-    <%= form.submit 'إجراء المعاملة', class: "bg-gradient white btn" %>
+    <%= form.submit 'Proceed', class: "bg-gradient white btn" %>
   </div>
 <% end %>

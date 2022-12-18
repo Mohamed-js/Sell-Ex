@@ -1,20 +1,19 @@
-<h1 class="text-center mb-3">المنتجات</h1>
+<h1 class="text-center mb-3">Products</h1>
 
 <div class="text-center mb-2">
-  <%= link_to 'اضافة منتج +', new_product_path,  class:"btn bg-gradient-tertiary white" %>
-  <button onclick='printDiv("table")'>طباعة</button>
+  <%= link_to 'Add Product +', new_product_path,  class:"btn bg-gradient-tertiary white" %>
+  <button onclick='printDiv("table")'>Print</button>
 </div>
 <div class="container my-2">
-    <%= link_to 'رجوع للخلف', root_path, class:"btn btn-secondary" %>
+    <%= link_to 'Back', root_path, class:"btn btn-secondary" %>
 </div>
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">الاسم</th>
-      <th scope="col">سعر البيع</th>
-      <th scope="col">سعر الجملة</th>
-      <th scope="col" small='true'>الكمية في المخزن</th>
-      
+      <th scope="col">Name</th>
+      <th scope="col">Selling Price</th>
+      <th scope="col">Wholesale Price</th>
+      <th scope="col" small='true'>Stock Amount</th>
     </tr>
   </thead>
 
@@ -22,12 +21,12 @@
     <% @products.each do |product| %>
       <tr scope="row">
         <td><%= product.name %></td>
-        <td><%= product.selling_price %> ج.م</td>
-        <td><%= product.whole_sale_price %> ج.م</td>
-        <td><%= product.items.count %> قطعة</td>
+        <td><%= product.selling_price %> </td>
+        <td><%= product.whole_sale_price %> </td>
+        <td><%= product.items.count %> <%= product.items.count <= 1 ? 'Piece' : "Pieces" %></td>
         <% if current_user.admin %>
-          <td><%= link_to 'عرض البضاعة', product, class:"btn bg-gradient-tertiary white" %></td>
-          <td><%= button_to 'حذف المنتج نهائيا', product, method: :delete, data: { confirm: 'هل أنت متأكد ؟' }, class:"btn bg-gradient-danger white" %></td>
+          <td><%= link_to 'Show Pieces', product, class:"btn bg-gradient-tertiary white" %></td>
+          <td><%= button_to 'Delete Permanently', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
         <% end %>
       </tr>
     <% end %>

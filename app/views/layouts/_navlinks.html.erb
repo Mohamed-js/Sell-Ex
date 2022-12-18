@@ -10,19 +10,19 @@
         <%= link_to root_url do %>
             <div class="sidebar-link flex-row align-center px-3 py-2 <%= home %>">
                 <%= fa_icon "home" %>
-                الصفحة الرئيسية
+                Home
             </div>
         <% end %>
         <%= link_to "/bills/search" do %>
             <div class="sidebar-link flex-row align-center px-3 py-2 <%= bill %>">
                 <%= fa_icon "search" %>
-                بحث فاتورة
+                Search Bill
             </div>
         <% end %>
         <%= link_to "/transactions/all" do %>
             <div class="sidebar-link flex-row align-center px-3 py-2 <%= transactions %>">
                 <%= fa_icon "money-bill" %>
-                الدرج
+              Cash
             </div>
         <% end %>
         <%# Admin specific!!!!!!!!!!!!!!! %>
@@ -30,22 +30,15 @@
             <%= link_to products_url do %>
                 <div class="sidebar-link flex-row align-center px-3 py-2 <%= products %>">
                     <%= fa_icon "diamond" %>
-                    المنتجات
+                    Products
                 </div>
             <% end %>
             <%= link_to "/debts" do %>
                 <div class="sidebar-link flex-row align-center px-3 py-2 <%= debts %>">
                     <%= fa_icon "credit-card" %>
-                    المديونيات
+                    Debts
                 </div>
             <% end %>
-        <% end %>
-        <%# Admin specific!!!!!!!!!!!!!!! %>
-        <%= link_to charges_url do %>
-            <div class="sidebar-link flex-row align-center px-3 py-2 <%= charges %>">
-                <%= fa_icon "dollar" %>
-                الشحن
-            </div>
         <% end %>
     </div>
 
@@ -53,7 +46,7 @@
     <%= button_to '/users/sign_out', class: "btn" , method: :delete do %>
             <div class=" flex-row align-center px-3 py-2">
                 <%= fa_icon "sign-out" %>
-                <span class="px-2">تسجيل الخروج</span>
+                <span class="px-2">Logout</span>
             </div>
     <% end %>
 </div>

@@ -1,4 +1,4 @@
-<h1 class="text-center mb-3">تعديل الكمية</h1>
+<h1 class="text-center mb-3">Edit Quantity</h1>
 <p id="notice" class="text-center alert"><%= notice %></p>
 <div class="container mt-3">
 <%= form_with(model: @sale) do |form| %>
@@ -15,14 +15,14 @@
   <% end %>
 
   <div class="field form-group">
-    <%= form.label "الكمية" %>
+    <%= form.label "Quantity" %>
     <%= form.number_field :quantity, class:"form-control" %>
   </div>
 
   <div class="actions form-group">
-    <%= form.submit "تعديل", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+    <%= form.submit "Edit", class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
 
-<%= link_to 'الغاء التعديل', sales_path %>
+<%= link_to 'Cancel', sales_path %>
 </div>

@@ -1,5 +1,5 @@
 <h1 class="text-center mb-3">
-اضافة عناصر لمنتج موجود
+  Existing Product
 </h1>
 
 <div class="container">
@@ -18,24 +18,24 @@
   <% end %>
 
   <div class="my-3">
-    <%= form.label 'المنتج' %>
+    <%= form.label 'Product' %>
     <%= select_tag "item[product_id]", options_from_collection_for_select(@products, "id", "name"), class:"form-control", prompt: "اختر المنتج", required: true %>
   </div>
 
   <div class="field mb-3">
-    <%= form.label "سعر شراء الوحدة" %>
+    <%= form.label "Item Purchasing Price" %>
     <%= form.number_field :buying_price, class:"form-control", step: :any, required: true%>
   </div>
 
   <div class="field mb-3">
-    <%= form.label "الكمية" %>
+    <%= form.label "Quantity" %>
     <%= form.number_field :quantity, class:"form-control", required: true %>
   </div>
 
   <div class="actions my-3">
-    <%= form.submit 'اضافة', class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+    <%= form.submit 'Add', class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
 
-<%= link_to 'الرجوع', root_path, class:"btn btn-secondary" %>
+<%= link_to 'Cancel', root_path, class:"btn btn-secondary" %>
 </div>

@@ -1,4 +1,4 @@
-<h1 class="text-center mb-3">تعديل العنصر</h1>
+<h1 class="text-center mb-3">Edit Product Item</h1>
 
 
 <div class="container">
@@ -16,17 +16,17 @@
   <% end %>
 
   <div class="field mb-3">
-    <%= form.label "سعر الشراء" %>
+    <%= form.label "Purchasing Price" %>
     <%= form.number_field :buying_price, class:"form-control", step: :any %>
   </div>
 
   <div class="actions my-3">
-    <%= form.submit 'تعديل', class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+    <%= form.submit 'Edit', class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
 </div>
 
 <div class="container">
-    <%= link_to 'عرض المنتج', @item.product %> |
-    <%= link_to 'الرجوع', products_path %>
+    <%= link_to 'Show Product', @item.product %> |
+    <%= link_to 'Back', products_path %>
 </div>

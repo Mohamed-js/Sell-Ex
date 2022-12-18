@@ -1,4 +1,4 @@
-<h1 class="text-center mb-3">سداد جزء من مديونية</h1>
+<h1 class="text-center mb-3">Complete unpaid bill</h1>
 <p id="notice" class="text-center alert"><%= notice %></p>
 <div class="container mt-3">
 
@@ -16,14 +16,14 @@
   <% end %>
 
   <div class="field form-group">
-    <%= form.label "المبلغ المراد سداده" %>
+    <%= form.label " Amount to pay " %>
     <%= form.number_field :money, class:"form-control" %>
   </div>
 
   <div class="actions form-group">
-    <%= form.submit "سداد", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+    <%= form.submit "Pay", class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
 
-<%= link_to 'الغاء ورجوع', debts_path %>
+<%= link_to 'Cancel', debts_path %>
 </div>

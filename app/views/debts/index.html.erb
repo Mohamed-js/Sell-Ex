@@ -3,9 +3,9 @@
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">الاسم</th>
-      <th scope="col">قيمة المديونية</th>
-      <th scope="col">الفاتورة</th>
+      <th scope="col">Name</th>
+      <th scope="col">Debt Amount</th>
+      <th scope="col">Bill</th>
       <th></th>
       <th></th>
     </tr>
@@ -16,9 +16,9 @@
       <tr scope="row">
         <td><%= debt.debtor %></td>
         <td><%= debt.dept_value %></td>
-        <td><%= link_to "عرض", bill_path(debt.bill.id) %></td>
-        <td><%= link_to "سداد جزء", edit_debt_path(debt.id), class:"btn bg-gradient-secondary white" %></td>
-        <td><%= link_to "سداد بالكامل", debt_path(debt.id), class:"btn bg-gradient-danger white", method: :delete %></td>
+        <td><%= link_to "Show", bill_path(debt.bill.id) %></td>
+        <td><%= link_to "Pay Partially", edit_debt_path(debt.id), class:"btn bg-gradient-secondary white" %></td>
+        <td><%= link_to "Pay Completely", debt_path(debt.id), class:"btn bg-gradient-danger white", method: :delete, data: {confirm: "Are you sure you want to pay it COMPLETELY?"} %></td>
       </tr>
     <% end %>
   </tbody>
