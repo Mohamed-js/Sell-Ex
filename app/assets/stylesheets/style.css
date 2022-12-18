@@ -110,12 +110,13 @@ table img {
 .field {
   display: flex;
   flex-direction: column;
-  max-width: 350px;
+  /* max-width: 350px; */
   margin: 0 auto;
 }
 
 label {
   font-size: 14px;
+  text-align: left;
 }
 
 .bold {
@@ -757,6 +758,31 @@ hr {
   border: none;
 }
 
+.sidebar-dropdown{
+  display: none;
+}
+
+.sidebar-dropdown.active {
+  background: transparent;
+  color: rgb(235, 235, 235);
+  margin-left: 20px;
+  font-size: 13px;
+  display: flex;
+}
+
+
+.sidebar-dropdown.active i {
+  margin-right: 5px;
+}
+
+.sidebar-dropdown.active::after {
+  box-shadow: none;
+} 
+
+.sidebar-dropdown.active::before {
+  box-shadow: none;
+} 
+
 .logout {
   position: relative;
   top: 50px;
@@ -1070,4 +1096,8 @@ hr {
   .bold {
     font-weight: 600;
   }
+}
+
+.table .thead-dark th {
+  text-align: left;
 }

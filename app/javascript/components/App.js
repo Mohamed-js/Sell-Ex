@@ -27,7 +27,7 @@ function App({ products }) {
           onClick={() => {
             setItemCount((prev) => prev + 1);
           }}>
-          عنصر جديد +
+          Add Sale +
         </button>
       </div>
       <div className="container max-width my-2">
@@ -70,11 +70,11 @@ function App({ products }) {
           {continues && (
             <div className="pop-up">
               <div className="pop-up-content p-4">
-                <h4>ادخل اسم العميل:</h4>
+                <h4>Client Name</h4>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={'اسم العميل - اختياري في حالة عد وجود أجل'}
+                  placeholder={'Optional if no debt **'}
                   required={forLater}
                   onChange={(e) =>
                     setSales((prev) => {
@@ -82,7 +82,7 @@ function App({ products }) {
                     })
                   }
                 />
-                <h4 className="mt-4">هل تريد تسجيل المعاملة في الاجل؟</h4>
+                <h4 className="mt-4">Do you want to set a debt for this operation?</h4>
                 <div className="row w-100">
                   <div className="col-6">
                     <div className="col-6">
@@ -112,16 +112,16 @@ function App({ products }) {
                       value="whole_sale_price"
                       className="m-2"
                     />
-                    <span>نعم</span>
+                    <span>Yes</span>
                   </div>
                 </div>
                 {forLater && (
                   <>
-                    <h4 className="mt-4"> المبلغ المدفوع :</h4>
+                    <h4 className="mt-4">Paid Amount :</h4>
                     <input
                       type="number"
                       className="form-control"
-                      placeholder="المبلغ الذي قام العميل بدفعه"
+                      placeholder="Money the client paid"
                       required
                       onChange={(e) =>
                         setSales((prev) => {
@@ -134,12 +134,12 @@ function App({ products }) {
                 <div className="mt-4">
                   <input
                     type="submit"
-                    value="اتمام البيع"
+                    value="Proceed"
                     className="btn m-2 bg-gradient-tertiary white"
                   />
                   <input
                     type="button"
-                    value="الغاء"
+                    value="Cancel"
                     className="btn m-2 btn-secondary"
                     onClick={() => {
                       setContinues(false);
@@ -159,11 +159,11 @@ function App({ products }) {
 
           <input
             type="button"
-            value="استكمال البيع"
+            value="Proceed"
             className="btn m-2 bg-gradient-tertiary white"
             onClick={() => setContinues(true)}
           />
-          <a href="/sales">الغاء و عودة</a>
+          <a href="/sales">Cancel Operation</a>
         </form>
       </div>
     </>

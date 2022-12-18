@@ -1,5 +1,9 @@
 <h1 class="text-center mb-3">Sell</h1>
 
-<%= react_component('App', {products: @products}) %>
+<%
+=begin%>
+ <%= react_component('App', {products: @products}) %> 
+<%
+=end%>
 
-
+<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
