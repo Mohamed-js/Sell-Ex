@@ -1,10 +1,8 @@
 <h1 class="text-center mb-3">Products</h1>
 
-<div class="text-center mb-2">
-  <%= link_to 'Add Product +', new_product_path,  class:"btn bg-gradient-tertiary white" %>
-  <button class="btn bg-primary white" onclick='printDiv("table")'>Print</button>
-</div>
-<div class="container my-2">
+
+<div class="container my-2 d-flex justify-content-between">
+    <button class="btn bg-primary white" onclick='printDiv("table")'>Print</button>
     <%= link_to 'Back', root_path, class:"btn btn-secondary" %>
 </div>
 <table class="table table-bordered table-sm table-striped max-width">

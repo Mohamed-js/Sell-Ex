@@ -1,8 +1,8 @@
-<% home = current_page?(root_url) ? "active": "" %>
+<% home = current_page?(root_url) || current_page?(new_bill_url) ? "active": "" %>
 <% bill = current_page?("/bills/search") ? "active": "" %>
-<% transactions = current_page?("/transactions/all") ? "active": "" %>
-<% debts = current_page?("/debts") ? "active": "" %>
-<% products = current_page?(products_url) ? "active": "" %>
+<% transactions = current_page?(transactions_url) || current_page?("/transactions/new?type=increase") || current_page?("/transactions/new?type=decrease") ? "active": "" %>
+<% debts = current_page?(debts_url) ? "active": "" %>
+<% products = current_page?(products_url) || current_page?(new_item_url)|| current_page?(new_product_url) ? "active": "" %>
 
 
 <div class="flex-col mt-2 h-100">
@@ -13,24 +13,56 @@
                 Home
             </div>
         <% end %>
+        <%= link_to "/bills/new" do %>
+            <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= home %>">
+                <%= fa_icon "money-bill" %>
+                Sell
+            </div>
+        <% end %>
         <%= link_to "/bills/search" do %>
             <div class="sidebar-link flex-row align-center px-3 py-2 <%= bill %>">
                 <%= fa_icon "search" %>
                 Search Bill
             </div>
         <% end %>
-        <%= link_to "/transactions/all" do %>
+        <%= link_to "/transactions" do %>
             <div class="sidebar-link flex-row align-center px-3 py-2 <%= transactions %>">
                 <%= fa_icon "money-bill" %>
               Cash
             </div>
+            
         <% end %>
+        <%= link_to "/transactions/new?type=increase" do %>
+            <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= transactions %>">
+                <%= fa_icon "plus" %>
+                Deposit
+            </div>
+        <% end %>
+        <%= link_to "/transactions/new?type=decrease" do %>
+            <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= transactions %>">
+                <%= fa_icon "minus" %>
+                Withdraw
+            </div>
+        <% end %>
+        
         <%# Admin specific!!!!!!!!!!!!!!! %>
         <% if current_user.admin %>
             <%= link_to products_url do %>
                 <div class="sidebar-link flex-row align-center px-3 py-2 <%= products %>">
                     <%= fa_icon "diamond" %>
                     Products
+                </div>
+            <% end %>
+            <%= link_to "/products/new" do %>
+                <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= products %>">
+                    <%= fa_icon "plus" %>
+                    Add New Product
+                </div>
+            <% end %>
+            <%= link_to "/items/new" do %>
+                <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= products %>">
+                    <%= fa_icon "plus" %>
+                    Add Product Items
                 </div>
             <% end %>
             <%= link_to "/debts" do %>

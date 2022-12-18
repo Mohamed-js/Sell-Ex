@@ -59,7 +59,7 @@ const SaleItem = ({ index, products, setSales }) => {
             id={`search${index}`}
             type="text"
             className="form-control m-2"
-            placeholder="اسم المنتج"
+            placeholder="Product Name"
             onChange={handleSearchChange}
             autoComplete="off"
             required
@@ -74,7 +74,7 @@ const SaleItem = ({ index, products, setSales }) => {
             name={`sale${index}[quantity]`}
             type="number"
             className="form-control m-2"
-            placeholder="عدد الوحدات"
+            placeholder="Quantity"
             required
           />
           <input
@@ -82,7 +82,7 @@ const SaleItem = ({ index, products, setSales }) => {
             onChange={handleChange}
             type="number"
             className="form-control m-2"
-            placeholder="الخصم"
+            placeholder="Discount"
           />
         </div>
         {changingSearch && (
@@ -112,7 +112,7 @@ const SaleItem = ({ index, products, setSales }) => {
                     defaultChecked
                     required
                   />
-                  <span>الجمهور {prod.selling_price} ج.م</span>
+                  <span>Selling price ${prod.selling_price}</span>
                 </div>
                 <div className="col-6">
                   <input
@@ -122,7 +122,7 @@ const SaleItem = ({ index, products, setSales }) => {
                     value="whole_sale_price"
                     className="m-2"
                   />
-                  <span>الجملة {prod.whole_selling_price} ج.م</span>
+                  <span>Wholesale price ${prod.whole_selling_price}</span>
                 </div>
               </div>
             )}
