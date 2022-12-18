@@ -32,10 +32,9 @@
     <%= form.number_field :quantity, class:"form-control", required: true %>
   </div>
 
-  <div class="actions my-3">
+  <div class="actions mt-3">
     <%= form.submit 'Add', class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
 
-<%= link_to 'Cancel', root_path, class:"btn btn-secondary" %>
 </div>

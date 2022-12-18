@@ -53,7 +53,7 @@ const SaleItem = ({ index, products, setSales }) => {
         x
       </h3> */}
 
-      <div className="row position-relative sale m-2 border p-3">
+      <div className="row position-relative sale  border p-3">
         <div className="row col-6">
           <input
             id={`search${index}`}
