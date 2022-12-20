@@ -1,9 +1,33 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<h1 class="text-center mb-3">
+  <%= @category.name.capitalize %>
+</h1>
+<%= link_to 'Back', categories_path, class: "btn bg-gradient white" %>
+<br />
+<br />
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Selling Price</th>
+      <th scope="col">Wholesale Price</th>
+      <th scope="col" small='true'>Stock Amount</th>
+      <th scope="col"></th>
+      <th scope="col" small='true'></th>
+    </tr>
+  </thead>
+  <tbody id='table'>
+    <% @products.each do |product| %>
+      <tr scope="row">
+        <td><%= product.name %></td>
+        <td><%= product.selling_price %> </td>
+        <td><%= product.whole_sale_price %> </td>
+        <td><%= product.items.count %> <%= product.items.count <= 1 ? 'Piece' : "Pieces" %></td>
+        <% if current_user.admin %>
+          <td><%= link_to 'Show Pieces', product, class:"btn bg-gradient-tertiary white" %></td>
+          <td><%= button_to 'Delete', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

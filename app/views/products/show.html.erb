@@ -1,13 +1,13 @@
 <div class="row align-items-center mb-2">
   <div class="text-center mb-1 col-4">
-    <h3 class='white'><%= @product.name %></h3>
+    <h3 class='white'><%= @product.name.capitalize %></h3>
     <% if @product.image.attached? %>
       <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded" %>
     <% end %>
   </div>
   <div class="col-8">
     <div class="p-2 text-center max-width white">
-      <h4 class="text-center"><%= @product.category.name %></h4>
+      <h4 class="text-center"><%= @product.category.name.capitalize %></h4>
     </div>
     <div class="row p-2 text-center max-width bg-gradient btn-dark">
       <h6 class="col-6 m-0">Quantity</h6>

@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.png";
 const Navbar = ({ store }) => {
   return (
     <nav className="navbar navbar-dark ">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to={`/stores/${store.id}`}>
         <img
           src={logo}
           width="30"
@@ -15,7 +15,7 @@ const Navbar = ({ store }) => {
           loading="lazy"
         />
         {store.name}
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root "sales#index"
-  get '/store', to: "stores#index"
+  resources :stores do
+    collection do
+      get "/:id/activate", to: "stores#activate"
+    end
+  end
   resources :transactions
   resources :debts, only: [:index, :update, :edit, :destroy]
   resources :items
@@ -13,7 +17,6 @@ Rails.application.routes.draw do
   resources :bills do
     collection do
       get :search
-      post :create
     end
   end
   resources :products

@@ -3,11 +3,12 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = @current_store.categories
   end
 
   # GET /categories/1 or /categories/1.json
   def show
+    @products = @category.products
   end
 
   # GET /categories/new
@@ -22,7 +23,7 @@ class CategoriesController < ApplicationController
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
-
+    @category.store_id = @current_store.id
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_url, notice: "Category was successfully created." }
@@ -58,13 +59,14 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def category_params
-      params.require(:category).permit(:name, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = @current_store.categories.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def category_params
+    params.require(:category).permit(:name, :image)
+  end
 end

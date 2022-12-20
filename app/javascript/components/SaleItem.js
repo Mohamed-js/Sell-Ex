@@ -53,7 +53,7 @@ const SaleItem = ({ index, products, setSales }) => {
         x
       </h3> */}
 
-      <div className="row position-relative sale  border p-3">
+      <div className="row position-relative sale border p-3">
         <div className="row col-6">
           <input
             id={`search${index}`}
@@ -65,7 +65,7 @@ const SaleItem = ({ index, products, setSales }) => {
             required
           />
           <h4
-            className="mr-2"
+            className="mr-2 white"
             id={`item${index}`}
             onChange={handleSearchChange}></h4>
 

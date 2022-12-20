@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
-    @products = Product.all.select(:id, :name).order(:name)
+    @products = @current_store.products.select(:id, :name).order(:name)
   end
 
   # GET /items/1/edit
@@ -14,11 +14,11 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @store = Store.first
-    prod = Product.find(params[:item]['product_id'].to_i)
+    @store = @current_store
+    prod = @current_store.products.find(params[:item]["product_id"].to_i)
     Item.create_multible(params, @store)
     @store.save
-    prod.quantity += params[:item]['quantity'].to_i
+    prod.quantity += params[:item]["quantity"].to_i
     prod.save
     redirect_to new_item_path
   end
@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
 
   # DELETE /items/1 or /items/1.json
   def destroy
-    @store = Store.first
+    @store = @current_store
     @product = @item.product
     @product.quantity -= 1
     if params[:money_back]
@@ -49,13 +49,14 @@ class ItemsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_item
-      @item = Item.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def item_params
-      params.require(:item).permit(:product_id, :buying_price, :quantity)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def item_params
+    params.require(:item).permit(:product_id, :buying_price, :quantity)
+  end
 end

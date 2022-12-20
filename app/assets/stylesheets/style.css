@@ -608,8 +608,8 @@ h1.text-center {
 }
 
 .profile-avatar {
-  width: 130px;
-  height: 130px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -714,7 +714,7 @@ h1.text-center {
 }
 
 .sidebar-links .sidebar-link {
-  font-size: 1rem;
+  font-size: 0.8rem;
   position: relative;
   margin-bottom: 3px;
 }
@@ -777,11 +777,11 @@ h1.text-center {
   background: #1c2039;
   color: white;
   margin-left: 33px;
-  font-size: 13px;
   display: flex;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   transform: scale(1.1) translateX(9px);
+  font-size: 0.7rem;
 }
 
 .sidebar-dropdown.active:hover {
@@ -805,6 +805,7 @@ h1.text-center {
   top: 50px;
   padding-left: 20px;
   margin-left: 15px;
+  font-size: 0.8rem;
 }
 
 .logout i {

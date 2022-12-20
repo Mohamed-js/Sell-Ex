@@ -58,9 +58,8 @@ a:hover {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: white;
-  max-height: 155px;
-  overflow: auto;
+  color: white;
+  max-height: 160px;
 }
 
 .product-select:hover {
@@ -153,6 +152,7 @@ h2[href="/users/sign_in"] {
   color: aliceblue;
   /* padding-left: 4px; */
   background-color: transparent;
+  font-size: 0.8rem;
 }
 
 .logout-container form {

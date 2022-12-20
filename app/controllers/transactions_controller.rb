@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.order("created_at desc")
+    @transactions = @current_store.transactions.order("created_at desc")
   end
 
   def all
@@ -25,8 +25,9 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    @store = Store.first
+    @store = @current_store
     @transaction = Transaction.new(transaction_params)
+    @transaction.store_id = @current_store.id
     @transaction.dorg_was = @store.dorg
 
     if @transaction.transaction_type == "decrease"
@@ -76,7 +77,7 @@ class TransactionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = @current_store.transactions.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

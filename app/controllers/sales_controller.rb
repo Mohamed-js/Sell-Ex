@@ -5,24 +5,23 @@ class SalesController < ApplicationController
   # GET /sales or /sales.json
   def index
     this_month = Date.today.beginning_of_month
-    discounts = Sale.sum(:discount)
-    month_discounts = Sale.month_discounts(this_month)
-    debts = Debt.sum(:dept_value)
-    month_debts = Debt.month_debts(this_month)
+    discounts = @current_store.sales.sum(:discount)
+    month_discounts = @current_store.sales.month_discounts(this_month)
+    debts = @current_store.debts.sum(:dept_value)
+    month_debts = @current_store.debts.month_debts(this_month)
 
-    @products_value = Item.sum(:buying_price)
+    @products_value = @current_store.items.sum(:buying_price)
 
-    @sales = Sale.includes(:bill, :product).order('id DESC').limit(25)
-    @total_sales = @sales.sum('sales.selling_price * sales.quantity') - discounts - debts
-    @total_profit = @total_sales - @sales.sum('sales.buying_price * sales.quantity') 
-    @month_sales = @sales.where('sales.created_at > ?', (this_month)).sum('sales.selling_price * sales.quantity') - month_discounts - month_debts
-    @month_profit = @month_sales - @sales.where('sales.created_at > ?', (this_month)).sum('sales.buying_price * sales.quantity') 
+    @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
+    @total_sales = @sales.sum("sales.selling_price * sales.quantity") - discounts - debts
+    @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
+    @month_sales = @sales.where("sales.created_at > ?", (this_month)).sum("sales.selling_price * sales.quantity") - month_discounts - month_debts
+    @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
   end
 
   def all
-    @sales = Sale.includes(:bill).order('id DESC')
+    @sales = @current_store.sales.includes(:bill).order("id DESC")
   end
-  
 
   # GET /sales/1 or /sales/1.json
   def show
@@ -31,7 +30,7 @@ class SalesController < ApplicationController
   # GET /sales/new
   def new
     @sale = Sale.new
-    @products = Product.all.select(:name).order(:name)
+    @products = @current_store.products.select(:name).order(:name)
   end
 
   # GET /sales/1/edit
@@ -41,12 +40,12 @@ class SalesController < ApplicationController
   # PATCH/PUT /sales/1 or /sales/1.json
   def update
     q1 = @sale.quantity
-    q2 = params[:sale]['quantity'].to_i
+    q2 = params[:sale]["quantity"].to_i
     q_to_return = q1 - q2
-    prod = Product.find(@sale.product_id)
+    prod = @current_store.products.find(@sale.product_id)
     # lower the sold quantity
     if q_to_return > 0
-      q_to_return.to_i.times do 
+      q_to_return.to_i.times do
         Item.create(product_id: @sale.product_id, buying_price: @sale.buying_price)
       end
       prod.quantity += q_to_return.abs
@@ -63,10 +62,10 @@ class SalesController < ApplicationController
       end
     elsif q_to_return == 0
       redirect_to edit_sale_path, notice: "Nothing changed..."
-    # Higher than sold quantity >> CHeck if available in stock
+      # Higher than sold quantity >> CHeck if available in stock
     else
       if prod.quantity >= q_to_return.abs
-        q_to_return.abs.times do 
+        q_to_return.abs.times do
           prod.items.first.destroy
         end
         @sale.update(quantity: q2)
@@ -86,11 +85,11 @@ class SalesController < ApplicationController
       @item = Item.create(product_id: @sale.product.id, buying_price: @sale.buying_price)
     end
 
-    prod = Product.find(@sale.product.id)
+    prod = @current_store.products.find(@sale.product.id)
     prod.quantity += @sale.quantity
     prod.save
 
-    @store = Store.first
+    @store = @current_store
     @store.dorg -= @sale.quantity * @sale.selling_price - @sale.discount
     @store.save
 
@@ -99,17 +98,17 @@ class SalesController < ApplicationController
       format.html { redirect_to sales_path, notice: "Sale was successfully destroyed." }
       format.json { head :no_content }
     end
-    
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sale
-      @sale = Sale.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sale_params
-      params.require(:sale).permit(:name, :buying_price, :selling_price, :quantity, :validity)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sale
+    @sale = @current_store.sales.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def sale_params
+    params.require(:sale).permit(:name, :buying_price, :selling_price, :quantity, :validity)
+  end
 end

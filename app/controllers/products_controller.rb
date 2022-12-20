@@ -1,38 +1,39 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: %i[ show edit update destroy ]
-  
+
   # GET /products or /products.json
   def index
-    @products = Product.all.order('name')
+    @products = @current_store.products.order("name")
   end
 
   # GET /products/1 or /products/1.json
   def show
-    @product = Product.includes(:items).find(params[:id])
+    @product = @current_store.products.includes(:items).find(params[:id])
   end
 
   # GET /products/new
   def new
     @product = Product.new
     @product.validity = Date.today.next_year
-    @categories = Category.all
+    @categories = @current_store.categories
   end
 
   # GET /products/1/edit
   def edit
-    @categories = Category.all
+    @categories = @current_store.categories
   end
 
   # POST /products or /products.json
   def create
     @store = Store.first
     @product = Product.new(product_params)
+    @product.store_id = @current_store.id
     respond_to do |format|
       if @product.save
         Product.create_multible_items(params, @store, @product)
         @store.save
-        format.html { redirect_to '/products/new', notice: "Product was successfully created." }
+        format.html { redirect_to "/products/new", notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,13 +65,14 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:name, :selling_price, :whole_sale_price, :quantity, :validity, :image, :open_to_store, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = @current_store.products.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:name, :selling_price, :whole_sale_price, :quantity, :validity, :image, :open_to_store, :category_id)
+  end
 end

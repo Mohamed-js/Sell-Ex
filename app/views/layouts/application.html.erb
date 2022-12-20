@@ -7,28 +7,26 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" %>
     <%= stylesheet_link_tag "https://pro.fontawesome.com/releases/v5.10.0/css/all.css" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
   </head>
-
   <body class="container-fluid p-0">
-  <%# If the url is not /store, open the dashboard %>
-  <% if !current_page?('/store') %>
-    <div class="app-container">
+    <%# If the url is not /store, open the dashboard %>
+    <% unless request.original_fullpath.match(/\/stores\/\d/) %>
+      <div class="app-container">
         <div class="sidebar flex-col w-100">
           <div class="logo ">
             <div class="profile-avatar mt-4 mb-2 mx-auto">
-              <%= image_tag 'logo.png' , class: "full-img"%>
-            </div> 
+              <%= image_tag Store.find(session[:current_store_id]).image , class: "full-img" if session[:current_store_id] %>
+            </div>
             <h2 class="text-center"><span style="color: #ff613d;">Sell</span>Ex</h2>
           </div>
           <% if current_user %>
-             <%= render 'layouts/navlinks'%>
+            <%= render 'layouts/navlinks'%>
           <% else %>
-              <%= render 'layouts/placeholder'%>
+            <%= render 'layouts/placeholder'%>
           <% end %>
         </div>
         <div class="main">
@@ -36,14 +34,12 @@
             <%= yield %>
           </div>
         </div>
-    </div>
-  <% else %>
-    <%# Show clients the store %>
-    <%= yield %>
-  <% end %>
-
+      </div>
+    <% else %>
+      <%# Show clients the store %>
+      <%= yield %>
+    <% end %>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
   </body>
-
 </html>

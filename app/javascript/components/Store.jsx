@@ -25,7 +25,7 @@ function Store({ products, store }) {
             setCartItems={setCartItems}
           />
         )}
-        path="/store"
+        path="/stores/:id"
       />
       <Route
         component={() => (
