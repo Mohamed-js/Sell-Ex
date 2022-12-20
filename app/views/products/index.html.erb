@@ -11,6 +11,8 @@
       <th scope="col">Selling Price</th>
       <th scope="col">Wholesale Price</th>
       <th scope="col" small='true'>Stock Amount</th>
+      <th scope="col"></th>
+      <th scope="col" small='true'></th>
     </tr>
   </thead>
 
@@ -23,7 +25,7 @@
         <td><%= product.items.count %> <%= product.items.count <= 1 ? 'Piece' : "Pieces" %></td>
         <% if current_user.admin %>
           <td><%= link_to 'Show Pieces', product, class:"btn bg-gradient-tertiary white" %></td>
-          <td><%= button_to 'Delete Permanently', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
+          <td><%= button_to 'Delete', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
         <% end %>
       </tr>
     <% end %>

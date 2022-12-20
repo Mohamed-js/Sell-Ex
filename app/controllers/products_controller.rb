@@ -16,10 +16,12 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.validity = Date.today.next_year
+    @categories = Category.all
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /products or /products.json
@@ -28,10 +30,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
-        params[:product]['quantity'].to_i.times do
-          Item.create(product_id: @product.id, buying_price: params[:product]['buying_price'])
-          @store.dorg -= params[:product]['buying_price'].to_i
-        end
+        Product.create_multible_items(params, @store, @product)
         @store.save
         format.html { redirect_to '/products/new', notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
@@ -72,6 +71,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :selling_price, :whole_sale_price, :quantity, :validity)
+      params.require(:product).permit(:name, :selling_price, :whole_sale_price, :quantity, :validity, :image, :open_to_store, :category_id)
     end
 end

@@ -4,12 +4,11 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.order('created_at desc')
+    @transactions = Transaction.order("created_at desc")
   end
 
   def all
   end
-  
 
   # GET /transactions/1 or /transactions/1.json
   def show
@@ -30,15 +29,10 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.dorg_was = @store.dorg
 
-    if @transaction.transaction_type == 'decrease'
+    if @transaction.transaction_type == "decrease"
       @store.dorg -= @transaction.transaction_value
     else
       @store.dorg += @transaction.transaction_value
-      if @transaction.title == 'فودافون كاش'
-        p 'heeeeeeeeeeeeeeeey'
-        @sale = Sale.new(name: 'فودافون كاش', buying_price: 0, selling_price: @transaction.transaction_value, quantity: 1, seller: current_user.email, bill_id: Bill.first.id, product_id: Product.first.id)
-        @sale.errors.full_messages
-      end
     end
 
     respond_to do |format|
@@ -47,7 +41,7 @@ class TransactionsController < ApplicationController
           @sale.save
         end
         @store.save
-        format.html { redirect_to transactions_url, notice: "تمت المعاملة بنجاح." }
+        format.html { redirect_to transactions_url, notice: "Done successfully." }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -79,13 +73,14 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:title, :transaction_value, :dorg_was, :notes, :transaction_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:title, :transaction_value, :dorg_was, :notes, :transaction_type)
+  end
 end

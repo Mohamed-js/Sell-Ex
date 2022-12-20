@@ -1,0 +1,27 @@
+<%= form_with(model: category) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <ul>
+        <% category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class:"form-control" %>
+  </div>
+  <% if @category.image.attached? %>
+    <%= image_tag @category.image, :width=>180, :crop=>"fill", class: "rounded my-2" %>
+  <% end %>
+  <div class="field form-group mb-3">
+    <%= form.label "Image" %>
+    <%= form.file_field :image, class:"form-control" , step: :any %>
+  </div>
+  <div class="actions">
+    <%= form.submit class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
+    <%= link_to 'Cancel', categories_path, class:"btn btn-secondary" %>
+  </div>
+<% end %>

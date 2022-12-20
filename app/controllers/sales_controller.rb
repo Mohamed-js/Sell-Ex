@@ -6,17 +6,17 @@ class SalesController < ApplicationController
   def index
     this_month = Date.today.beginning_of_month
     discounts = Sale.sum(:discount)
-    month_discounts = Sale.where('created_at > ?', (this_month)).sum(:discount)
+    month_discounts = Sale.month_discounts(this_month)
     debts = Debt.sum(:dept_value)
-    month_debts = Debt.where('created_at > ?', (this_month)).sum(:dept_value)
+    month_debts = Debt.month_debts(this_month)
 
     @products_value = Item.sum(:buying_price)
 
-    @sales = Sale.includes(:bill).order('id DESC').limit(25)
-    @total_sales = @sales.sum('selling_price * quantity') - discounts - debts
-    @total_profit = @total_sales - @sales.sum('buying_price * quantity') 
-    @month_sales = @sales.where('sales.created_at > ?', (this_month)).sum('selling_price * quantity') - month_discounts - month_debts
-    @month_profit = @month_sales - @sales.where('sales.created_at > ?', (this_month)).sum('buying_price * quantity') 
+    @sales = Sale.includes(:bill, :product).order('id DESC').limit(25)
+    @total_sales = @sales.sum('sales.selling_price * sales.quantity') - discounts - debts
+    @total_profit = @total_sales - @sales.sum('sales.buying_price * sales.quantity') 
+    @month_sales = @sales.where('sales.created_at > ?', (this_month)).sum('sales.selling_price * sales.quantity') - month_discounts - month_debts
+    @month_profit = @month_sales - @sales.where('sales.created_at > ?', (this_month)).sum('sales.buying_price * sales.quantity') 
   end
 
   def all
@@ -62,7 +62,7 @@ class SalesController < ApplicationController
         end
       end
     elsif q_to_return == 0
-      redirect_to edit_sale_path, notice: "لم يحدث تغيير"
+      redirect_to edit_sale_path, notice: "Nothing changed..."
     # Higher than sold quantity >> CHeck if available in stock
     else
       if prod.quantity >= q_to_return.abs
@@ -74,7 +74,7 @@ class SalesController < ApplicationController
         prod.save
         redirect_to sales_path
       else
-        redirect_to sales_path, notice: "أنت تحاول بيع بضاعة اكثر من التي موجودة بالمخزن"
+        redirect_to sales_path, notice: "You are trying to sell more than the stock amount..!"
       end
     end
   end

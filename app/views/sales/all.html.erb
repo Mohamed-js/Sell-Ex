@@ -3,12 +3,7 @@
 </h1>
 
 <br>
-<div class="row m-1 max-width m-auto">
-  <div  class="col-lg-3 col-md-4 p-0">
-    <a href="/sales">Back</a>
-  </div>
-</div>
-<br>
+
 
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
@@ -45,7 +40,7 @@
         <% end %>
         <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
         <% if current_user.admin %>
-          <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1", method: "get" %></td>
+          <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient white p-1", method: "get" %></td>
           <td><%= button_to 'ٌReturn', sale, method: :delete, data: { confirm: 'Are you sure..?' } , class:"btn bg-gradient-danger white p-1" %></td>
         <% end %>
       </tr>

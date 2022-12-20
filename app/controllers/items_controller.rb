@@ -16,10 +16,7 @@ class ItemsController < ApplicationController
   def create
     @store = Store.first
     prod = Product.find(params[:item]['product_id'].to_i)
-    params[:item]['quantity'].to_i.times do 
-      Item.create(product_id: params[:item]['product_id'].to_i, buying_price: params[:item]['buying_price'])
-      @store.dorg -= params[:item]['buying_price'].to_i
-    end
+    Item.create_multible(params, @store)
     @store.save
     prod.quantity += params[:item]['quantity'].to_i
     prod.save

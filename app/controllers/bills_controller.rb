@@ -1,11 +1,11 @@
 class BillsController < ApplicationController
   before_action :authenticate_user!, except: %i[importer import]
   before_action :set_bill, only: %i[ show edit update destroy ]
-  skip_before_action :verify_authenticity_token, only: %i[ create ]
+  skip_before_action :verify_authenticity_token, only: %i[ create ] 
 
   def search
     if params[:q]
-      @bills = Bill.where(id: params[:q]).or(Bill.where(buyer: params[:q]))
+      @bills = Bill.get_by_client_or_bill_id(params[:q])
     end
   end
   
@@ -31,9 +31,8 @@ class BillsController < ApplicationController
     @store = Store.first
     buyer = params['buyer'] ? params['buyer'] : nil
     paid_amount = params['paid_amount'] ? params['paid_amount'].to_i : nil
-    seller = current_user.email
     @bill = Bill.create(buyer: buyer)
-    @bill.seller = seller
+    @bill.seller = current_user.name
     bill_count = 0
     params.to_enum.each_with_index do |pair, index|
       is_sale = pair[0] =~ /sale_[0-9]/
@@ -47,7 +46,7 @@ class BillsController < ApplicationController
         item = Item.where(product_id: product_id).order('created_at ASC').first
         price_to_use = pair[1]["sale#{i}[type]"] === "selling_price" ? product.selling_price : product.whole_sale_price
 
-        sale_type = pair[1]["sale#{i}[type]"] === "selling_price" ? "جمهور" : "جملة"
+        sale_type = pair[1]["sale#{i}[type]"] === "selling_price" ? "public" : "wholesale"
         
         # Create sale
         sale = Sale.new(bill_id: @bill.id, product_id: product_id, quantity: quantity, name: product.name, buying_price: item.buying_price, selling_price: price_to_use, validity: product.validity, discount: discount, sale_type: sale_type)
@@ -68,7 +67,7 @@ class BillsController < ApplicationController
             product.quantity -= quantity
             product.save
           else
-            redirect_to '/sell', notice: 'حدث خطأ مجهول!'
+            redirect_to '/sell', notice: 'Something went wrong..!'
           end
         else
           notes += "الكمية التي تريد بيعها من #{product.name} ليست متاحه في المخزن. || "

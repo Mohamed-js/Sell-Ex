@@ -1,0 +1,34 @@
+body {
+  color: white;
+  background-color: #1c2039;
+  overflow: initial;
+}
+
+.navbar {
+  background-color: #c32332;
+}
+
+.store-products {
+  justify-content: center;
+  margin: auto;
+}
+
+.store-products .store-product {
+  max-width: 225px;
+}
+
+.product-img {
+  height: 200px;
+}
+
+.modal {
+  color: black;
+}
+
+.modal-body label {
+  color: black !important;
+}
+
+.rounded {
+  border-radius: 5% !important;
+}

@@ -52,7 +52,7 @@
       <th scope="col">Name</th>
       <th scope="col" small='true'>Quantity</th>
       <th scope="col">Selling Price</th>
-      <th scope="col">After Discount</th>
+      <th scope="col" small='true'>After Discount</th>
       <th scope="col">Seller</th>
       <th scope="col">Selling Date</th>
       <% if current_user.admin %>
@@ -80,7 +80,7 @@
         <% end %>
         <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
         <% if current_user.admin %>
-          <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient-secondary white p-1", method: "get" %></td>
+          <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient white p-1", method: "get" %></td>
           <td><%= button_to 'Return', sale, method: :delete, data: { confirm: 'Are you sure..?' } , class:"btn bg-gradient-danger white p-1" %></td>
         <% end %>
       </tr>

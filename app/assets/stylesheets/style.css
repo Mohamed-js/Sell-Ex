@@ -262,7 +262,7 @@ h1.text-center {
   border: none;
   border-radius: 4px;
   text-align: center;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding: 0.2rem 0.5rem;
   font-size: unset;
 }
@@ -612,7 +612,6 @@ h1.text-center {
   height: 130px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: #20114e 1px 1px 30px;
 }
 
 .form-input {
@@ -815,6 +814,10 @@ h1.text-center {
 .main {
   padding: 10px 0;
   color: var(--primary);
+}
+
+#notice {
+  color: white;
 }
 
 .main::after {

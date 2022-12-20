@@ -20,7 +20,7 @@ class DebtsController < ApplicationController
             @debt.save
             redirect_to '/debts'
         else
-            redirect_to edit_debt_path, notice: 'لا يمكنك سداد مبلغ اكبر من الدين. لو أردت سداد المبلغ كله اضغط علي سداد بالكامل.'
+            redirect_to edit_debt_path, notice: 'You cannot pay more than the debt value, click the other button to pay the debt completely.'
         end
     end
     
