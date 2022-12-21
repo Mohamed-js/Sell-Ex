@@ -7,11 +7,11 @@ const Home = ({ products, cartItems, setCartItems }) => {
     <>
       {products && (
         <div className="store-products container row">
-          {products.map((product) => (
+          {products.map((prod) => (
             <Product
-              key={product.product.id}
-              product={product.product}
-              img={product.img}
+              key={prod.product.id}
+              product={prod.product}
+              img={prod.img}
               setCartItems={setCartItems}
               cartItems={cartItems}
             />

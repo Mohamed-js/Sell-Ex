@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const Product = ({ product, img, setCartItems, cartItems }) => {
+  let products = cartItems;
   const [cartProduct, setCartProduct] = useState({
-    product_id: product.id,
-    product_price: product.selling_price,
-    product_img: img,
+    id: `${Math.random()}_${product.name}_${Math.random()}`,
     size: "m",
     quantity: 1,
   });
@@ -15,16 +14,24 @@ const Product = ({ product, img, setCartItems, cartItems }) => {
   };
 
   const handleAddToCart = () => {
-    let products = cartItems;
+    products = cartItems;
     products.push(cartProduct);
-    setCartItems(products);
     localStorage.setItem("cart-products", JSON.stringify(products));
+    setCartItems(JSON.parse(localStorage.getItem("cart-products")));
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    setCartProduct({
+      ...cartProduct,
+      product_id: product.id,
+      product_price: product.selling_price,
+      product_img: img,
+      product_name: product.name,
+    });
+  }, [products]);
   return (
     <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-4 store-product">
-      <h6 className="text-center secondary">{product.name}</h6>
+      <h6 className="text-center">{product.name}</h6>
       <div className="product-img">
         <img className="full-img rounded" src={img} alt={product.name} />
       </div>
@@ -34,14 +41,14 @@ const Product = ({ product, img, setCartItems, cartItems }) => {
         type="button"
         className="btn btn-success w-100"
         data-toggle="modal"
-        data-target="#staticBackdrop"
+        data-target={`#modal${product.id}`}
       >
         <i className="fa fa-shopping-cart"></i> Add To Cart
       </button>
 
       <div
         className="modal fade black"
-        id="staticBackdrop"
+        id={`modal${product.id}`}
         data-backdrop="static"
         data-keyboard="false"
         tabIndex="-1"
@@ -52,7 +59,7 @@ const Product = ({ product, img, setCartItems, cartItems }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
-                Select your size:
+                {product.name}
               </h5>
               <button
                 type="button"

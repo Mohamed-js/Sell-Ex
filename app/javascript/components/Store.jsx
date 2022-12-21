@@ -41,7 +41,11 @@ function Store({ products, store }) {
       /> */}
       <Route
         component={() => (
-          <Cart cartItems={cartItems} setCartItems={setCartItems} />
+          <Cart
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            products={products}
+          />
         )}
         exact
         path="/stores/:id/cart"

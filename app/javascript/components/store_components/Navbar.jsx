@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
@@ -33,7 +33,7 @@ const Navbar = ({ store, cartItems }) => {
           data-toggle="collapse"
           data-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded="true"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
@@ -42,17 +42,35 @@ const Navbar = ({ store, cartItems }) => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" to={`/stores/${store.id}`}>
+            <Link
+              className="nav-link"
+              to={`/stores/${store.id}`}
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+            >
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={`/stores/${store.id}/categoties`}>
+          {/* <li className="nav-item">
+            <Link
+              className="nav-link"
+              to={`/stores/${store.id}/categoties`}
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+            >
               Categories
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
-            <Link className="nav-link" to={`/stores/${store.id}/cart`}>
+            <Link
+              className="nav-link"
+              to={`/stores/${store.id}/cart`}
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+            >
               Cart
             </Link>
           </li>

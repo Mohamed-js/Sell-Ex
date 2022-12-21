@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   resources :products
   resources :clients
   resources :categories
+  get "/stores/:id/*path", to: "stores#show"
 end

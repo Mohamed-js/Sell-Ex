@@ -48,3 +48,38 @@ body {
     color: whitesmoke;
   }
 }
+
+.cart-info {
+  max-height: 120px;
+  border-radius: 8px;
+}
+
+.cart-item {
+  display: flex;
+
+  background-color: #252c47;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.cart-item-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-item-info small,
+.cart-item-info p {
+  line-height: 0.9;
+}
+
+.cart-item-info h6 {
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.cart-item-info .btn {
+  padding: 0.1rem 0.3rem;
+}

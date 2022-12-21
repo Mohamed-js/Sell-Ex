@@ -1,33 +1,185 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-const Cart = ({ cartItems }) => {
-  useEffect(() => {
-    console.log(cartItems);
-  }, []);
+const Cart = ({ cartItems, setCartItems }) => {
+  const [order, setOrder] = useState({});
+  useEffect(() => {}, []);
+
+  const handleDelete = (id) => {
+    const filteredCartItems = cartItems.filter((item) => item.id !== id);
+    setCartItems(filteredCartItems);
+    localStorage.setItem("cart-products", JSON.stringify(filteredCartItems));
+  };
+
+  const handleChange = (e) => {
+    setOrder((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handlePlaceOrder = () => {
+    console.log("Order should place.");
+    setOrder((prev) => {
+      return {
+        items: cartItems,
+        ...prev,
+      };
+    });
+    console.log({
+      items: cartItems,
+      ...order,
+    });
+  };
   return (
-    <div>
-      <h1 className="text-center">My Cart</h1>
-      {cartItems.length > 0 &&
-        cartItems.map((item) => {
-          return (
-            <div className="row">
-              <div className="col-3">
-                <img
-                  src={item.product_img}
-                  alt={item.product_price}
-                  className="full-img"
-                />
-              </div>
-              <div className="col-6">
-                <h5>{item.product_price}</h5>
-                <h6>{item.size}</h6>
-                <h6>{item.quantity}</h6>
-              </div>
-              <div className="col-3">Do Something..!</div>
+    <>
+      {cartItems && cartItems.length > 0 ? (
+        <>
+          <h1 className="text-center">My Cart</h1>
+          <br />
+          <div className="d-flex m-0 justify-content-center">
+            <div className="pr-2" style={{ maxWidth: 450 }}>
+              {cartItems.map((item, i) => {
+                return (
+                  <div className="max-width cart-item">
+                    <div
+                      className="p-0"
+                      style={{
+                        maxHeight: 110,
+                        maxWidth: 120,
+                        minHeight: 110,
+                        minWidth: 120,
+                      }}
+                    >
+                      <img
+                        src={item.product_img}
+                        alt={item.product_price}
+                        className="full-img fit-cover"
+                      />
+                    </div>
+                    <div className="cart-item-info">
+                      <div
+                        style={{
+                          padding: "6px 10px",
+                        }}
+                      >
+                        <h6>{item.product_name}</h6>
+                        <h6 className="secondary">${item.product_price}</h6>
+                        <p className="m-0">
+                          <small>{item.size.toUpperCase()}</small>
+                        </p>
+                        <p className="m-0">
+                          <small>
+                            {item.quantity}{" "}
+                            {item.quantity > 1 ? "pieces" : "piece"}
+                          </small>
+                        </p>
+                      </div>
+                      <div
+                        style={{
+                          padding: "6px 10px",
+                        }}
+                      >
+                        <button
+                          className="white bg-danger btn"
+                          onClick={(e) => handleDelete(item.id)}
+                        >
+                          <i className="fa fa-trash"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
-    </div>
+            <div
+              className="p-2 cart-info"
+              style={{ backgroundColor: "#252c47" }}
+            >
+              <p>
+                Total: $
+                {cartItems.reduce((accumulator, item) => {
+                  accumulator =
+                    accumulator + item.product_price * item.quantity;
+                  return accumulator;
+                }, 0)}
+                <br />
+                {cartItems.reduce((accumulator, item) => {
+                  accumulator = accumulator + item.quantity;
+                  return accumulator;
+                }, 0)}{" "}
+                items in your cart.
+              </p>
+              <button
+                className="btn bg-gradient-tertiary white"
+                data-toggle="modal"
+                data-target={`#modal  `}
+              >
+                Checkout
+              </button>
+              <div
+                className="modal fade black"
+                id={`modal`}
+                data-backdrop="static"
+                data-keyboard="false"
+                tabIndex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="staticBackdropLabel">
+                        Shipping Info
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <div className="form-group">
+                        <label htmlFor="quantity">Full Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="name"
+                          name="name"
+                          aria-describedby="quantity"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        data-dismiss="modal"
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handlePlaceOrder}
+                      >
+                        Place Order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+        </>
+      ) : (
+        <h1 className="text-center">Your cart is empty...</h1>
+      )}
+    </>
   );
 };
 
