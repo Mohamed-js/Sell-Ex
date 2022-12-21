@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
-const Navbar = ({ store }) => {
+const Navbar = ({ store, cartItems }) => {
   return (
     <nav className="navbar navbar-dark ">
       <Link className="navbar-brand" to={`/stores/${store.id}`}>
@@ -16,31 +16,43 @@ const Navbar = ({ store }) => {
         />
         {store.name}
       </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      <div className="d-flex">
+        {cartItems.length > 0 && (
+          <Link
+            to={`/stores/${store.id}/cart`}
+            className="navbar-toggler mr-2"
+            type="Link"
+            aria-expanded="false"
+          >
+            <i className="fa fa-shopping-cart  cart-icon"></i>
+          </Link>
+        )}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+      </div>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link" to={"/store"}>
+            <Link className="nav-link" to={`/stores/${store.id}`}>
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={"/store/categories"}>
+            <Link className="nav-link" to={`/stores/${store.id}/categoties`}>
               Categories
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to={"/store/cart"}>
+            <Link className="nav-link" to={`/stores/${store.id}/cart`}>
               Cart
             </Link>
           </li>

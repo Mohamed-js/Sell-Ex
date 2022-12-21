@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "../assets/styles/store.css";
+import Cart from "./store_components/Cart";
 import Home from "./store_components/Home";
 import Navbar from "./store_components/Navbar";
 
@@ -15,7 +16,7 @@ function Store({ products, store }) {
 
   return (
     <BrowserRouter>
-      <Navbar store={store} />
+      <Navbar store={store} cartItems={cartItems} />
       <br />
       <Route
         component={() => (
@@ -25,9 +26,10 @@ function Store({ products, store }) {
             setCartItems={setCartItems}
           />
         )}
+        exact
         path="/stores/:id"
       />
-      <Route
+      {/* <Route
         component={() => (
           <Home
             products={products}
@@ -35,7 +37,14 @@ function Store({ products, store }) {
             setCartItems={setCartItems}
           />
         )}
-        path="/store/categories"
+        path="/stores/:id/categories"
+      /> */}
+      <Route
+        component={() => (
+          <Cart cartItems={cartItems} setCartItems={setCartItems} />
+        )}
+        exact
+        path="/stores/:id/cart"
       />
     </BrowserRouter>
   );

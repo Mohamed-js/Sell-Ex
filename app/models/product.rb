@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many :items, dependent: :destroy
   belongs_to :category
   belongs_to :store
+  has_one :order, through: :order_item
+  has_many :order_items
 
   validates :selling_price, presence: true
   validates :whole_sale_price, presence: true

@@ -4,7 +4,7 @@
 </div>
 <br />
 <% @stores.each do |store| %>
-  <div class="row align-items-center">
+  <div class="row align-items-center mb-2">
     <% if store.image.attached? %>
       <%= image_tag store.image, :crop=>"fill", class: "rounded col-2" %>
     <% end %>

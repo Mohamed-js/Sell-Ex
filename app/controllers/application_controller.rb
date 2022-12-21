@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
   def authenticate_admin!
     authenticate_user!
     unless current_user.admin
-      redirect_to root_path, notice: "مش مسموحلك تخش هنا!"
+      redirect_to root_path, notice: "Unauthorized..!"
     end
   end
 
   def set_store
     unless session[:current_store_id]
-      session[:current_store_id] = Store.first.id
+      store = Store.first
+      session[:current_store_id] = store.id if store
+      redirect_to stores_path, notice: "You have to create at least one store...!" unless store
     end
     @current_store = Store.find session[:current_store_id]
   end

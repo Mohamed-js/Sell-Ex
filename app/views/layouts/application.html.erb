@@ -17,11 +17,11 @@
     <% unless request.original_fullpath.match(/\/stores\/\d/) %>
       <div class="app-container">
         <div class="sidebar flex-col w-100">
-          <div class="logo ">
+          <div class="logo">
             <div class="profile-avatar mt-4 mb-2 mx-auto">
               <%= image_tag Store.find(session[:current_store_id]).image , class: "full-img" if session[:current_store_id] %>
             </div>
-            <h2 class="text-center"><span style="color: #ff613d;">Sell</span>Ex</h2>
+            <h2 class="text-center"><%= Store.find(session[:current_store_id]).name %></h2>
           </div>
           <% if current_user %>
             <%= render 'layouts/navlinks'%>
@@ -31,6 +31,7 @@
         </div>
         <div class="main">
           <div class="content p-3 rounded">
+            <%= render 'layouts/notice'%>
             <%= yield %>
           </div>
         </div>

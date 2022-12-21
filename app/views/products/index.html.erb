@@ -1,8 +1,6 @@
 <h1 class="text-center mb-3">Products</h1>
-
-
 <div class="container my-2 d-flex justify-content-between">
-    <button class="btn bg-primary white" onclick='printDiv("table")'>Print</button>
+  <button class="btn bg-primary white" onclick='printDiv("table")'>Print</button>
 </div>
 <table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
@@ -15,7 +13,6 @@
       <th scope="col" small='true'></th>
     </tr>
   </thead>
-
   <tbody id='table'>
     <% @products.each do |product| %>
       <tr scope="row">
@@ -31,25 +28,20 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
-
-
 <script>
- function printDiv(divID) {
-        //Get the HTML of div
-        var divElements = document.getElementById(divID).innerHTML;
-        //Get the HTML of whole page
-        var oldPage = document.body.innerHTML;
-        //Reset the page's HTML with div's HTML only
-        document.body.innerHTML = 
-          "<html><head> <link rel='stylesheet' href='https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css' integrity='sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe' crossorigin='anonymous'></head><body>" + 
-          divElements + "</body>";
-        //Print Page
-        window.print();
-        //Restore orignal HTML
-        document.body.innerHTML = oldPage;
-    }
+  function printDiv(divID) {
+         //Get the HTML of div
+         var divElements = document.getElementById(divID).innerHTML;
+         //Get the HTML of whole page
+         var oldPage = document.body.innerHTML;
+         //Reset the page's HTML with div's HTML only
+         document.body.innerHTML =
+           "<html><head> <link rel='stylesheet' href='https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css' integrity='sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe' crossorigin='anonymous'></head><body>" +
+           divElements + "</body>";
+         //Print Page
+         window.print();
+         //Restore orignal HTML
+         document.body.innerHTML = oldPage;
+     }
 </script>
-
-

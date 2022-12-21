@@ -12,3 +12,15 @@ export const newBill = (bill) => {
     .catch((err) => err);
   return response;
 };
+
+export const newOrder = (order) => {
+  const response = fetch(`${base}/orders`, {
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    body: JSON.stringify(order),
+  })
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((err) => err);
+  return response;
+};

@@ -32,3 +32,19 @@ body {
 .rounded {
   border-radius: 5% !important;
 }
+
+.cart-icon {
+  animation: poping infinite 0.8s alternate linear;
+}
+
+@keyframes poping {
+  0% {
+    transform: scale(1.2);
+    color: rgb(0, 197, 39);
+  }
+
+  100% {
+    transform: scale(0.8);
+    color: whitesmoke;
+  }
+}

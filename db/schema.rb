@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_20_121803) do
+ActiveRecord::Schema.define(version: 2022_12_21_013152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -60,14 +60,6 @@ ActiveRecord::Schema.define(version: 2022_12_20_121803) do
     t.integer "store_id"
   end
 
-  create_table "charges", force: :cascade do |t|
-    t.string "network"
-    t.decimal "cash"
-    t.decimal "profit"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -87,6 +79,32 @@ ActiveRecord::Schema.define(version: 2022_12_20_121803) do
   create_table "items", force: :cascade do |t|
     t.integer "product_id"
     t.decimal "buying_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "store_id"
+    t.integer "order_id"
+    t.integer "product_id"
+    t.decimal "price"
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "color"
+    t.string "size"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "store_id"
+    t.integer "client_id"
+    t.decimal "total_price"
+    t.integer "items_count"
+    t.string "phone"
+    t.string "country"
+    t.string "city"
+    t.text "address"
+    t.boolean "status_done", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
