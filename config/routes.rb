@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :order_items
+  root "sales#index"
+  # resources :order_items
   resources :orders
   devise_for :users
-  root "sales#index"
   resources :stores do
     collection do
       get "/:id/activate", to: "stores#activate"

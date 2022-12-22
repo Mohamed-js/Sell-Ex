@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Cart = ({ cartItems, setCartItems }) => {
   const [order, setOrder] = useState({});
+  const params = useParams();
   useEffect(() => {}, []);
 
   const handleDelete = (id) => {
@@ -16,18 +18,27 @@ const Cart = ({ cartItems, setCartItems }) => {
     });
   };
 
-  const handlePlaceOrder = () => {
-    console.log("Order should place.");
-    setOrder((prev) => {
-      return {
-        items: cartItems,
-        ...prev,
-      };
-    });
+  const handlePlaceOrder = async () => {
     console.log({
-      items: cartItems,
       ...order,
+      store_id: params.id,
+      order_items: cartItems,
     });
+    const response = await fetch("/orders.json", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...order,
+        store_id: params.id,
+        order_items: cartItems,
+      }),
+    });
+    if (response.status == 200) {
+      localStorage.setItem("cart-products", JSON.stringify([]));
+      setCartItems([]);
+    }
   };
   return (
     <>
@@ -39,7 +50,7 @@ const Cart = ({ cartItems, setCartItems }) => {
             <div className="pr-2" style={{ maxWidth: 450 }}>
               {cartItems.map((item, i) => {
                 return (
-                  <div className="max-width cart-item">
+                  <div className="max-width cart-item" key={i}>
                     <div
                       className="p-0"
                       style={{
@@ -141,13 +152,57 @@ const Cart = ({ cartItems, setCartItems }) => {
                     </div>
                     <div className="modal-body">
                       <div className="form-group">
-                        <label htmlFor="quantity">Full Name</label>
+                        <label htmlFor="name">Full Name</label>
                         <input
                           type="text"
                           className="form-control"
                           id="name"
                           name="name"
-                          aria-describedby="quantity"
+                          aria-describedby="name"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="phone">Phone</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="phone"
+                          name="phone"
+                          aria-describedby="phone"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="country">Country</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="country"
+                          name="country"
+                          aria-describedby="country"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="city">City</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="city"
+                          name="city"
+                          aria-describedby="city"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="address">Address</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="address"
+                          name="address"
+                          aria-describedby="address"
                           onChange={(e) => handleChange(e)}
                         />
                       </div>

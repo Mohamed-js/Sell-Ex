@@ -18,7 +18,7 @@
       <tr scope="row">
         <td>
           <% order.order_items.each do |item| %>
-            <h6><%= link_to product_path(item.product_id) %></h6>
+            <h6><%= link_to item.product.name, product_path(item.product_id) %></h6>
           <% end %>
         </td>
         <td><%= order.total_price %></td>
