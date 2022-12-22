@@ -1,7 +1,7 @@
 <div class="sidebar flex-col w-100">
           <div class="logo">
             <div class="profile-avatar mt-4 mb-1 mx-auto">
-              <% @store = Store.find(session[:current_store_id]) %>
+              <% @store = Store.where(id:session[:current_store_id]).first %>
               <% if @store && current_user && @store.image %>
               <%= image_tag @store.image , class: "full-img" %>
               <% else %>
@@ -9,7 +9,7 @@
               <% end %>
             </div>
             <% if @store && current_user && @store.image %>
-              <h2 class="text-center"><%= Store.find(session[:current_store_id]).name %></h2>
+              <h2 class="text-center"><%= @store.name if @store %></h2>
             <% end %>
           </div>
           <% if current_user %>

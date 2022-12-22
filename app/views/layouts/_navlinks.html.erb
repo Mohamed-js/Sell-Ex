@@ -4,6 +4,8 @@
 <% debts = current_page?(debts_url) ? "active": "" %>
 <% products = current_page?(products_url) || current_page?(new_item_url)|| current_page?(new_product_url) ? "active": "" %>
 <% categories = current_page?(categories_url) || current_page?(new_category_url) ? "active": "" %>
+<% stores = current_page?(stores_url) || current_page?(new_store_url) ? "active": "" %>
+<% orders = current_page?(orders_url) ? "active": "" %>
 <div class="flex-col mt-2 h-100">
   <div class="sidebar-links flex-col mt-2 w-100">
     <%= link_to root_url do %>
@@ -22,6 +24,12 @@
       <div class="sidebar-link flex-row align-center px-3 py-2 <%= bill %>">
         <%= fa_icon "search" %>
         Search Bill
+      </div>
+    <% end %>
+    <%= link_to "/orders" do %>
+      <div class="sidebar-link flex-row align-center px-3 py-2 <%= orders %>">
+        <i class="fas fa-store"></i>
+        Orders
       </div>
     <% end %>
     <%= link_to "/transactions" do %>
@@ -82,11 +90,17 @@
       <% end %>
     <% end %>
     <%= link_to "/stores" do %>
-      <div class="sidebar-link flex-row align-center px-3 py-2">
+      <div class="sidebar-link flex-row align-center px-3 py-2 <%= stores %>">
         <i class="fas fa-store"></i>
         My Stores
       </div>
     <% end %>
+    <%= link_to "/stores/new" do %>
+        <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= stores %>">
+          <%= fa_icon "plus" %>
+          Create New Store
+        </div>
+      <% end %>
     <div class = 'logout-container'>
       <%= button_to '/users/sign_out', class: "logout-btn" , method: :delete do %>
         <div class=" flex-row align-center px-3 py-2">
