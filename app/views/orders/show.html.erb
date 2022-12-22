@@ -1,0 +1,36 @@
+<p>
+  <strong>Products:</strong>
+  <% @order.order_items.each do |item| %>
+    <h6><%= link_to product_path(item.product_id) %></h6>
+  <% end %>
+</p>
+<p>
+  <strong>Total price:</strong>
+  <%= @order.total_price %>
+</p>
+<p>
+  <strong>Items count:</strong>
+  <%= @order.items_count %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @order.phone %>
+</p>
+<p>
+  <strong>Country:</strong>
+  <%= @order.country %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @order.city %>
+</p>
+<p>
+  <strong>Address:</strong>
+  <%= @order.address %>
+</p>
+<p>
+  <strong>Status done:</strong>
+  <%= @order.status_done %>
+</p>
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

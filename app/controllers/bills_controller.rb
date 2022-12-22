@@ -5,20 +5,19 @@ class BillsController < ApplicationController
 
   def search
     if params[:q]
-      @bills = Bill.where(id: params[:q]).or(Bill.where(buyer: params[:q]))
+      @bills = @current_store.bills.get_by_client_or_bill_id(params[:q])
     end
   end
-  
 
   # GET /bills/1 or /bills/1.json
   def show
-    @bill = Bill.includes(:sales).find(params[:id])
+    @bill = @current_store.bills.includes(:sales).find(params[:id])
   end
 
   # GET /bills/new
   def new
     @bill = Bill.new
-    @products = Product.all.select(:id, :name, :selling_price, :whole_sale_price).order(:name)
+    @products = @current_store.products.all.select(:id, :name, :selling_price, :whole_sale_price).order(:name)
   end
 
   # GET /bills/1/edit
@@ -28,29 +27,28 @@ class BillsController < ApplicationController
   # POST /bills or /bills.json
   def create
     notes = ""
-    @store = Store.first
-    buyer = params['buyer'] ? params['buyer'] : nil
-    paid_amount = params['paid_amount'] ? params['paid_amount'].to_i : nil
-    seller = current_user.email
-    @bill = Bill.create(buyer: buyer)
-    @bill.seller = seller
+    @store = @current_store
+    buyer = params["buyer"] ? params["buyer"] : nil
+    paid_amount = params["paid_amount"] ? params["paid_amount"].to_i : nil
+    @bill = Bill.create(buyer: buyer, store_id: @current_store.id)
+    @bill.seller = current_user.name
     bill_count = 0
     params.to_enum.each_with_index do |pair, index|
       is_sale = pair[0] =~ /sale_[0-9]/
       if is_sale == 0
         # Extract values
-        i =  index + 1
+        i = index + 1
         discount = (pair[1]["sale#{i}[discount]"] ? pair[1]["sale#{i}[discount]"] : 0).to_i
         quantity = (pair[1]["sale#{i}[quantity]"]).to_i
         product_id = pair[1]["sale#{i}[id]"]
-        product = Product.find(product_id)
-        item = Item.where(product_id: product_id).order('created_at ASC').first
+        product = @current_store.products.find(product_id)
+        item = Item.where(product_id: product_id).order("created_at ASC").first
         price_to_use = pair[1]["sale#{i}[type]"] === "selling_price" ? product.selling_price : product.whole_sale_price
 
-        sale_type = pair[1]["sale#{i}[type]"] === "selling_price" ? "جمهور" : "جملة"
-        
+        sale_type = pair[1]["sale#{i}[type]"] === "selling_price" ? "public" : "wholesale"
+
         # Create sale
-        sale = Sale.new(bill_id: @bill.id, product_id: product_id, quantity: quantity, name: product.name, buying_price: item.buying_price, selling_price: price_to_use, validity: product.validity, discount: discount, sale_type: sale_type)
+        sale = Sale.new(store_id: @current_store.id, bill_id: @bill.id, product_id: product_id, quantity: quantity, name: product.name, buying_price: item.buying_price, selling_price: price_to_use, validity: product.validity, discount: discount, sale_type: sale_type)
 
         # If a valid sale ==> Add to bill
         if quantity <= product.items.count
@@ -62,13 +60,13 @@ class BillsController < ApplicationController
               @bill.total = price_to_use * quantity - discount
             end
             quantity.times do
-              item = Item.where(product_id: product_id).order('created_at ASC').first
+              item = Item.where(product_id: product_id).order("created_at ASC").first
               item.destroy
             end
             product.quantity -= quantity
             product.save
           else
-            redirect_to '/sell', notice: 'حدث خطأ مجهول!'
+            redirect_to "/sell", notice: "Something went wrong..!"
           end
         else
           notes += "الكمية التي تريد بيعها من #{product.name} ليست متاحه في المخزن. || "
@@ -80,7 +78,7 @@ class BillsController < ApplicationController
     @store.dorg += @bill.total
 
     if paid_amount && @bill.total > paid_amount
-      Debt.create(debtor: buyer, bill_id: @bill.id, dept_value: @bill.total - paid_amount)
+      Debt.create(store_id: @current_store.id, debtor: buyer, bill_id: @bill.id, dept_value: @bill.total - paid_amount)
       @store.dorg -= @bill.total - paid_amount
     end
 
@@ -91,10 +89,8 @@ class BillsController < ApplicationController
       @bill.save
     end
 
-    render json: {message: "Saved"}
+    render json: { message: "Saved" }
   end
-
-
 
   # PATCH/PUT /bills/1 or /bills/1.json
   def update
@@ -122,8 +118,7 @@ class BillsController < ApplicationController
   end
 
   def import
-    require 'csv'    
-
+    require "csv"
 
     CSV.foreach(params[:csv_file].path, headers: true) do |row|
       Sale.create! row.to_hash
@@ -133,13 +128,14 @@ class BillsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bill
-      @bill = Bill.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bill_params
-      params.require(:bill).permit(:total, :buyer)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bill
+    @bill = @current_store.bills.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bill_params
+    params.require(:bill).permit(:total, :buyer)
+  end
 end

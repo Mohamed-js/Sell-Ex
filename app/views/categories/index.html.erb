@@ -1,0 +1,23 @@
+<h1 class="text-center mb-3">Categories</h1>
+<table class="table table-bordered table-sm table-striped max-width">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th ></th>
+      <th small='true'></th>
+      <th small='true'></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= image_tag url_for(category.image) if category.image.attached? %></td>
+        <td><%= link_to 'Products', category, class:"btn bg-gradient-tertiary white" %></td>
+        <td><%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white" %></td>
+        <td><%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

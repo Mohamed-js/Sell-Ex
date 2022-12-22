@@ -1,5 +1,5 @@
-<h1 class="text-center mb-3">Computech</h1>
-<div class="text-center mt-3 d-flex justify-content-between max-width p-2">
+<h1 class="text-center mb-3"><%= Store.first.name.capitalize %></h1>
+<div class="text-center mt-3 d-flex justify-content-between max-width p-2 white">
   <p>
     <span> Date: </span>
     <span> <%= @bill.created_at.strftime('%d/%m/%Y') %></span>
@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="text-center mt-3 d-flex justify-content-between max-width p-2">
+<div class="text-center mt-3 d-flex justify-content-between max-width p-2 white">
   <h5>
     <span>  Client: </span>
     <span> <%= @bill.buyer %></span>
@@ -27,7 +27,7 @@
 
 
 
-<div class="text-center mb-2 d-flex justify-content-between max-width p-2">
+<div class="text-center mb-2 d-flex justify-content-between max-width p-2 white">
   <%if @bill.debt %>
     <h5>
       <span> Status : </span>
@@ -38,13 +38,17 @@
       <span> <%= @bill.debt.dept_value %> ج.م</span>
     </h5>
     <h5>
-      <span> Paid amount: </span>
+      <span> Paid Amount: </span>
       <span> $<%= @bill.sales.sum('(selling_price * quantity) - discount') - @bill.debt.dept_value %></span>
     </h5>
   <% else %>
     <h5>
       <span> Status : </span>
       <span> Complete</span>
+    </h5>
+    <h5>
+      <span> Discount : </span>
+      <span> $<%= @bill.sales.sum('discount') %></span>
     </h5>
     <h5>
       <span>Paid Amount : </span>

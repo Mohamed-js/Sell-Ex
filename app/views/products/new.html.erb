@@ -1,12 +1,10 @@
-<h1 class="text-center mb-3">
-    New Product
+<h1 class="text-center mb-2">
+  New Product
 </h1>
-
 <%= form_with(model: @product, class:"container") do |form| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
       <ul>
         <% @product.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -14,37 +12,35 @@
       </ul>
     </div>
   <% end %>
-  <br>
   <div class="field form-group">
     <%= form.label "Name" %>
     <%= form.text_field :name, class:"form-control", required: true %>
   </div>
-
+  <div class="field form-gruop">
+    <%= form.label "Category" %>
+    <%= select_tag "product[#{:category_id}]", options_from_collection_for_select(@categories, "id", "name"), class:"form-control" %>
+  </div>
   <div class="field form-group">
     <%= form.label "Purchasing Price" %>
     <%= form.number_field :buying_price, class:"form-control" , step: :any, required: true %>
   </div>
-
   <div class="field form-group">
     <%= form.label "Selling Price" %>
     <%= form.number_field :selling_price, class:"form-control" , step: :any, required: true %>
   </div>
-
   <div class="field form-group">
     <%= form.label "Wholesale Price" %>
     <%= form.number_field :whole_sale_price, class:"form-control" , step: :any, required: true %>
   </div>
-
+  <div class="field form-group">
+    <%= form.label "Image" %>
+    <%= form.file_field :image, class:"form-control", required: true %>
+  </div>
   <div class="field form-group">
     <%= form.label "Quantity" %>
     <%= form.number_field :quantity, class:"form-control", required: true %>
   </div>
-
   <div class="actions">
-    <%= form.submit "Add Product", class:"btn bg-gradient-tertiary white", data: { disable_with: "انتظر..." } %>
+    <%= form.submit "Add Product", class:"btn bg-gradient-tertiary white mt-3", data: { disable_with: "Wait..." } %>
   </div>
 <% end %>
-
-<div class="container mt-2">
-    <%= link_to 'Cancel', root_path, class:"btn btn-secondary" %>
-</div>

@@ -1,29 +1,23 @@
 <h1 class="text-center mb-3">Complete unpaid bill</h1>
-<p id="notice" class="text-center alert"><%= notice %></p>
 <div class="container mt-3">
-
-<%= form_with(model: @debt) do |form| %>
-  <% if @debt.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
-
-      <ul>
-        <% @debt.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: @debt) do |form| %>
+    <% if @debt.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@debt.errors.count, "error") %> prohibited this debt from being saved:</h2>
+        <ul>
+          <% @debt.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field form-group">
+      <%= form.label " Amount to pay " %>
+      <%= form.number_field :money, class:"form-control" %>
+    </div>
+    <div class="actions form-group">
+      <%= form.submit "Pay", class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
     </div>
   <% end %>
-
-  <div class="field form-group">
-    <%= form.label " Amount to pay " %>
-    <%= form.number_field :money, class:"form-control" %>
-  </div>
-
-  <div class="actions form-group">
-    <%= form.submit "Pay", class:"btn bg-gradient-tertiary white", data: { disable_with: "Wait..." } %>
-  </div>
-<% end %>
-
-<%= link_to 'Cancel', debts_path %>
+  <%= link_to 'Cancel', debts_path %>
 </div>

@@ -19,11 +19,11 @@ function App({ products }) {
 
   return (
     <>
-      <div className="container max-width my-2">
+      <div className="container max-width">
         <button
           id="new-sale"
           type="button"
-          className="btn bg-gradient white m-3 bold"
+          className="btn bg-gradient white mb-2 bold"
           onClick={() => {
             setItemCount((prev) => prev + 1);
           }}>
@@ -99,7 +99,7 @@ function App({ products }) {
                         className="m-2"
                         defaultChecked
                       />
-                      <span>لا</span>
+                      <span>No</span>
                     </div>
                   </div>
                   <div className="col-6">
@@ -160,10 +160,10 @@ function App({ products }) {
           <input
             type="button"
             value="Proceed"
-            className="btn m-2 bg-gradient-tertiary white"
+            className="btn mt-3 bg-gradient-tertiary white"
             onClick={() => setContinues(true)}
           />
-          <a href="/sales">Cancel</a>
+          <a className="btn mt-3 bg-gradient white ml-1" href="/">Cancel</a>
         </form>
       </div>
     </>

@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = Client.all
+    @clients = @current_store.clients.all
   end
 
   # GET /clients/1 or /clients/1.json
@@ -22,6 +22,7 @@ class ClientsController < ApplicationController
   # POST /clients or /clients.json
   def create
     @client = Client.new(client_params)
+    @client.store_id = @current_store.id
 
     respond_to do |format|
       if @client.save
@@ -58,13 +59,14 @@ class ClientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client
-      @client = Client.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def client_params
-      params.require(:client).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_client
+    @client = @current_store.clients.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def client_params
+    params.require(:client).permit(:name)
+  end
 end

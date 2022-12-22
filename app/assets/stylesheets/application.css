@@ -58,9 +58,8 @@ a:hover {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: white;
-  max-height: 155px;
-  overflow: auto;
+  color: white;
+  max-height: 160px;
 }
 
 .product-select:hover {
@@ -116,29 +115,34 @@ a:hover {
   display: none;
 }
 
-#new_user div input[value='Log in'] {
+#new_user div input[value="Log in"] {
   border: 1px solid rgba(115, 255, 173, 0.692);
   background-color: rgba(115, 255, 173, 0.692);
-  /* margin-right: 50px; */
+  color: white;
 }
 
-#new_user div input[value='Sign up'] {
+#new_user div input[value="Sign up"] {
   border: 1px solid rgba(115, 255, 173, 0.692);
   background-color: rgba(115, 255, 173, 0.692);
   margin-right: 50px;
   margin-top: 10px;
 }
 
-a[href='/users/sign_up'] {
+a[href="/users/sign_up"] {
   display: none;
 }
 
-a[href='/users/password/new'] {
+a[href="/users/password/new"] {
   display: none;
 }
 
 h2 {
+  color: white;
   text-align: center;
+}
+
+h2[href="/users/sign_in"] {
+  color: white;
 }
 
 .logout-container .logout-btn {
@@ -148,11 +152,15 @@ h2 {
   color: aliceblue;
   /* padding-left: 4px; */
   background-color: transparent;
+  font-size: 0.8rem;
 }
 
 .logout-container form {
   text-align: start;
 }
 .actions {
-  text-align: left  ;
+  text-align: left;
+}
+.form-control {
+  height: calc(1.5em + 1.1rem + 2px);
 }

@@ -1,31 +1,34 @@
-<div class="text-center p-3 mb-3">
-    <h1><%= @product.name %></h1>
+<div class="row align-items-center mb-2">
+  <div class="text-center mb-1 col-4">
+    <h3 class='white'><%= @product.name.capitalize %></h3>
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded" %>
+    <% end %>
+  </div>
+  <div class="col-8">
+    <div class="p-2 text-center max-width white">
+      <h4 class="text-center"><%= @product.category.name.capitalize %></h4>
+    </div>
+    <div class="row p-2 text-center max-width bg-gradient btn-dark">
+      <h6 class="col-6 m-0">Quantity</h6>
+      <h6 class="col-6 m-0"><%= @product.items.count %></h6>
+    </div>
+    <div class="row p-2 text-center max-width white">
+      <h6 class="col-6 m-0">Selling Price</h6>
+      <h6 class="col-6 m-0">$<%= @product.selling_price %></h6>
+    </div>
+    <div class="row p-2 text-center max-width bg-gradient btn-dark">
+      <h6 class="col-6 m-0">Wholesale Price</h6>
+      <h6 class="col-6 m-0">$<%= @product.whole_sale_price %></h6>
+    </div>
+    <div class="row p-3 text-center max-width flex-row justify-between">
+      <% if current_user.admin %>
+        <%= link_to 'Edit Product', edit_product_path(@product), class:"btn bg-gradient white" %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<div class="row p-3 text-center max-width flex-row justify-between">
-  <% if current_user.admin %>
-    <%= link_to 'Edit Product', edit_product_path(@product), class:"btn bg-gradient-secondary white" %>
-  <% end %>
-  <%= link_to 'Back', products_path, class:"btn bg-secondary white" %>
-</div>
-
-<div class="row p-3 text-center max-width bg-gradient-tertiary btn-dark">
-  <h4 class="col-6">Quantity</h4>
-  <h4 class="col-6"><%= @product.items.count %></h4>
-</div>
-
-<div class="row p-3 text-center max-width">
-  <h4 class="col-6">Selling Price</h4>
-  <h4 class="col-6"><%= @product.selling_price %></h4>
-</div>
-
-<div class="row p-3 text-center max-width bg-gradient-tertiary btn-dark">
-  <h4 class="col-6">Wholesale Price</h4>
-  <h4 class="col-6"><%= @product.whole_sale_price %></h4>
-</div>
-
-
-<table class="table table-bordered table-sm table-striped max-width mt-4">
+<table class="table table-bordered table-sm table-striped max-width">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Item ID</th>
@@ -33,9 +36,12 @@
         <th scope="col">Purchasing Price</th>
       <% end %>
       <th scope="col">Date of purchase</th>
+      <% if current_user.admin %>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      <% end %>
     </tr>
   </thead>
-
   <tbody>
     <% @product.items.each do |item| %>
       <tr scope="row">
@@ -46,12 +52,10 @@
         <td><%= item.created_at.strftime('%F - %I:%M - %p') %></td>
         <!-- <td><%= button_to 'Edit', edit_item_path(item.id), method: :get, class:"btn bg-gradient-secondary white" %></td> -->
         <% if current_user.admin %>
-          <td><%= button_to 'Expired With Cashback', {:controller => "items", :action => "destroy", :money_back => true, :id => item.id}, method: :delete,  data: { confirm: 'Are you sure..?' }, class:"btn btn-secondary" %></td>
-          <td><%= button_to 'Expired With Loss', item, method: :delete, data: { confirm: 'Are you sure..?' }, class:"btn bg-gradient-danger white" %></td>
+          <td><%= button_to 'Expired & Cashback', {:controller => "items", :action => "destroy", :money_back => true, :id => item.id}, method: :delete,  data: { confirm: 'Are you sure..?' }, class:"btn btn-secondary" %></td>
+          <td><%= button_to 'Expired & Loss', item, method: :delete, data: { confirm: 'Are you sure..?' }, class:"btn bg-gradient-danger white" %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-

@@ -1,0 +1,12 @@
+development:
+  cloud_name: atefcloud
+  api_key: "824336462488539"
+  api_secret: "pEGHRdxPduNoMq8eWAu3c361h7E"
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: atefcloud
+  api_key: "824336462488539"
+  api_secret: "pEGHRdxPduNoMq8eWAu3c361h7E"
+  enhance_image_tag: true
+  static_file_support: true

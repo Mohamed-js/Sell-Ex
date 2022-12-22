@@ -6,8 +6,9 @@ default: &default
 
 development:
   <<: *default
-  username: postgres
-  password: postgresql
+  url: postgres://dwqawyqa:hTqF1-qiKe9d6AtZvW_0jcuDHrYZMejs@ella.db.elephantsql.com/dwqawyqa
+  # username: postgres
+  # password: postgresql
 
 production:
-  url: <%= ENV['MY_APP_DATABASE_URL'] %>
+  url: postgres://dwqawyqa:hTqF1-qiKe9d6AtZvW_0jcuDHrYZMejs@ella.db.elephantsql.com/dwqawyqa

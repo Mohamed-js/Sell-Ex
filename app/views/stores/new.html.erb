@@ -1,0 +1,31 @@
+<h1 class="text-center mb-2">
+  New store
+</h1>
+<%= form_with(model: @store, class:"container") do |form| %>
+  <% if @store.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h2>
+      <ul>
+        <% @store.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field form-group">
+    <%= form.label "Name" %>
+    <%= form.text_field :name, class:"form-control", required: true %>
+  </div>
+  <div class="field form-group">
+    <%= form.label "How much money to start with?" %>
+    <%= form.number_field :dorg, class:"form-control" , step: :any, required: true %>
+    <small class='white'>Note: Every product you add to the store will lower this cash with the same amount as its purchasing price.</small>
+  </div>
+  <div class="field form-group">
+    <%= form.label "Image" %>
+    <%= form.file_field :image, class:"form-control", required: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Create Store", class:"btn bg-gradient-tertiary white mt-3", data: { disable_with: "Wait..." } %>
+  </div>
+<% end %>
