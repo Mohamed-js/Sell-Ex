@@ -59,7 +59,7 @@
         <% if sale.product %>
           <td><%= button_to sale.name , product_path(sale.product.id), method: "get", class:"btn blue-link" %></td>
         <% else %>
-          <td><%= sale.name %></td>
+          <td class="tertiary"><%= sale.name %></td>
         <% end %>
         <td><%= sale.quantity %></td>
         <td>$<%= sale.selling_price %>  <%= " - " + sale.sale_type if sale.sale_type %> </td>

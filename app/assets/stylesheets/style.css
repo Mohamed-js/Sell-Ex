@@ -1130,3 +1130,7 @@ h1.text-center {
   background: transparent;
   color: white;
 }
+
+.table a {
+  color: white;
+}
