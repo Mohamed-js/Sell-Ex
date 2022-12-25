@@ -11,4 +11,5 @@ development:
   # password: postgresql
 
 production:
+  <<: *default
   url: postgres://dwqawyqa:hTqF1-qiKe9d6AtZvW_0jcuDHrYZMejs@ella.db.elephantsql.com/dwqawyqa
