@@ -1,5 +1,5 @@
 // const base = 'http://computech-management-system.herokuapp.com';
-const base = 'http://127.0.0.1:3000';
+const base = 'https://sellex.onrender.com/';
 
 export const newBill = (bill) => {
   const response = fetch(`${base}/bills`, {
