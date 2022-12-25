@@ -1,24 +1,57 @@
-# README
+# SellEx Systems
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> This project is a full-stack web app built mainly with Rails, React, CSS, and Bootsrap. It is a solution for those who want to manage their community, and online stores at the same time. You can manage:
 
-Things you may want to cover:
+- Sales and handle returns.
+- Products' stock.
+- Your cash & products capital.
+- Store debts and paying them back.
+- Clients' bills.
+- Online orders with a simple cart.
+- All expenses in income of your store.
 
-* Ruby version
+<div align="center">
 
-* System dependencies
+![screenshot](./assets/sellex4.png)
+![screenshot](./assets/sellex1.png)
+![screenshot](./assets/sellex2.png)
+![screenshot](./assets/sellex3.png)
 
-* Configuration
+</div>
 
-* Database creation
+## Technologies
 
-* Database initialization
+- Ruby On Rails
+- React
+- React On Rails
+- Cloudinary
+- Bootstrap
+- CSS
+- ES6
 
-* How to run the test suite
+## Live Demo
 
-* Services (job queues, cache servers, search engines, etc.)
+[Live Demo Link](https://sellex.onrender.com/)
 
-* Deployment instructions
+## Usage
 
-* ...
+```
+- git clone "https://github.com/Mohamed-js/Sell-Ex.git"
+- cd sell-ex
+```
+
+## Authors
+
+👤 **Mohammed Atef**
+
+- GitHub: [Mohamed Atef](https://github.com/Mohamed-js)
+- Twitter: [@Mohamed Atef](https://twitter.com/Demovejetta)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/mohamed-js/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+## Show your support
+
+Give a ⭐️ if you like this project!

@@ -225,7 +225,7 @@ hr {
 }
 
 .tertiary {
-  color: #00ee9f;
+  color: #00ee9f !important;
 }
 
 .border {

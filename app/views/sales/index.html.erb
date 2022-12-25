@@ -57,7 +57,7 @@
       <tr scope="row">
         <td><%= button_to sale.bill.id , bill_path(sale.bill.id), method: "get", class:"btn blue-link" %> </td>
         <% if sale.product %>
-          <td><%= button_to sale.name , product_path(sale.product.id), method: "get", class:"btn blue-link" %></td>
+          <td><%= link_to sale.name , product_path(sale.product.id), method: "get", class:"btn tertiary" %></td>
         <% else %>
           <td class="tertiary"><%= sale.name %></td>
         <% end %>
