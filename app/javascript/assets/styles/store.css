@@ -1,11 +1,24 @@
 body {
-  color: white;
-  background-color: #1c2039;
+  /* color: white; */
   overflow: initial;
 }
 
+.nav-link {
+  font-size: 0.95rem;
+}
+
+.nav-link i.fa {
+  font-size: 1.3rem;
+  margin: 0 2px;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+}
+
 .navbar {
-  background-color: #c32332;
+  background-color: #f8f8f8;
 }
 
 .store-products {
@@ -34,7 +47,14 @@ body {
 }
 
 .cart-icon {
-  animation: poping infinite 0.8s alternate linear;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.navbar-toggler {
+  border: none;
 }
 
 @keyframes poping {
@@ -82,4 +102,36 @@ body {
 
 .cart-item-info .btn {
   padding: 0.1rem 0.3rem;
+}
+
+.cover {
+  position: relative;
+  display: flex;
+}
+
+.cover p,
+.cover h1 {
+  z-index: 3;
+  padding: 0 10px;
+  width: fit-content;
+}
+
+.cover button {
+  z-index: 3;
+  margin: 0 10px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.cover .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+
+.cover .bg-image {
+  z-index: 1;
 }

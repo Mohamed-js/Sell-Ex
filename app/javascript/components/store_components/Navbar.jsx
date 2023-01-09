@@ -1,32 +1,65 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
 
-const Navbar = ({ store, cartItems }) => {
+const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
+  const BREAK_POINT = 768;
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  let logoCentered = storeOpts.navbar.logo.position == "center" ? true : false;
+  useEffect(() => {
+    let logo = document.getElementById("navbar-brand");
+    logo.style.left = `calc(50% - ${logo.offsetWidth / 2}px)`;
+
+    window.addEventListener("resize", () => {
+      setScreenWidth(window.innerWidth);
+    });
+  }, []);
+
   return (
-    <nav className="navbar navbar-dark ">
-      <Link className="navbar-brand" to={`/stores/${store.id}`}>
+    <nav
+      className="navbar navbar-light navbar-expand-md"
+      style={{ backgroundColor: `${storeOpts.navbar.bg_color}` }}
+    >
+      <Link
+        className="navbar-brand"
+        id="navbar-brand"
+        to={`/stores/${store.id}`}
+        style={{
+          position: logoCentered ? "absolute" : "static",
+        }}
+      >
         <img
-          src={logo}
+          src={storeImage}
           width="30"
           height="30"
-          className="d-inline-block align-top"
-          alt=""
+          className="d-inline-block align-top mx-1"
+          alt={store.name}
           loading="lazy"
         />
         {store.name}
       </Link>
-      <div className="d-flex">
-        {cartItems.length > 0 && (
-          <Link
-            to={`/stores/${store.id}/cart`}
-            className="navbar-toggler mr-2"
-            type="Link"
-            aria-expanded="false"
-          >
-            <i className="fa fa-shopping-cart  cart-icon"></i>
-          </Link>
-        )}
+      <div
+        className="d-flex justify-content-between"
+        style={{
+          width: logoCentered && screenWidth < BREAK_POINT ? "100%" : 0,
+        }}
+      >
+        {/* {cartItems.length > 0 && ( */}
+        <Link
+          className="nav-link navbar-toggler cart-icon"
+          to={`/stores/${store.id}/cart`}
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-expanded="true"
+          aria-controls="navbarNav"
+        >
+          <i
+            className="fa fa-shopping-bag"
+            style={{
+              color: `${storeOpts.navbar.cart.color}`,
+            }}
+          ></i>
+        </Link>
+        {/* )} */}
         <button
           className="navbar-toggler"
           type="button"
@@ -39,42 +72,85 @@ const Navbar = ({ store, cartItems }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div className="collapse navbar-collapse" id="navbarNav">
+      <div
+        className="collapse navbar-collapse justify-content-between"
+        id="navbarNav"
+      >
         <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link
-              className="nav-link"
-              to={`/stores/${store.id}`}
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-            >
-              Home <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-          {/* <li className="nav-item">
-            <Link
-              className="nav-link"
-              to={`/stores/${store.id}/categoties`}
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-            >
-              Categories
-            </Link>
-          </li> */}
-          <li className="nav-item">
-            <Link
-              className="nav-link"
-              to={`/stores/${store.id}/cart`}
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-            >
-              Cart
-            </Link>
-          </li>
+          {storeOpts.navbar.links.home.exists && (
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to={`/stores/${store.id}`}
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                style={{
+                  color: storeOpts.navbar.links.color,
+                }}
+              >
+                <i className="fa fa-home"></i>{" "}
+                {storeOpts.navbar.links.with_text &&
+                  storeOpts.navbar.links.home.text}
+                <span className="sr-only">(current)</span>
+              </Link>
+            </li>
+          )}
+          {storeOpts.navbar.links.about.exists && (
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to={`/stores/${store.id}`}
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                style={{
+                  color: storeOpts.navbar.links.color,
+                }}
+              >
+                <i className="fa fa-user"></i>{" "}
+                {storeOpts.navbar.links.with_text &&
+                  storeOpts.navbar.links.about.text}
+                <span className="sr-only">(current)</span>
+              </Link>
+            </li>
+          )}
+          {storeOpts.navbar.links.contact.exists && (
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to={`/stores/${store.id}`}
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                style={{
+                  color: storeOpts.navbar.links.color,
+                }}
+              >
+                <i className="fa fa-phone"></i>{" "}
+                {storeOpts.navbar.links.with_text &&
+                  storeOpts.navbar.links.contact.text}
+                <span className="sr-only">(current)</span>
+              </Link>
+            </li>
+          )}
         </ul>
+
+        <Link
+          className="nav-link cart-icon"
+          to={`/stores/${store.id}/cart`}
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-expanded="true"
+          aria-controls="navbarNav"
+        >
+          <i
+            className="fa fa-shopping-bag"
+            style={{
+              color: `${storeOpts.navbar.cart.color}`,
+            }}
+          ></i>
+        </Link>
       </div>
     </nav>
   );

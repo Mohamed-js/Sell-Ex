@@ -51,7 +51,7 @@
       </div>
     <% end %>
     <%# Admin specific!!!!!!!!!!!!!!! %>
-    <% if current_user.admin %>
+    <%# <% if current_user.admin %>
       <%= link_to "/categories" do %>
         <div class="sidebar-link flex-row align-center px-3 py-2 <%= categories %>">
           <i class="fas fa-th-large"></i>
@@ -88,7 +88,7 @@
           Debts
         </div>
       <% end %>
-    <% end %>
+    <%# <% end %> 
     <%= link_to "/stores" do %>
       <div class="sidebar-link flex-row align-center px-3 py-2 <%= stores %>">
         <i class="fas fa-store"></i>

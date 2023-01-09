@@ -8,8 +8,77 @@ class StoresController < ApplicationController
 
   def show
     @products = []
-    @all_products = @store.products
-    @all_products.each { |product|
+    @store_opts = {
+      body: {
+        bg_color: '#fff',
+      },
+      navbar: {
+        bg_color: '#fff',
+        logo: {
+          text: "Otaku Wear",
+          text_color: "black",
+          position: "center",
+        },
+        cart: {
+          color: "#d44c0b"
+        },
+        links: {
+          with_text: false,
+          color: 'rgba(0,0,0,.7)',
+          home: {
+            exists: true,
+            text: 'Home',
+          },
+          about: {
+            exists: true,
+            text: 'About Us',
+          },
+          contact: {
+            exists: true,
+            text: 'Contact',
+          }
+        }
+      },
+      cover: {
+        height: '70vh',
+        bg_color: "white",
+        content_vertical_position: 'center',
+        content_horizontal_position: 'start',
+        headline: {
+          text: "Otaku Wear",
+          font_size: "4.5rem",
+          color: "#d44c0b",
+          bg_color: "transparent",
+          text_align: "left",
+        },
+        description: {
+          text: "The first place to think about when you are buying amazing stuff...",
+          font_size: "1.5rem",
+          color: "white",
+          bg_color: "transparent",
+          text_align: "left",
+        },
+        button: {
+          font_size: "1rem",
+          color: "#d44c0b",
+          bg_color: "transparent",
+          alignment: 'left',
+        },
+        background: {
+          exists: true,
+          image: "https://images6.alphacoders.com/415/415519.jpg",
+          size: '100%',
+          position: 'right',
+          image_position: "center left",
+        },
+        overlay: {
+          exists: true,
+          color: '#171717bd',
+        },
+      },
+    }
+    all_products = @store.products
+    all_products.each { |product|
       @products.push({
         product: product,
         img: url_for(product.image),

@@ -5,8 +5,9 @@ import Cart from "./store_components/Cart";
 import Home from "./store_components/Home";
 import Navbar from "./store_components/Navbar";
 
-function Store({ products, store }) {
+function Store({ products, store, store_image, store_opts }) {
   const [cartItems, setCartItems] = useState([]);
+  document.body.style.backgroundColor = `${store_opts.body.bg_color}`;
   useEffect(() => {
     const products = JSON.parse(localStorage.getItem("cart-products"));
     if (products) {
@@ -16,14 +17,19 @@ function Store({ products, store }) {
 
   return (
     <BrowserRouter>
-      <Navbar store={store} cartItems={cartItems} />
-      <br />
+      <Navbar
+        store={store}
+        cartItems={cartItems}
+        storeImage={store_image}
+        storeOpts={store_opts}
+      />
       <Route
         component={() => (
           <Home
             products={products}
             cartItems={cartItems}
             setCartItems={setCartItems}
+            storeOpts={store_opts}
           />
         )}
         exact

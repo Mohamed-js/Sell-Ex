@@ -1,1 +1,3 @@
-<%= react_component('Store', {products: @products, store: @store}) %>
+
+
+<%= react_component('Store', {products: @products, store: @store, store_image: url_for(@store.image), store_opts: @store_opts}) %>
