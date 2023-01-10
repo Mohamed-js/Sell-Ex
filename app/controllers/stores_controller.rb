@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_store, only: %i[show destroy update edit design]
+  before_action :set_store, only: %i[show destroy update edit design update_design ]
   before_action :default_store_options, only: :create
 
   def index
@@ -48,6 +48,21 @@ class StoresController < ApplicationController
         format.json { render :index, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @store.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_design
+    @store.options = params[:store_options].to_json
+
+    respond_to do |format|
+      p format
+      if @store.save
+        format.html { render json: {success: true}, notice: "Store design was successfully updated." }
+        format.json { render :index, status: :ok }
+      else
+        format.html { render :design, status: :unprocessable_entity }
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end

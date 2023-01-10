@@ -4,7 +4,6 @@ import NavbarDesigner from "./designer_components/NavbarDesigner";
 const Designer = ({ store }) => {
   const [storeOpts, setStoreOpts] = useState(JSON.parse(store.options));
 
-  console.log(storeOpts);
   return (
     <div className="row design-area">
       <div
@@ -59,8 +58,23 @@ const Designer = ({ store }) => {
           style={{
             margin: "2.5rem 1rem",
           }}
-          onClick={() => {
+          onClick={async () => {
+            const token = document.querySelector("[name=csrf-token]").content;
             console.log(storeOpts);
+            await fetch(`/stores/${store.id}/update_design`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": token,
+              },
+              body: JSON.stringify({ store_options: storeOpts }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.success) {
+                  alert("Design updated successfully...!");
+                }
+              });
           }}
         >
           Save Changes

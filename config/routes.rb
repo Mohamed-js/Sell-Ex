@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get "/:id/control", to: "stores#control"
       get "/:id/activation_toggle", to: "stores#activation_toggle"
       get '/:id/design', to: 'stores#design'
+      patch '/:id/update_design', to: 'stores#update_design'
     end
   end
   resources :transactions
