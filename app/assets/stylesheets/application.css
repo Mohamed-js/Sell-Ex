@@ -136,6 +136,10 @@ a[href="/users/password/new"] {
   display: none;
 }
 
+h1 {
+  color: white;
+}
+
 h2 {
   color: white;
   text-align: center;
@@ -158,9 +162,21 @@ h2[href="/users/sign_in"] {
 .logout-container form {
   text-align: start;
 }
+
 .actions {
   text-align: left;
 }
+
 .form-control {
   height: calc(1.5em + 1.1rem + 2px);
+}
+
+.not-found {
+  height: 100vh;
+}
+
+.not-found h1 {
+  font-size: 25vw;
+  font-weight: 900;
+  text-shadow: 4px 4px 0 #fff, 6px 6px 0 #ffc107;
 }

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :stores do
     collection do
-      get "/:id/activate", to: "stores#activate"
+      get "/:id/control", to: "stores#control"
+      get "/:id/activation_toggle", to: "stores#activation_toggle"
+      get '/:id/design', to: 'stores#design'
     end
   end
   resources :transactions

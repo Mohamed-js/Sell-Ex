@@ -5,10 +5,12 @@ import Cart from "./store_components/Cart";
 import Home from "./store_components/Home";
 import Navbar from "./store_components/Navbar";
 
-function Store({ products, store, store_image, store_opts }) {
+function Store({ products, store, store_image }) {
+  const [storeOpts, setStoreOpts] = useState(JSON.parse(store.options));
   const [cartItems, setCartItems] = useState([]);
-  document.body.style.backgroundColor = `${store_opts.body.bg_color}`;
+  console.log(store.options);
   useEffect(() => {
+    document.body.style.backgroundColor = `${storeOpts.body.bg_color}`;
     const products = JSON.parse(localStorage.getItem("cart-products"));
     if (products) {
       setCartItems(products);
@@ -21,7 +23,7 @@ function Store({ products, store, store_image, store_opts }) {
         store={store}
         cartItems={cartItems}
         storeImage={store_image}
-        storeOpts={store_opts}
+        storeOpts={storeOpts}
       />
       <Route
         component={() => (
@@ -29,7 +31,7 @@ function Store({ products, store, store_image, store_opts }) {
             products={products}
             cartItems={cartItems}
             setCartItems={setCartItems}
-            storeOpts={store_opts}
+            storeOpts={storeOpts}
           />
         )}
         exact

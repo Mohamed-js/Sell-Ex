@@ -59,6 +59,6 @@ class ItemsController < ApplicationController
   end
 
   def check_categories
-    redirect_to categories_path, notice: 'You have to create at least one category first.' if Category.count == 0
+    redirect_to categories_path, notice: 'You have to create at least one category first.' if @current_store.categories.count == 0
   end
 end

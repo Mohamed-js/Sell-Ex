@@ -730,7 +730,7 @@ h1.text-center {
   color: white;
 }
 
-.active {
+.sidebar-links .active {
   transform: scale(1.1) translateX(10px);
   background-color: #1c2039;
   color: #ff613d;
@@ -739,11 +739,11 @@ h1.text-center {
   border-bottom-left-radius: 10px;
 }
 
-.active:hover {
+.sidebar-links .active:hover {
   color: #ff613d !important;
 }
 
-.active::before {
+.sidebar-links .active::before {
   content: "";
   width: 20px;
   height: 20px;
@@ -756,7 +756,7 @@ h1.text-center {
   border: none;
 }
 
-.active::after {
+.sidebar-links .active::after {
   content: "";
   width: 20px;
   height: 20px;

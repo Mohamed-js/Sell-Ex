@@ -1,14 +1,97 @@
 class StoresController < ApplicationController
   skip_before_action :authenticate_user!
-  before_action :set_store, only: %i[show destroy update edit]
+  before_action :set_store, only: %i[show destroy update edit design]
+  before_action :default_store_options, only: :create
 
   def index
     @stores = Store.all
   end
 
   def show
+    render 'layouts/404' unless @store.active
     @products = []
-    @store_opts = {
+    all_products = @store.products
+    all_products.each { |product|
+      @products.push({
+        product: product,
+        img: url_for(product.image),
+      })
+    }
+  end
+
+  def new
+    @store = Store.new
+  end
+
+  def edit
+  end
+
+  def create
+    @store = Store.new(store_params)
+    @store.options = @store_options.to_json
+
+    respond_to do |format|
+      if @store.save
+        format.html { redirect_to stores_url, notice: "Store was successfully created." }
+        format.json { render :index, status: :ok }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @store.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @store.update(store_params)
+        format.html { redirect_to stores_url, notice: "Store was successfully updated." }
+        format.json { render :index, status: :ok }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @store.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def control
+    session[:current_store_id] = params[:id]
+    s = Store.find params[:id]
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "You now control #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def activation_toggle
+    s = Store.find params[:id]
+    s.active = !s.active
+    s.save
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "You #{"de" unless s.active}activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def destroy
+    @store.destroy
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "Store was successfully deleted." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def design
+    
+  end
+
+  private
+
+  def set_store
+    @store = Store.find(params[:id])
+  end
+
+  def default_store_options
+    @store_options = {
       body: {
         bg_color: '#fff',
       },
@@ -40,7 +123,7 @@ class StoresController < ApplicationController
         }
       },
       cover: {
-        height: '70vh',
+        height: '80vh',
         bg_color: "white",
         content_vertical_position: 'center',
         content_horizontal_position: 'start',
@@ -77,68 +160,6 @@ class StoresController < ApplicationController
         },
       },
     }
-    all_products = @store.products
-    all_products.each { |product|
-      @products.push({
-        product: product,
-        img: url_for(product.image),
-      })
-    }
-  end
-
-  def new
-    @store = Store.new
-  end
-
-  def edit
-  end
-
-  def create
-    @store = Store.new(store_params)
-
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to stores_url, notice: "Store was successfully created." }
-        format.json { render :index, status: :ok }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @store.update(store_params)
-        format.html { redirect_to stores_url, notice: "Store was successfully updated." }
-        format.json { render :index, status: :ok }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def activate
-    session[:current_store_id] = params[:id]
-    respond_to do |format|
-      format.html { redirect_to stores_url, notice: "Store was successfully activated." }
-      format.json { render :index, status: :ok }
-    end
-  end
-
-  def destroy
-    @store.destroy
-    respond_to do |format|
-      format.html { redirect_to stores_url, notice: "Store was successfully deleted." }
-      format.json { render :index, status: :ok }
-    end
-  end
-
-  private
-
-  def set_store
-    @store = Store.find(params[:id])
   end
 
   def store_params

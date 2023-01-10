@@ -47,8 +47,8 @@ const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
         <Link
           className="nav-link navbar-toggler cart-icon"
           to={`/stores/${store.id}/cart`}
-          data-toggle="collapse"
-          data-target="#navbarNav"
+          // data-toggle="collapse"
+          // data-target="#navbarNav"
           aria-expanded="true"
           aria-controls="navbarNav"
         >
