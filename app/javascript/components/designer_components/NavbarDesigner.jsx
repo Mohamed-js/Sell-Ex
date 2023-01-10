@@ -8,7 +8,7 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
       <h2 className="text-left secondary">General</h2>
       {/* BACHGROUND COLOR */}
       <div className="d-flex align-items-center justify-content-between my-2">
-        <h6 className="m-0 ml-2">Background Color</h6>
+        <h6 className="m-0 ml-2">Navbar Background</h6>
         <ColorPicker
           color={storeOpts.navbar.bg_color}
           setColor={handleBackgroundColor}

@@ -109,6 +109,7 @@ class StoresController < ApplicationController
     @store_options = {
       body: {
         bg_color: '#fff',
+        color: 'black'
       },
       navbar: {
         bg_color: '#fff',

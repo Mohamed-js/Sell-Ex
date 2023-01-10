@@ -13,9 +13,9 @@
  *= require_tree .
  *= require_self
  */
-
+/* @import url("https://fonts.googleapis.com/css2?family=Revalia&display=swap"); */
 body {
-  direction: ltr;
+  /* font-family: "Revalia", cursive; */
 }
 
 table {
@@ -179,4 +179,40 @@ h2[href="/users/sign_in"] {
   font-size: 25vw;
   font-weight: 900;
   text-shadow: 4px 4px 0 #fff, 6px 6px 0 #ffc107;
+}
+
+#notice-container {
+  background: #17171780;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+}
+
+#notice {
+  max-width: 50%;
+  background-color: white;
+  min-height: 150px;
+  border-radius: 10px;
+  box-shadow: 4px 5px 20px #00000080;
+  padding: 20px;
+  text-align: center;
+  animation: notice-disappear 0.2s forwards ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+#notice .fa-check {
+  background: limegreen;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

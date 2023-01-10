@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../assets/styles/designer.css";
+import GeneralDesigner from "./designer_components/GeneralDesigner";
 import NavbarDesigner from "./designer_components/NavbarDesigner";
 const Designer = ({ store }) => {
   const [storeOpts, setStoreOpts] = useState(JSON.parse(store.options));
@@ -21,6 +22,17 @@ const Designer = ({ store }) => {
         >
           <a
             className="nav-link active"
+            id="v-pills-general-tab"
+            data-toggle="pill"
+            href="#v-pills-general"
+            role="tab"
+            aria-controls="v-pills-general"
+            aria-selected="true"
+          >
+            General Settings
+          </a>
+          <a
+            className="nav-link"
             id="v-pills-navbar-tab"
             data-toggle="pill"
             href="#v-pills-navbar"
@@ -93,6 +105,17 @@ const Designer = ({ store }) => {
         <div className="tab-content" id="v-pills-tabContent">
           <div
             className="tab-pane fade show active"
+            id="v-pills-general"
+            role="tabpanel"
+            aria-labelledby="v-pills-general-tab"
+          >
+            <GeneralDesigner
+              storeOpts={storeOpts}
+              setStoreOpts={setStoreOpts}
+            />
+          </div>
+          <div
+            className="tab-pane fade active"
             id="v-pills-navbar"
             role="tabpanel"
             aria-labelledby="v-pills-navbar-tab"

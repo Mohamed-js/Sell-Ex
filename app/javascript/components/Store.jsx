@@ -8,9 +8,10 @@ import Navbar from "./store_components/Navbar";
 function Store({ products, store, store_image }) {
   const [storeOpts, setStoreOpts] = useState(JSON.parse(store.options));
   const [cartItems, setCartItems] = useState([]);
-  console.log(store.options);
+  // console.log(store.options);
   useEffect(() => {
     document.body.style.backgroundColor = `${storeOpts.body.bg_color}`;
+    document.body.style.color = `${storeOpts.body.color}`;
     const products = JSON.parse(localStorage.getItem("cart-products"));
     if (products) {
       setCartItems(products);

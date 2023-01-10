@@ -25,13 +25,14 @@ const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
         to={`/stores/${store.id}`}
         style={{
           position: logoCentered ? "absolute" : "static",
+          color: storeOpts.navbar.logo.text_color,
         }}
       >
         <img
           src={storeImage}
           width="30"
           height="30"
-          className="d-inline-block align-top mx-1"
+          className="d-inline-block align-top mx-1 rounded"
           alt={store.name}
           loading="lazy"
         />
@@ -40,7 +41,7 @@ const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
       <div
         className="d-flex justify-content-between"
         style={{
-          width: logoCentered && screenWidth < BREAK_POINT ? "100%" : 0,
+          width: logoCentered && screenWidth < BREAK_POINT ? "100%" : "",
         }}
       >
         {/* {cartItems.length > 0 && ( */}
@@ -69,7 +70,12 @@ const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
           aria-expanded="true"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i
+            className="fa fa-bars"
+            style={{
+              color: storeOpts.navbar.links.color,
+            }}
+          ></i>
         </button>
       </div>
       <div
