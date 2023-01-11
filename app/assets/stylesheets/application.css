@@ -13,10 +13,6 @@
  *= require_tree .
  *= require_self
  */
-/* @import url("https://fonts.googleapis.com/css2?family=Revalia&display=swap"); */
-body {
-  /* font-family: "Revalia", cursive; */
-}
 
 table {
   table-layout: fixed;
@@ -58,7 +54,6 @@ a:hover {
   position: absolute;
   top: 0;
   right: 0;
-  color: white;
   max-height: 160px;
 }
 
@@ -135,13 +130,7 @@ a[href="/users/sign_up"] {
 a[href="/users/password/new"] {
   display: none;
 }
-
-h1 {
-  color: white;
-}
-
-h2 {
-  color: white;
+x h2 {
   text-align: center;
 }
 
@@ -193,7 +182,9 @@ h2[href="/users/sign_in"] {
 }
 
 #notice {
-  max-width: 50%;
+  max-width: 320px;
+  width: 30%;
+  min-width: 220px;
   background-color: white;
   min-height: 150px;
   border-radius: 10px;

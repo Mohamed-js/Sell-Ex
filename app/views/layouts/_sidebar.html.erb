@@ -1,27 +1,38 @@
-<div class="sidebar flex-col w-100">
-          <div class="logo">
-            <div class="profile-avatar mt-4 mb-1 mx-auto">
-              <% @store = Store.where(id:session[:current_store_id]).first %>
-              <% if @store && current_user && @store.image %>
-              <%= image_tag @store.image , class: "full-img" %>
-              <% else %>
-              <%= image_tag 'sellex_logo.png' , class: "full-img"  %>
-              <% end %>
-            </div>
-            <% if @store && current_user && @store.image %>
-              <h2 class="text-center"><%= @store.name if @store %></h2>
-            <% end %>
-          </div>
-          <% if current_user %>
-            <%= render 'layouts/navlinks'%>
-          <% else %>
-          <div class="flex-col h-100">
-          <br />
-          <br />
-          <h5 class="text-center">Welcome To</h5>
-          <h4 class="text-center">Sell<span class="secondary">Ex</span> Systems</h4>
-      
-          
-      </div>
-          <% end %>
-        </div>
+<div class="sidebar flex-col w-100" id="sidebar">
+  <button class="toggler border" id="toggler">
+    <i class="fa fa-bars"></i>
+  </button>
+  <div class="logo">
+    <div class="profile-avatar mt-4 mb-1 mx-auto">
+      <% @store = Store.where(id:session[:current_store_id]).first %> <% if
+      @store && current_user && @store.image %> <%= image_tag @store.image ,
+      class: "full-img" %> <% else %> <%= image_tag 'sellex_logo.png' , class:
+      "full-img" %> <% end %>
+    </div>
+    <% if @store && current_user && @store.image %>
+      <h2 class="text-center white"><%= @store.name if @store %></h2>
+    <% end %>
+  </div>
+  <% if current_user %> <%= render 'layouts/navlinks'%> <% else %>
+    <div class="flex-col h-100">
+      <br />
+      <br />
+      <h5 class="text-center">Welcome To</h5>
+      <h4 class="text-center">Sell<span class="secondary">Ex</span> Systems</h4>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  if(window.innerWidth < 800){
+    document.getElementById("sidebar").style.transform = "translateX(-100%)"
+  }
+  document.getElementById("toggler").onclick = () => {
+    const closed = document.getElementById("sidebar").style.transform === "translateX(-100%)" ? true : false
+    if(!closed){
+      document.getElementById("sidebar").style.transform = "translateX(-100%)";
+    } else {
+      document.getElementById("sidebar").style.transform = "translateX(0)";
+    }
+  };
+</script>

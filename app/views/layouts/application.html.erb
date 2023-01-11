@@ -17,15 +17,16 @@
     <%= stylesheet_link_tag "https://pro.fontawesome.com/releases/v5.10.0/css/all.css" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   </head>
   <body class="container-fluid p-0">
     <%# If the url is not /store, open the dashboard %>
+    <%= render 'layouts/notice'%>
     <% unless request.original_fullpath.match(/\/stores\/\d/) %>
       <div class="app-container">
         <%= render "layouts/sidebar" %>
         <div class="main">
           <div class="content p-3 rounded">
-            <%= render 'layouts/notice'%>
             <%= yield %>
           </div>
         </div>

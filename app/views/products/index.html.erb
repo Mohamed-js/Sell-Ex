@@ -21,7 +21,7 @@
         <td><%= product.whole_sale_price %> </td>
         <td><%= product.items.count %> <%= product.items.count <= 1 ? 'Piece' : "Pieces" %></td>
         <% if current_user.admin %>
-          <td><%= link_to 'Show Pieces', product, class:"btn bg-gradient-tertiary white" %></td>
+          <td><%= link_to 'Units', product, class:"btn bg-primary white" %></td>
           <td><%= button_to 'Delete', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
         <% end %>
       </tr>

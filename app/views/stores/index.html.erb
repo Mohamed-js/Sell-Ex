@@ -2,22 +2,22 @@
 
 <br />
 <div class="row align-items-center ml-1 mb-2">
-    <h6 class="col-1 p-0 white">
+    <h6 class="col-1 p-0">
       Store
     </h6>
-    <h6 class="col-3 p-0 white">
+    <h6 class="col-3 p-0">
       Name
     </h6>
-    <h6 class="col-1 p-0 white">
+    <h6 class="col-1 p-0 text-center">
       Activate
     </h6>
-    <h6 class="col-1 p-0 white">
+    <h6 class="col-1 p-0 text-center">
       Design
     </h6>
-    <h6 class="col-2 p-0 white">
+    <h6 class="col-2 p-0 text-center">
       Current Store
     </h6>
-    <h6 class="col-2 p-0 white">
+    <h6 class="col-2 p-0 text-center">
       Controls
     </h6>
 </div>
@@ -28,21 +28,21 @@
       <%= image_tag store.image,  class: "rounded", width: 45, height: 45 %>
     </div>
     <% end %>
-    <h5 class="col-3 white p-0 m-0"><%= store.name %></h5>
-    <div class="col-1 p-0 white">
+    <h5 class="col-3 p-0 m-0"><%= store.name %></h5>
+    <div class="col-1 p-0 text-center">
       <% if store.active %>
         <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on success"></i></a>
       <% else %>
         <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
       <% end %>
     </div>
-    <div class="col-1 p-0">
-      <a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;">
+    <div class="col-1 p-0 text-center">
+      <a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;" target="_blank">
         <i class="fa fa-paint-brush danger"></i>
       </a>
     </div>
-    <div class="col-2 p-0">
-      <a class="btn white <%= store.id == session[:current_store_id].to_i ? 'bg-tertiary' : 'bg-primary' %>" href='/stores/<%= store.id %>/control' style="line-height: 1;">
+    <div class="col-2 p-0 text-center">
+      <a class="btn white <%= store.id == session[:current_store_id].to_i ? 'bg-tertiary' : 'bg-primary' %>" href='/stores/<%= store.id %>/control' style="line-height: 1.4;">
         <%= store.id == session[:current_store_id].to_i ? 'Controlled' : 'Control' %>  
       </a>
     </div>
@@ -50,7 +50,7 @@
       <a class="btn primary" href='/stores/<%= store.id %>' target="_blank">
         <i class="fa fa-external-link"></i>
       </a>
-      <a class="btn tertiary" href='/stores/<%= store.id %>/edit' >
+      <a class="btn secondary" href='/stores/<%= store.id %>/edit' >
         <i class="fa fa-edit"></i>
       </a>
       <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?' }, class:"btn danger" do %>
