@@ -1,5 +1,6 @@
-<% home = current_page?(root_url) || current_page?(new_bill_url) ||
-current_page?(sales_url) ? "active": "" %> <% bill =
+<% dashboard = current_page?(root_url) ? "active": ""  %>
+<% sales = current_page?(new_bill_url) ||
+current_page?('/sales/all') ? "active": "" %> <% bill =
 current_page?("/bills/search") ? "active": "" %> <% transactions =
 current_page?(transactions_url) ||
 current_page?("/transactions/new?type=increase") ||
@@ -13,11 +14,16 @@ current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
 <div class="flex-col mt-2 h-100">
   <div class="sidebar-links flex-col mt-2 w-100">
     <%= link_to root_url do %>
-    <div class="sidebar-link flex-row align-center px-3 py-2 <%= home %>">
-      <%= fa_icon "home" %> Home
+      <div class="sidebar-link flex-row align-center px-3 py-2 <%= dashboard %>">
+        <%= fa_icon "home" %> Dashboard
+      </div>
+    <% end %>
+    <%= link_to 'sales/all' do %>
+    <div class="sidebar-link flex-row align-center px-3 py-2 <%= sales %>">
+      <%= fa_icon "shopping-basket" %> Sales
     </div>
     <% end %> <%= link_to "/bills/new" do %>
-    <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= home %>">
+    <div class="sidebar-dropdown flex-row align-center px-3 py-2 <%= sales %>">
       <%= fa_icon "money-bill" %> Sell
     </div>
     <% end %> <%= link_to "/bills/search" do %>
@@ -99,5 +105,6 @@ current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
       <% end %>
     </div>
   </div>
+  <br />
   <%# LOGOUT %>
 </div>

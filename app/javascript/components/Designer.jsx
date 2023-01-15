@@ -4,13 +4,14 @@ import GeneralDesigner from "./designer_components/GeneralDesigner";
 import NavbarDesigner from "./designer_components/NavbarDesigner";
 const Designer = ({ store }) => {
   const [storeOpts, setStoreOpts] = useState(JSON.parse(store.options));
-
+  console.log(JSON.parse(store.options));
   return (
-    <div className="row design-area">
+    <div className="row design-area justify-content-center">
       <div
         className="col-3"
         style={{
           maxWidth: 250,
+          borderRight: "1px solid",
         }}
       >
         <h3 className="text-center my-4">Sections</h3>
@@ -66,7 +67,7 @@ const Designer = ({ store }) => {
           </a>
         </div>
         <button
-          className="btn bg-tertiary white"
+          className="btn bg-primary white"
           style={{
             margin: "2.5rem 1rem",
           }}
@@ -95,11 +96,11 @@ const Designer = ({ store }) => {
       <div
         className="col-9"
         style={{
-          background: "#171717",
+          // background: "#171717",
           overflowY: "scroll",
           overflowX: "hidden",
           height: "100vh",
-          maxWidth: 600,
+          // maxWidth: 600,
         }}
       >
         <div className="tab-content" id="v-pills-tabContent">

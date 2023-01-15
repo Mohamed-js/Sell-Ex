@@ -232,7 +232,7 @@ const Cart = ({ cartItems, setCartItems }) => {
           <br />
         </>
       ) : (
-        <h1 className="text-center">Your cart is empty...</h1>
+        <h1 className="text-center mt-3">Your cart is empty...</h1>
       )}
     </>
   );

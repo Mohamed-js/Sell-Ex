@@ -111,8 +111,8 @@ a:hover {
 }
 
 #new_user div input[value="Log in"] {
-  border: 1px solid rgba(115, 255, 173, 0.692);
-  background-color: rgba(115, 255, 173, 0.692);
+  border: 1px solid rgba(27, 255, 122, 0.947);
+  background-color: rgba(27, 255, 122, 0.692);
   color: white;
 }
 
@@ -130,7 +130,8 @@ a[href="/users/sign_up"] {
 a[href="/users/password/new"] {
   display: none;
 }
-x h2 {
+
+h2 {
   text-align: center;
 }
 

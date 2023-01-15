@@ -130,7 +130,7 @@ label {
 
 body {
   /* background: #252c47; */
-  color: #420187;
+  color: #672fa4;
   background-color: white;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -150,15 +150,15 @@ hr {
 }
 
 .danger {
-  color: #e91e63;
+  color: #fc4b6c !important;
 }
 
 .bg-danger {
-  background: #e91e63;
+  background: #fc4b6c !important;
 }
 
 .bg-gradient-danger {
-  background: linear-gradient(to left, #e91e63, #e91e63);
+  background: linear-gradient(to left, #fc4b6c, #fc4b6c);
 }
 
 .success {
@@ -182,7 +182,7 @@ hr {
 }
 
 .bg-gradient {
-  background: linear-gradient(to left, #2b1147, #2b1147);
+  background: linear-gradient(to left, #672fa4, #672fa4);
 }
 
 .text-center {
@@ -194,7 +194,7 @@ hr {
 }
 
 .bg-primary {
-  background-color: #420187 !important;
+  background-color: #672fa4 !important;
 }
 
 .bg-secondary {
@@ -234,7 +234,7 @@ hr {
 }
 
 .border {
-  border: 1px solid #252c47 !important;
+  border: 1px solid #5a5a5a8f !important;
 }
 
 .flex-col {
@@ -266,6 +266,10 @@ hr {
   /* white-space: nowrap; */
   padding: 0.2rem 0.5rem;
   font-size: unset;
+}
+
+.black {
+  color: black !important;
 }
 
 .btn:hover {
@@ -680,7 +684,7 @@ hr {
   height: 100%;
   min-width: 220px;
   position: relative;
-  background: #2b1147;
+  background: #672fa4;
   z-index: 1;
 }
 
@@ -744,7 +748,7 @@ hr {
 .sidebar-links .active {
   transform: scale(1.121) translateX(8px);
   background-color: white;
-  color: #2b1147;
+  color: #672fa4;
   margin-left: 10px;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 10px;
@@ -790,7 +794,7 @@ hr {
 
 .sidebar-dropdown.active {
   background: white;
-  color: #420187;
+  color: #672fa4;
   margin-left: 33px;
   display: flex;
   border-top-left-radius: 0;
@@ -1102,8 +1106,8 @@ hr {
   .table thead th {
     vertical-align: inherit;
     /* color: #fff; */
-    background-color: #420187 !important;
-    border-color: #420187 !important;
+    background-color: #672fa4 !important;
+    border-color: #672fa4 !important;
   }
 
   .table thead {
@@ -1134,19 +1138,19 @@ hr {
 
 .table .thead-dark th {
   text-align: left;
-  background-color: #2b1147 !important;
-  border-color: #451874 !important;
+  background-color: #672fa4 !important;
+  border-color: #650cc4 !important;
 }
 
 .table-bordered td,
 .table-bordered th {
-  border: 1px solid #2b1147;
+  border: 1px solid #672fa4;
   /* background: transparent; */
   /* color: white; */
 }
 
 .table a {
-  /* color: #2b1147; */
+  /* color: #672fa4; */
 }
 
 @media screen and (max-width: 800px) {

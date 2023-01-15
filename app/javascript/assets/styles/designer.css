@@ -1,9 +1,7 @@
 /* DESGIGN AREA */
 
 .design-area {
-  color: white;
   min-height: 100vh;
-  background: #151515;
 }
 
 .design-area .active {
@@ -11,7 +9,7 @@
 }
 
 .nav-pills .nav-link.active {
-  background-color: #615cf5;
+  background-color: #672fa4;
 }
 
 .design-area .active::before {
@@ -44,7 +42,7 @@
 
 .color-picker {
   border: none;
-  width: 80px;
+  width: 90px;
   height: 25px;
   border-radius: 2px;
 }
@@ -52,11 +50,11 @@
 .color-picker::before {
   content: "Pick Color";
   position: absolute;
-  width: 80px;
+  width: 90px;
   height: 25px;
   top: 0;
   left: 0;
-  background-color: #615cf5;
+  background-color: #672fa4;
   text-align: center;
   border-radius: 2px;
   color: white;
@@ -65,4 +63,10 @@
 
 ::-webkit-scrollbar-track {
   background: #212529;
+}
+
+.design-area h2 {
+  background-color: #00ee9f;
+  color: white;
+  padding: 5px;
 }
