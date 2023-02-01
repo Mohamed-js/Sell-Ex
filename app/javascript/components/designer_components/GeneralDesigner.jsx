@@ -13,17 +13,14 @@ const GeneralDesigner = ({ storeOpts, setStoreOpts }) => {
         setStoreOpts={setStoreOpts}
         path="body.bg_color"
       />
-
+      <hr />
       {/* TEXT COLOR */}
-
       <ColorPicker
         text="Main text color"
         storeOpts={storeOpts}
         setStoreOpts={setStoreOpts}
         path="body.color"
       />
-
-      <hr />
     </>
   );
 };

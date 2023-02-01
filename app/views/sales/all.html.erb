@@ -41,7 +41,7 @@
         <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
         <% if current_user.admin %>
           <td><%= button_to 'Edit', edit_sale_path(sale), class:"btn bg-gradient white p-1", method: "get" %></td>
-          <td><%= button_to 'ٌReturn', sale, method: :delete, data: { confirm: 'Are you sure..?' } , class:"btn bg-gradient-danger white p-1" %></td>
+          <td><%= button_to 'Return', sale, method: :delete, data: { confirm: 'Are you sure..?' } , class:"btn bg-gradient-danger white p-1" %></td>
         <% end %>
       </tr>
     <% end %>

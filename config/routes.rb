@@ -30,4 +30,5 @@ Rails.application.routes.draw do
 
 
   get "/stores/:id/*path", to: "stores#show"
+  get "/refresher", to: "stores#refresher"
 end

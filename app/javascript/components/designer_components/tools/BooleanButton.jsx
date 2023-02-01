@@ -1,12 +1,16 @@
 import React from "react";
+import { changeValOf, getValOf } from "../DesignHelpers";
 
-const BooleanButton = ({ text, valueToCompare, handleClick }) => {
+const BooleanButton = ({ storeOpts, setStoreOpts, text, path }) => {
+  const valueToCompare = getValOf(storeOpts, path);
   return (
     <div className="d-flex align-items-center justify-content-between my-2">
       <p className="m-0 ml-2">Display {text}</p>
       <span
         className={`mx-3 ${valueToCompare && "tertiary"}`}
-        onClick={() => handleClick()}
+        onClick={() =>
+          changeValOf(storeOpts, setStoreOpts, path, !valueToCompare)
+        }
       >
         <i
           className={`${

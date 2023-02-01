@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../assets/styles/designer.css";
+import CoverDesigner from "./designer_components/CoverDesigner";
 import GeneralDesigner from "./designer_components/GeneralDesigner";
 import NavbarDesigner from "./designer_components/NavbarDesigner";
 const Designer = ({ store }) => {
@@ -10,13 +11,12 @@ const Designer = ({ store }) => {
       <div
         className="col-3"
         style={{
-          maxWidth: 250,
           borderRight: "1px solid",
         }}
       >
         <h3 className="text-center my-4">Sections</h3>
         <div
-          className="nav flex-column nav-pills"
+          className="nav flex-column nav-pills ml-3"
           id="v-pills-tab"
           role="tablist"
           aria-orientation="vertical"
@@ -50,7 +50,7 @@ const Designer = ({ store }) => {
             href="#v-pills-cover"
             role="tab"
             aria-controls="v-pills-cover"
-            aria-selected="false"
+            aria-selected="true"
           >
             Cover
           </a>
@@ -97,13 +97,13 @@ const Designer = ({ store }) => {
         className="col-9"
         style={{
           // background: "#171717",
-          overflowY: "scroll",
-          overflowX: "hidden",
+          // overflowY: "scroll",
+          // overflowX: "hidden",
           height: "100vh",
           // maxWidth: 600,
         }}
       >
-        <div className="tab-content" id="v-pills-tabContent">
+        <div className="tab-content mr-3" id="v-pills-tabContent">
           <div
             className="tab-pane fade show active"
             id="v-pills-general"
@@ -116,7 +116,7 @@ const Designer = ({ store }) => {
             />
           </div>
           <div
-            className="tab-pane fade active"
+            className="tab-pane fade"
             id="v-pills-navbar"
             role="tabpanel"
             aria-labelledby="v-pills-navbar-tab"
@@ -124,21 +124,22 @@ const Designer = ({ store }) => {
             <NavbarDesigner storeOpts={storeOpts} setStoreOpts={setStoreOpts} />
           </div>
           <div
-            className="tab-pane fade active"
+            className="tab-pane fade"
             id="v-pills-cover"
             role="tabpanel"
             aria-labelledby="v-pills-cover-tab"
           >
-            Cover
+            <CoverDesigner storeOpts={storeOpts} setStoreOpts={setStoreOpts} />
           </div>
           <div
-            className="tab-pane fade active"
+            className="tab-pane fade"
             id="v-pills-featured"
             role="tabpanel"
             aria-labelledby="v-pills-featured-tab"
           >
             Featured
           </div>
+          <br />
         </div>
       </div>
     </div>

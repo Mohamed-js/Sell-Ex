@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import BooleanButton from "./tools/BooleanButton";
 import ColorPicker from "./tools/ColorPicker";
 import SelectButton from "./tools/SelectButton";
+import TextInput from "./tools/TextInput";
 
 const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
   return (
@@ -10,12 +11,12 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
       <h2 className="text-left mb-3">General</h2>
       {/* BACKGROUND COLOR */}
       <ColorPicker
-        text="Navbar Background"
+        text="Navbar background"
         storeOpts={storeOpts}
         setStoreOpts={setStoreOpts}
         path="navbar.bg_color"
       />
-      <hr />
+      <br />
       {/* CART=========================================================== */}
       <h2 className="text-left mb-3">Cart</h2>
       {/* CART ICON COLOR */}
@@ -25,7 +26,7 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
         setStoreOpts={setStoreOpts}
         path="navbar.cart.color"
       />
-      <hr />
+      <br />
       {/* LOGOOOOOOO=========================================================== */}
       <h2 className="text-left mb-3">Logo</h2>
       {/* LOGO POSITION */}
@@ -34,29 +35,30 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
 
         <div className="d-flex px-2">
           <SelectButton
-            valueToCompare={storeOpts.navbar.logo.position}
+            storeOpts={storeOpts}
+            setStoreOpts={setStoreOpts}
+            path={"navbar.logo.position"}
             value="left"
-            handleClick={handleLogoPosition}
             icon="fa fa-arrow-left"
           />
           <SelectButton
-            valueToCompare={storeOpts.navbar.logo.position}
+            storeOpts={storeOpts}
+            setStoreOpts={setStoreOpts}
+            path={"navbar.logo.position"}
             value="center"
-            handleClick={handleLogoPosition}
             icon="fa fa-align-center"
           />
         </div>
       </div>
+      <hr />
       {/* LOGO TEXT */}
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Logo text</p>
-        <input
-          className="mx-3 p-2 rounded border"
-          type="text"
-          defaultValue={storeOpts.navbar.logo.text}
-          onChange={handleLogoText}
-        />
-      </div>
+      <TextInput
+        text={"Logo text"}
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        path={"navbar.logo.text"}
+      />
+      <hr />
       {/* LOGO TEXT COLOR */}
       <ColorPicker
         text="Logo text color"
@@ -64,7 +66,7 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
         setStoreOpts={setStoreOpts}
         path="navbar.logo.text_color"
       />
-      <hr />
+      <br />
       {/* NAVIGATION=========================================================== */}
       <h2 className="text-left mb-3">Navigation Links</h2>
       {/* LINKS COLOR */}
@@ -77,72 +79,55 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
 
       {/* LINKS WITH TEXT */}
       <BooleanButton
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
         text="links text"
-        valueToCompare={storeOpts.navbar.links.with_text}
-        handleClick={handleLinksTextExistance}
+        path={"navbar.links.with_text"}
       />
       <hr />
       {/* HOME LINK */}
       <BooleanButton
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
         text="home link"
-        valueToCompare={storeOpts.navbar.links.home.exists}
-        handleClick={handleHomeLinkExistance}
+        path={"navbar.links.home.exists"}
       />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Home text</p>
-        <input
-          className="mx-3 p-2 rounded border"
-          type="text"
-          defaultValue={storeOpts.navbar.links.home.text}
-          onChange={handleHomeText}
-        />
-      </div>
+      <TextInput
+        text={"Home text"}
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        path={"navbar.links.home.text"}
+      />
       <hr />
       {/* ABOUT LINK */}
       <BooleanButton
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
         text="about link"
-        valueToCompare={storeOpts.navbar.links.about.exists}
-        handleClick={handleAboutLinkExistance}
+        path={"navbar.links.about.exists"}
       />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">About</p>
-        <input
-          className="mx-3 p-2 rounded border"
-          type="text"
-          defaultValue={storeOpts.navbar.links.about.text}
-          onChange={handleAboutText}
-        />
-      </div>
+      <TextInput
+        text={"About text"}
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        path={"navbar.links.about.text"}
+      />
       <hr />
       {/* CONTACT LINK */}
       <BooleanButton
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
         text="contact link"
-        valueToCompare={storeOpts.navbar.links.contact.exists}
-        handleClick={handleContactLinkExistance}
+        path={"navbar.links.contact.exists"}
       />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Contact</p>
-        <input
-          className="mx-3 p-2 rounded border"
-          type="text"
-          defaultValue={storeOpts.navbar.links.contact.text}
-          onChange={handleContactText}
-        />
-      </div>
+      <TextInput
+        text={"Contact text"}
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        path={"navbar.links.contact.text"}
+      />
     </>
   );
-
-  function handleLogoPosition(value) {
-    setStoreOpts((prev) => {
-      return {
-        ...prev,
-        navbar: {
-          ...prev.navbar,
-          logo: { ...prev.navbar.logo, position: value },
-        },
-      };
-    });
-  }
 
   function handleLogoText(e) {
     setStoreOpts((prev) => {
@@ -151,75 +136,6 @@ const NavbarDesigner = ({ storeOpts, setStoreOpts }) => {
         navbar: {
           ...prev.navbar,
           logo: { ...prev.navbar.logo, text: e.target.value },
-        },
-      };
-    });
-  }
-
-  function handleLinksTextExistance(value) {
-    setStoreOpts((prev) => {
-      return {
-        ...prev,
-        navbar: {
-          ...prev.navbar,
-          links: {
-            ...prev.navbar.links,
-            with_text: !prev.navbar.links.with_text,
-          },
-        },
-      };
-    });
-  }
-
-  function handleHomeLinkExistance(value) {
-    setStoreOpts((prev) => {
-      return {
-        ...prev,
-        navbar: {
-          ...prev.navbar,
-          links: {
-            ...prev.navbar.links,
-            home: {
-              ...prev.navbar.links.home,
-              exists: !prev.navbar.links.home.exists,
-            },
-          },
-        },
-      };
-    });
-  }
-
-  function handleAboutLinkExistance(value) {
-    setStoreOpts((prev) => {
-      return {
-        ...prev,
-        navbar: {
-          ...prev.navbar,
-          links: {
-            ...prev.navbar.links,
-            about: {
-              ...prev.navbar.links.about,
-              exists: !prev.navbar.links.about.exists,
-            },
-          },
-        },
-      };
-    });
-  }
-
-  function handleContactLinkExistance(value) {
-    setStoreOpts((prev) => {
-      return {
-        ...prev,
-        navbar: {
-          ...prev.navbar,
-          links: {
-            ...prev.navbar.links,
-            contact: {
-              ...prev.navbar.links.contact,
-              exists: !prev.navbar.links.contact.exists,
-            },
-          },
         },
       };
     });

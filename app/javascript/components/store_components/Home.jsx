@@ -26,6 +26,7 @@ const Home = ({ products, cartItems, setCartItems, storeOpts }) => {
             alignItems: `${storeOpts.cover.content_horizontal_position}`,
             height: "100%",
             width: `${storeOpts.cover.background.size}`,
+            padding: "10px 0",
           }}
         >
           <h1
@@ -89,7 +90,7 @@ const Home = ({ products, cartItems, setCartItems, storeOpts }) => {
               backgroundPosition: `${storeOpts.cover.background.image_position}`,
               right:
                 storeOpts.cover.background.position == "right" ? 0 : "auto",
-              backgroundAttachment: "fixed",
+              // backgroundAttachment: "fixed",
             }}
           ></div>
         )}

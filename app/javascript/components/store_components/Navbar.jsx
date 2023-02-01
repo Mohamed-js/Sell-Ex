@@ -36,7 +36,7 @@ const Navbar = ({ store, cartItems, storeImage, storeOpts }) => {
           alt={store.name}
           loading="lazy"
         />
-        {store.name}
+        {storeOpts.navbar.logo.text}
       </Link>
       <div
         className="d-flex justify-content-between"

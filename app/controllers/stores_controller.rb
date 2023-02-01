@@ -99,6 +99,9 @@ class StoresController < ApplicationController
     
   end
 
+  def refresher
+    render json: 'I\'m good!'
+  end
   private
 
   def set_store
