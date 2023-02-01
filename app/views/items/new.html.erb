@@ -24,12 +24,12 @@
 
   <div class="field mb-3">
     <%= form.label "Item Purchasing Price" %>
-    <%= form.number_field :buying_price, class:"form-control", step: :any, required: true%>
+    <%= form.number_field :buying_price, class:"form-control", step: :any, required: true, placeholder: "Purchasing Price" %>
   </div>
 
   <div class="field mb-3">
     <%= form.label "Quantity" %>
-    <%= form.number_field :quantity, class:"form-control", required: true %>
+    <%= form.number_field :quantity, class:"form-control", required: true, placeholder: "Quantity" %>
   </div>
 
   <div class="actions mt-3">

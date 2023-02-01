@@ -31,8 +31,10 @@
     const closed = document.getElementById("sidebar").style.transform === "translateX(-100%)" ? true : false
     if(!closed){
       document.getElementById("sidebar").style.transform = "translateX(-100%)";
+      document.querySelectorAll(".app-container")[0].style.gridTemplateColumns = '0 5fr';
     } else {
       document.getElementById("sidebar").style.transform = "translateX(0)";
+      document.querySelectorAll(".app-container")[0].style.gridTemplateColumns = '1fr 5fr';
     }
   };
 </script>
