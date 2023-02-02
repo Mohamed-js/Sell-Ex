@@ -17,6 +17,8 @@
 table {
   table-layout: fixed;
   column-width: auto;
+  margin: auto !important;
+  margin-bottom: 10px !important;
 }
 
 a:hover {
@@ -28,6 +30,19 @@ a:hover {
   max-width: 1172px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.table-container {
+  overflow-x: scroll;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 5px;
+  border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #ebebeb;
 }
 
 .big-icon {

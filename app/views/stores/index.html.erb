@@ -1,62 +1,65 @@
 <h1 class="text-center mb-3">My Stores</h1>
 
 <br />
-<div class="row align-items-center ml-1 mb-2">
-    <h6 class="col-1 p-0">
-      Store
-    </h6>
-    <h6 class="col-3 p-0">
-      Name
-    </h6>
-    <h6 class="col-1 p-0 text-center">
-      Activate
-    </h6>
-    <h6 class="col-1 p-0 text-center">
-      Design
-    </h6>
-    <h6 class="col-2 p-0 text-center">
-      Current Store
-    </h6>
-    <h6 class="col-2 p-0 text-center">
-      Controls
-    </h6>
-</div>
+<div class="table-container">
+<table class="table table-bordered table-sm table-striped max-width">
+<thead class="thead-dark">
+  <tr>
+    <th scope="col">Store</th>
+    <th scope="col">Name</th>
+    <th scope="col">Activate</th>
+    <th scope="col">Design</th>
+    <th scope="col">Current Store</th>
+    <th scope="col">Controls</th>
+  </tr>
+</thead>
+
+
 <% @stores.each do |store| %>
-  <div class="row align-items-center mb-2 ml-1">
-    <% if store.image.attached? %>
-    <div class="col-1 p-0">
-      <%= image_tag store.image,  class: "rounded", width: 45, height: 45 %>
-    </div>
-    <% end %>
-    <h5 class="col-3 p-0 m-0"><%= store.name %></h5>
-    <div class="col-1 p-0 text-center">
+  <tbody id='table'>
+  <tr scope="row">
+    <td>
+      <% if store.image.attached? %>
+
+        <%= image_tag store.image, class: "rounded" , width: 45, height: 45 %>
+
+          <% end %>
+    </td>
+    <td>
+      <%= store.name %>
+    </td>
+   
+    <td>
       <% if store.active %>
         <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on success"></i></a>
-      <% else %>
-        <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
-      <% end %>
-    </div>
-    <div class="col-1 p-0 text-center">
-      <a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;" target="_blank">
+        <% else %>
+          <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on danger"
+              style="transform: rotateZ(180deg);"></i></a>
+          <% end %>
+    </td>
+
+    <td><a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;" target="_blank">
         <i class="fa fa-paint-brush danger"></i>
-      </a>
-    </div>
-    <div class="col-2 p-0 text-center">
-      <a class="btn white <%= store.id == session[:current_store_id].to_i ? 'bg-tertiary' : 'bg-primary' %>" href='/stores/<%= store.id %>/control' style="line-height: 1.4;">
-        <%= store.id == session[:current_store_id].to_i ? 'Controlled' : 'Control' %>  
-      </a>
-    </div>
-    <div class="col-2 d-flex justify-content-around p-0">
-      <a class="btn primary" href='/stores/<%= store.id %>' target="_blank">
+      </a></td>
+    <td> <a class="btn white <%= store.id == session[:current_store_id].to_i ? 'bg-tertiary' : 'bg-primary' %>"
+        href='/stores/<%= store.id %>/control' style="line-height: 1.4;">
+        <%= store.id==session[:current_store_id].to_i ? 'Controlled' : 'Control' %>
+      </a></td>
+    <td><a class="btn primary" href='/stores/<%= store.id %>' target="_blank">
         <i class="fa fa-external-link"></i>
       </a>
-      <a class="btn secondary" href='/stores/<%= store.id %>/edit' >
+      <a class="btn secondary" href='/stores/<%= store.id %>/edit'>
         <i class="fa fa-edit"></i>
       </a>
-      <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?' }, class:"btn danger" do %>
+      <span style="display: inline-block;">
+      <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?'
+        }, class:"btn danger" do %>
         <i class="fa fa-trash"></i>
-      <% end %>
-    </div>
-    
+        <% end %>
+        </span>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+  </table>
   </div>
-<% end %>
