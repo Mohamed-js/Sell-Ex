@@ -251,6 +251,69 @@ const CoverDesigner = ({ storeOpts, setStoreOpts }) => {
         setStoreOpts={setStoreOpts}
         path={"cover.background.image"}
       />
+      <br />
+      {/* =============================HEADLINE============================== */}
+      <h2 className="text-left mb-3">Headline</h2>
+      <TextInput
+        text={"Headline text"}
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        path={"cover.headline.text"}
+      />
+      <ColorPicker
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        text="Headline color"
+        path="cover.headline.color"
+      />
+      <ColorPicker
+        storeOpts={storeOpts}
+        setStoreOpts={setStoreOpts}
+        text="Headline background color"
+        path="cover.headline.bg_color"
+        withTransparency
+      />
+
+      {/* <SelectGroup
+        text="Text align"
+        opts={3}
+        path="cover.headline.text_align"
+        values={["left", "center", "right"]}
+        icon={["fa fa-arrow-left", "fa fa-align-center", "fa fa-arrow-right"]}
+      /> */}
+
+      <div className="d-flex align-items-center justify-content-between my-2">
+        <p className="m-0 ml-2">Text align</p>
+
+        <div
+          className="d-flex px-2"
+          style={{
+            flexWrap: "wrap",
+          }}
+        >
+          <SelectButton
+            storeOpts={storeOpts}
+            setStoreOpts={setStoreOpts}
+            path={"cover.headline.text_align"}
+            value="left"
+            icon="fa fa-arrow-left"
+          />
+          <SelectButton
+            storeOpts={storeOpts}
+            setStoreOpts={setStoreOpts}
+            path={"cover.headline.text_align"}
+            value="center"
+            icon="fa fa-align-center"
+          />
+          <SelectButton
+            storeOpts={storeOpts}
+            setStoreOpts={setStoreOpts}
+            path={"cover.headline.text_align"}
+            value="right"
+            icon="fa fa-arrow-right"
+          />
+        </div>
+      </div>
     </>
   );
 };

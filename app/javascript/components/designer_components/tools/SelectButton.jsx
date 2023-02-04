@@ -9,7 +9,9 @@ const SelectButton = ({ storeOpts, setStoreOpts, path, value, icon }) => {
         className={`btn border mx-2 ${
           valueToCompare == value && "bg-tertiary white"
         }`}
-        onClick={() => changeValOf(storeOpts, setStoreOpts, path, value)}
+        onClick={() => {
+          changeValOf(storeOpts, setStoreOpts, path, value);
+        }}
       >
         {icon.startsWith("fa") ? <i className={icon}></i> : icon.toUpperCase()}
       </button>
