@@ -12,10 +12,11 @@
 
 <div align="center">
 
+![screenshot](./assets/sellex3.png)
+![screenshot](./assets/sellex6.png)
 ![screenshot](./assets/sellex4.png)
 ![screenshot](./assets/sellex1.png)
 ![screenshot](./assets/sellex2.png)
-![screenshot](./assets/sellex3.png)
 
 </div>
 
