@@ -31,4 +31,11 @@ Rails.application.routes.draw do
 
   get "/stores/:id/*path", to: "stores#show"
   get "/refresher", to: "stores#refresher"
+
+  namespace :api do
+    namespace :v1 do
+      resources :stores, only: %i[show]
+      resources :products, only: %i[index show create]
+    end
+  end
 end
