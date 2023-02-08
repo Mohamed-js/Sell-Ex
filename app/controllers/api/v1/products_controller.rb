@@ -15,7 +15,13 @@ class Api::V1::ProductsController < Api::V1::ApiController
         headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
         headers['Access-Control-Request-Method'] = '*'
         headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        render json: Product.all, only: [:id, :name, :selling_price], include: {:image_blob => {:only => [:key]}, :category => {:only => [:name]}, :store => {include: {:image_blob => {:only => [:key]}}, :only => [:id, :name]}}
+        render json: Product.all,
+            only: [:id, :name, :selling_price, :store_id],
+            include:{   
+                        :image_blob => {:only => [:key]},
+                        :store => {include: {:image_blob => {:only => [:key]}},  :only => [:id, :name]},
+                        :category => {:only => [:name]},
+                    }
     end
 end
 
