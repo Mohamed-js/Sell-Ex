@@ -3,6 +3,6 @@ class Api::V1::ApiController < ActionController::Base
 
     def set_store
         @store = Store.where('lower(name) = ?', params[:store].downcase).first 
-        render 'layouts/404' unless @store && @store.active
+        render json: {message: 'not found'} unless @store
     end
 end

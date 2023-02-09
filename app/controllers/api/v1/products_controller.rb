@@ -3,7 +3,7 @@ class Api::V1::ProductsController < Api::V1::ApiController
     skip_before_action :set_store, only: [:create, :show]
     def index
         headers['Access-Control-Allow-Origin'] = '*'
-        render json: @store.products, only: [:id, :name, :selling_price], include: {:image_blob => {:only => [:key]}, :category => {:only => [:name]}, :store => {include: {:image_blob => {:only => [:key]}}, :only => [:id]}}
+        render json: @store.products, only: [:id, :name, :selling_price], include: {:image_blob => {:only => [:key]}, :category => {:only => [:name]}, :store => {include: {:image_blob => {:only => [:key]}}, :only => [:id, :name]}}
     end
 
     def show
