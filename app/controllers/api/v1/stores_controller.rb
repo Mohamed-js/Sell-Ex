@@ -1,13 +1,5 @@
 class Api::V1::StoresController < Api::V1::ApiController  
     def show
-    #   @products = []
-    #   all_products = @store.products
-    #   all_products.each { |product|
-    #     @products.push({
-    #       product: product,
-    #       img: url_for(product.image),
-    #     })
-    #   }
-    render json: @store
+        render json: @store, include: {:image_blob => {:only => [:key]}}
     end
 end
