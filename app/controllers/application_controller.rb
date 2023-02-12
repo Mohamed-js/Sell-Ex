@@ -18,13 +18,13 @@ class ApplicationController < ActionController::Base
   
         session[:current_store_id] = store.id if store
   
-        redirect_to stores_path, notice: 'You have to create at least one store...!' unless store
+        redirect_to stores_path, notice: 'You have to create at least one one store...!' unless store
         return
       end
-  
+      
       @current_store = Store.where(id: session[:current_store_id]).first
-  
-      redirect_to stores_path, notice: 'You have to create at least one store...!' unless @current_store
+
+      redirect_to stores_path, notice: 'You have to create at least one two store...!' unless @current_store
   
       p 'I came in set Stooooooooooooore'
   end
