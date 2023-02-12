@@ -94,6 +94,7 @@ const NewProduct = ({ categories, variants }) => {
             <VariantBox
               variant={variant}
               setVariantsValues={setVariantsValues}
+              variantsValues={variantsValues}
             />
           ))}
         </div>
