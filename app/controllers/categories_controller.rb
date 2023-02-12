@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
-    Cloudinary::Uploader.destroy(@category.image_id, options = {})
+    Cloudinary::Uploader.destroy(@category.image_id, options = {}) if @category.image_id
     @category.destroy
 
     respond_to do |format|

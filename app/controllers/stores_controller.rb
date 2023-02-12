@@ -96,7 +96,7 @@ class StoresController < ApplicationController
   end
 
   def destroy
-    Cloudinary::Uploader.destroy(@store.image_id, options = {})
+    Cloudinary::Uploader.destroy(@store.image_id, options = {}) if @store.image_id
     @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: "Store was successfully deleted." }

@@ -125,7 +125,7 @@ class ProductsController < ApplicationController
 
   def destroy
 
-    Cloudinary::Uploader.destroy(@product.image_id, options = {})
+    Cloudinary::Uploader.destroy(@product.image_id, options = {}) if @product.image_id
 
     @product.destroy
 
