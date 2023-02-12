@@ -4,17 +4,17 @@ const VariantBox = ({ variant, variantsValues, setVariantsValues }) => {
   const vals = variantsValues[variant.name];
   return (
     <div
-      className="border rounded p-3 m-1"
+      className="border rounded p-3 m-1 my-3"
       style={{
         border: "1px solid lightgrey",
         borderRadius: "4px",
       }}
     >
       <div>
-        {variant.name[0].toUpperCase()}
+        Enter product's {variant.name[0].toUpperCase()}
         {variant.name.slice(1)}s
       </div>
-      <div className="flex-row">
+      <div className="flex-row" style={{ flexWrap: "wrap" }}>
         {vals &&
           vals.values.map((val) => (
             <VariantValue val={val} variant={variant} />
@@ -54,12 +54,16 @@ export const VariantInput = ({ variant, setVariantsValues }) => {
   };
   return (
     <div className="flex-col">
-      <label htmlFor={variant.name + variant.color}>
-        Type {variant.name} name
+      <label htmlFor={variant.name + variant.type}>
+        {variant.type == "color"
+          ? "Select a color then press add"
+          : `Type ${variant.name} name. `}
+        {variant.type != "color" && <small>eg.(sm, m, xl, 40cm, etc...)</small>}
       </label>
       <input
+        className={variant.type == "color" ? "color-btn" : ""}
         value={val}
-        id={variant.name + variant.color}
+        id={variant.name + variant.type}
         type={variant.type}
         onChange={(e) => setVal(e.target.value)}
       />
@@ -86,6 +90,7 @@ export const VariantValue = ({ variant, val }) => {
         borderRadius: "50%",
         backgroundColor: val,
         margin: ".25rem",
+        boxShadow: "#b7b4b4 1px 2px 5px",
       }}
     ></div>
   ) : (

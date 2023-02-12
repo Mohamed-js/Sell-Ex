@@ -60,6 +60,8 @@ class ProductsController < ApplicationController
 
     @product.store_id = @current_store.id
 
+    @product.variants = JSON.parse(product_params[:variants]).deep_symbolize_keys
+
     image = Cloudinary::Uploader.upload(product_params[:image], 
       use_filename:true, 
       unique_filename:true,
@@ -73,13 +75,11 @@ class ProductsController < ApplicationController
 
       if @product.save
 
-        Product.create_multible_items(params, @current_store, @product)
-
         @current_store.save
 
         format.html { redirect_to '/products/new', notice: 'Product was successfully created.' }
 
-        format.json { render :show, status: :created, location: @product }
+        format.json { render json: {message: 'ok'}, status: :created, location: @product }
 
       else
 

@@ -10,15 +10,11 @@
     </div>
     <div class="row p-2 text-center max-width bg-gradient btn-dark">
       <h6 class="col-6 m-0">Quantity</h6>
-      <h6 class="col-6 m-0"><%= @product.items.count %></h6>
+      <h6 class="col-6 m-0"><%= @product.quantity %></h6>
     </div>
     <div class="row p-2 text-center max-width primary">
       <h6 class="col-6 m-0">Selling Price</h6>
       <h6 class="col-6 m-0">$<%= @product.selling_price %></h6>
-    </div>
-    <div class="row p-2 text-center max-width bg-gradient btn-dark">
-      <h6 class="col-6 m-0">Wholesale Price</h6>
-      <h6 class="col-6 m-0">$<%= @product.whole_sale_price %></h6>
     </div>
     <div class="row p-3 text-center max-width flex-row justify-between">
       <% if current_user.admin %>
@@ -26,37 +22,4 @@
       <% end %>
     </div>
   </div>
-</div>
-<div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Item ID</th>
-      <% if current_user.admin %>
-        <th scope="col">Purchasing Price</th>
-      <% end %>
-      <th scope="col">Date of purchase</th>
-      <% if current_user.admin %>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @product.items.each do |item| %>
-      <tr scope="row">
-        <td><%= item.id %></td>
-        <% if current_user.admin %>
-          <td>$<%= item.buying_price %> </td>
-        <% end %>
-        <td><%= item.created_at.strftime('%F - %I:%M - %p') %></td>
-        <!-- <td><%= button_to 'Edit', edit_item_path(item.id), method: :get, class:"btn bg-gradient-secondary white" %></td> -->
-        <% if current_user.admin %>
-          <td><%= button_to 'Expired & Cashback', {:controller => "items", :action => "destroy", :money_back => true, :id => item.id}, method: :delete,  data: { confirm: 'Are you sure..?' }, class:"btn btn-secondary" %></td>
-          <td><%= button_to 'Expired & Loss', item, method: :delete, data: { confirm: 'Are you sure..?' }, class:"btn bg-gradient-danger white" %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 </div>
