@@ -1,15 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import VariantBtn from "./new_product_components/Variant";
+import VariantBox from "./new_product_components/VariantBox";
 
 const NewProduct = ({ categories, variants }) => {
-  // const variantsRef = useRef();
   const [selectedVariants, setSelectedVariants] = useState([]);
+  const [variantsValues, setVariantsValues] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
     for (const [name, value] of data) {
       console.log(name, ":", value);
     }
+    console.log(variants, ":", variantsValues);
   };
 
   const handleVariantClick = (variant) => {
@@ -20,6 +23,8 @@ const NewProduct = ({ categories, variants }) => {
     }
     setSelectedVariants((prev) => [...prev, variant]);
   };
+
+  console.log("variants", ":", variantsValues);
   return (
     <>
       <h1 className="text-center mb-2">New Product</h1>
@@ -71,9 +76,7 @@ const NewProduct = ({ categories, variants }) => {
             required
           />
         </div>
-        {/* {variants.map((variant) => {
-          return <VariantBtn name={variant.name} />;
-        })} */}
+
         <div
           style={{
             display: "flex",
@@ -88,16 +91,10 @@ const NewProduct = ({ categories, variants }) => {
         </div>
         <div>
           {selectedVariants.map((variant) => (
-            <div
-              className="border rounded"
-              style={{
-                width: "100px",
-                height: "100px",
-                background: "green",
-              }}
-            >
-              <div>{variant.name}</div>
-            </div>
+            <VariantBox
+              variant={variant}
+              setVariantsValues={setVariantsValues}
+            />
           ))}
         </div>
         <button type="submit" className="bg-primary white rounded p-1">

@@ -4,7 +4,6 @@ const VariantBtn = ({ variant, funcToDo }) => {
   const [btnSelected, setBtnSelected] = useState(false);
   const handleClick = () => {
     setBtnSelected((prev) => !prev);
-
     funcToDo(variant);
   };
   return (
