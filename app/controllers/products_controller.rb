@@ -31,12 +31,12 @@ class ProductsController < ApplicationController
   # GET /products/new
 
   def new
-
-    @product = Product.new
-
-    @product.validity = Date.today.next_year
-
     @categories = @current_store.categories
+
+    @variants = [
+                  {name: 'color', type: 'color'},
+                  {name: 'size', type: 'text'},
+                ]
 
   end
 
@@ -56,19 +56,26 @@ class ProductsController < ApplicationController
 
   def create
 
-    @store = Store.first
-
     @product = Product.new(product_params)
 
     @product.store_id = @current_store.id
+
+    image = Cloudinary::Uploader.upload(product_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true
+    )
+
+    @product.image = image['secure_url']
+    @product.image_id = image['public_id']
 
     respond_to do |format|
 
       if @product.save
 
-        Product.create_multible_items(params, @store, @product)
+        Product.create_multible_items(params, @current_store, @product)
 
-        @store.save
+        @current_store.save
 
         format.html { redirect_to '/products/new', notice: 'Product was successfully created.' }
 
@@ -118,6 +125,8 @@ class ProductsController < ApplicationController
 
   def destroy
 
+    Cloudinary::Uploader.destroy(@product.image_id, options = {})
+
     @product.destroy
 
     respond_to do |format|
@@ -152,7 +161,7 @@ class ProductsController < ApplicationController
 
     params.require(:product).permit(:name, :selling_price, :whole_sale_price, :quantity, :validity, :image,
 
-                                    :open_to_store, :category_id)
+                                    :open_to_store, :category_id, :variants)
 
   end
 

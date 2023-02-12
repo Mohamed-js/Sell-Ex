@@ -24,6 +24,15 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.store_id = @current_store.id
+
+    image = Cloudinary::Uploader.upload(category_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true
+    )
+
+    @category.image = image['secure_url']
+    @category.image_id = image['public_id']
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_url, notice: "Category was successfully created." }
@@ -50,6 +59,7 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
+    Cloudinary::Uploader.destroy(@category.image_id, options = {})
     @category.destroy
 
     respond_to do |format|

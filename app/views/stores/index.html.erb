@@ -19,11 +19,7 @@
   <tbody id='table'>
   <tr scope="row">
     <td>
-      <% if store.image.attached? %>
-
-        <%= image_tag store.image, class: "rounded" , width: 45, height: 45 %>
-
-          <% end %>
+      <%= image_tag store.image, class: "rounded" , width: 45, height: 45 %>
     </td>
     <td>
       <%= store.name %>

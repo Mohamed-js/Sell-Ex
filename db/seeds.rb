@@ -1,7 +1,2 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+ps = Product.create [{name: "Goku White Shirt", selling_price: 0.4e3, whole_sale_price: 0.35e3, quantity: 10, validity: nil, open_to_store: false, store_id: Store.first.id, category_id: Category.first.id, variants: {:colors=>{type: 'color', values: ["blue", "white"]}, :sizes=>{type: 'text', values: ["sm", "m", "lg", "xl"]}}}, {name: "Naruto Shirt", selling_price: 0.5e3, whole_sale_price: 0.4e3, quantity: 10, validity: nil, open_to_store: false, store_id: Store.first.id, category_id: Category.first.id, variants: {:colors=>{type: 'color', values: ["green", "crimson"]}, :sizes=>{type: 'text', values: ["sm", "lg", "xl"]}}}, {name: "Goku Orange Shirt", selling_price: 0.4e3, whole_sale_price: 0.35e3, quantity: 7, validity: nil, open_to_store: false, store_id: Store.first.id, category_id: Category.first.id, variants: {:colors=>{type: 'color', values: ["red", "green"]}, :sizes=>{type: 'text', values: ["sm", "m", "lg"]}}}]
+

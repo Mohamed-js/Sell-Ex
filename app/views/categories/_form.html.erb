@@ -13,9 +13,6 @@
     <%= form.label :name %>
     <%= form.text_field :name, class:"form-control" %>
   </div>
-  <% if @category.image.attached? %>
-    <%= image_tag @category.image, :width=>180, :crop=>"fill", class: "rounded my-2" %>
-  <% end %>
   <div class="field form-group mb-3">
     <%= form.label "Image" %>
     <%= form.file_field :image, class:"form-control" , step: :any %>

@@ -30,6 +30,14 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     @store.options = @store_options.to_json
 
+    image = Cloudinary::Uploader.upload(store_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true
+    )
+    @store.image = image['secure_url']
+    @store.image_id = image['public_id']
+
     respond_to do |format|
       if @store.save
         format.html { redirect_to stores_url, notice: "Store was successfully created." }
@@ -88,6 +96,7 @@ class StoresController < ApplicationController
   end
 
   def destroy
+    Cloudinary::Uploader.destroy(@store.image_id, options = {})
     @store.destroy
     respond_to do |format|
       format.html { redirect_to stores_url, notice: "Store was successfully deleted." }

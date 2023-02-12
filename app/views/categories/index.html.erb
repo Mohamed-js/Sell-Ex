@@ -14,7 +14,7 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name.capitalize %></td>
-        <td><%= image_tag url_for(category.image), height: 50 if category.image.attached? %></td>
+        <td><%= image_tag category.image, height: 50  %></td>
         <td><%= link_to 'Products', category, class:"btn bg-primary white" %></td>
         <td><%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white" %></td>
         <td><%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>

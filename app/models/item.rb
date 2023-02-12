@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
     belongs_to :product
 
-    validates :buying_price, presence: true
+    # validates :buying_price, presence: true
 
     def self.create_multible(params, store)
         params[:item]['quantity'].to_i.times do 

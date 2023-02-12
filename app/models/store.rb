@@ -1,5 +1,4 @@
 class Store < ApplicationRecord
-  has_one_attached :image
   has_many :bills, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :clients, dependent: :destroy
