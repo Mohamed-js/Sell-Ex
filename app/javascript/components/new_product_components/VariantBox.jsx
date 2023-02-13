@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const VariantBox = ({ variant, variantsValues, setVariantsValues }) => {
+const VariantBox = ({
+  variant,
+  variantsValues,
+  setVariantsValues,
+  deleteVariantValue,
+}) => {
   const vals = variantsValues[variant.name];
   return (
     <div
@@ -17,7 +22,11 @@ const VariantBox = ({ variant, variantsValues, setVariantsValues }) => {
       <div className="flex-row" style={{ flexWrap: "wrap" }}>
         {vals &&
           vals.values.map((val) => (
-            <VariantValue val={val} variant={variant} />
+            <VariantValue
+              val={val}
+              variant={variant}
+              deleteVariantValue={deleteVariantValue}
+            />
           ))}
       </div>
 
@@ -34,12 +43,6 @@ export const VariantInput = ({ variant, setVariantsValues }) => {
     setVariantsValues((prev) => {
       console.log(prev[variant.name]);
       if (prev[variant.name]) {
-        const x = {
-          color: {
-            type: "color",
-            values: [1],
-          },
-        };
         return {
           ...prev,
           [variant.name]: {
@@ -61,11 +64,12 @@ export const VariantInput = ({ variant, setVariantsValues }) => {
         {variant.type != "color" && <small>eg.(sm, m, xl, 40cm, etc...)</small>}
       </label>
       <input
-        className={variant.type == "color" ? "color-btn" : ""}
+        className={variant.type == "color" ? "color-btn" : "form-control"}
         value={val}
         id={variant.name + variant.type}
         type={variant.type}
         onChange={(e) => setVal(e.target.value)}
+        placeholder={variant.name}
       />
       <button
         type="button"
@@ -81,19 +85,34 @@ export const VariantInput = ({ variant, setVariantsValues }) => {
   );
 };
 
-export const VariantValue = ({ variant, val }) => {
+export const VariantValue = ({ variant, val, deleteVariantValue }) => {
   return variant.type == "color" ? (
-    <div
+    <button
       style={{
         width: 50,
         height: 50,
         borderRadius: "50%",
         backgroundColor: val,
         margin: ".25rem",
+        border: "none",
         boxShadow: "#b7b4b4 1px 2px 5px",
       }}
-    ></div>
+      onClick={() => deleteVariantValue(variant.name, val)}
+    ></button>
   ) : (
-    <div className="rounded p-2 m-1 border">{val}</div>
+    <button
+      style={{
+        width: 80,
+        height: 35,
+        borderRadius: "50%",
+        backgroundColor: val,
+        border: "none",
+        boxShadow: "#b7b4b4 1px 2px 5px",
+      }}
+      className="rounded m-1"
+      onClick={() => deleteVariantValue(variant.name, val)}
+    >
+      {val}
+    </button>
   );
 };

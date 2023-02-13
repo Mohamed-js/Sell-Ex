@@ -39,6 +39,24 @@ const NewProduct = ({ categories, variants }) => {
     setSelectedVariants((prev) => [...prev, variant]);
   };
 
+  const deleteVariantValues = (name) => {
+    setVariantsValues((prev) => {
+      delete prev[name];
+      return prev;
+    });
+  };
+  const deleteVariantValue = (name, value) => {
+    setVariantsValues((prev) => {
+      return {
+        ...prev,
+        [name]: {
+          ...prev[name],
+          values: [...prev[name]["values"]].filter((val) => val != value),
+        },
+      };
+    });
+  };
+
   return (
     <>
       <h1 className="text-center mb-2">New Product</h1>
@@ -112,7 +130,11 @@ const NewProduct = ({ categories, variants }) => {
         >
           {variants.map((variant) => {
             return (
-              <VariantBtn variant={variant} funcToDo={handleVariantClick} />
+              <VariantBtn
+                variant={variant}
+                funcToDo={handleVariantClick}
+                deleteVariantValues={deleteVariantValues}
+              />
             );
           })}
         </div>
@@ -122,6 +144,7 @@ const NewProduct = ({ categories, variants }) => {
             <VariantBox
               variant={variant}
               setVariantsValues={setVariantsValues}
+              deleteVariantValue={deleteVariantValue}
               variantsValues={variantsValues}
             />
           ))}

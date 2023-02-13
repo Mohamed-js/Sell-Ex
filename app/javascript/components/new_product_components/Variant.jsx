@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-const VariantBtn = ({ variant, funcToDo }) => {
+const VariantBtn = ({ variant, funcToDo, deleteVariantValues }) => {
   const [btnSelected, setBtnSelected] = useState(false);
   const handleClick = () => {
     setBtnSelected((prev) => !prev);
     funcToDo(variant);
+    deleteVariantValues(variant.name);
   };
   return (
     <button
