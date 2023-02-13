@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_13_170802) do
+ActiveRecord::Schema.define(version: 2023_02_13_231005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -139,9 +139,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_170802) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.decimal "selling_price"
-    t.decimal "whole_sale_price"
     t.integer "quantity"
-    t.date "validity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "open_to_store", default: false
@@ -150,6 +148,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_170802) do
     t.text "variants"
     t.text "image"
     t.string "image_id"
+    t.string "description"
   end
 
   create_table "sales", force: :cascade do |t|

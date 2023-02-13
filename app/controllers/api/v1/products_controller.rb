@@ -1,5 +1,5 @@
 class Api::V1::ProductsController < Api::V1::ApiController
-    protect_from_forgery    
+    protect_from_forgery
     skip_before_action :set_store, only: [:create, :show]
     def index
         headers['Access-Control-Allow-Origin'] = '*'

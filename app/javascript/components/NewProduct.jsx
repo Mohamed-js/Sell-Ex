@@ -68,9 +68,22 @@ const NewProduct = ({ categories, variants }) => {
             className="form-control"
             type="text"
             name="product[name]"
-            placeholder="Name"
+            placeholder="Product name"
+            maxLength={400}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Product description</label>
+          <textarea
+            className="form-control"
+            name="product[description]"
+            id="description"
+            cols="30"
+            rows="4"
+            maxLength={400}
+            placeholder="Product description goes here..."
+          ></textarea>
         </div>
         <div className="form-group">
           <label htmlFor="price">Product price</label>
@@ -79,7 +92,8 @@ const NewProduct = ({ categories, variants }) => {
             className="form-control"
             type="number"
             name="product[selling_price]"
-            placeholder="Price"
+            placeholder="Product price"
+            maxLength={20}
             required
           />
         </div>
@@ -116,6 +130,7 @@ const NewProduct = ({ categories, variants }) => {
             type="number"
             name="product[quantity]"
             placeholder="Quantity"
+            max={1000}
             required
           />
         </div>

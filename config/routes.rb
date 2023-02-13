@@ -35,9 +35,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :stores, only: %i[show]
+      resources :clients, only: %i[show]
       resources :products, only: %i[index show create]
       resources :sessions, only: %i[create]
       resources :registrations, only: %i[create]
+      resources :orders, only: %i[create]
+      resources :search, only: %i[index]
     end
   end
 end
