@@ -1,10 +1,15 @@
 class Api::V1::RegistrationsController < Api::V1::ApiController
+    skip_before_action :verify_authenticity_token
     def create
         # User already exists
         @client = @store.clients.where(email: params[:email])
-        render json: {message: 'User already exists.'} if @client
+        return render json: {message: 'User already exists.'}, status: :unprocessable_entity if @client
 
         # User not found, => create User
-        @client = Client.create(email: params[:email], password: bcrypt())
+        @client = @store.clients.build(email: params[:email], password: params[:password])
+        return render json: {message: 'User created successfully'}, status: :ok if @client.save
+
+        # User has errors
+        render json: {message: @client.errors.full_messages}, status: :unprocessable_entity unless @client.valid?
     end
 end

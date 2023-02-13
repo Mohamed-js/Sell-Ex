@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :stores, only: %i[show]
       resources :products, only: %i[index show create]
+      resources :sessions, only: %i[create]
+      resources :registrations, only: %i[create]
     end
   end
 end
