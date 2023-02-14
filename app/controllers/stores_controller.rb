@@ -191,7 +191,7 @@ class StoresController < ApplicationController
         },
         overlay: {
           exists: true,
-          color: '#171717bd',
+          color: 'rgba(23,23,23,0.75)',
         },
       },
     }

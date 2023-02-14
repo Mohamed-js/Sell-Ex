@@ -3,15 +3,8 @@ import BooleanButton from "./tools/BooleanButton";
 import ColorPicker from "./tools/ColorPicker";
 import SelectButton from "./tools/SelectButton";
 import TextInput from "./tools/TextInput";
-// import SelectMenu from "./tools/SelectMenu"; // Test
-import Opacity from "./tools/Opacity"; // test
 
-const CoverDesigner = ({
-  storeOpts,
-  setStoreOpts,
-  handleSelectValue,
-  selectValue,
-}) => {
+const CoverDesigner = ({ storeOpts, setStoreOpts }) => {
   return (
     <>
       <br />
@@ -91,7 +84,7 @@ const CoverDesigner = ({
             storeOpts={storeOpts}
             setStoreOpts={setStoreOpts}
             path={"cover.content_horizontal_position"}
-            value="left"
+            value="start"
             icon="fa fa-arrow-left"
           />
           <SelectButton
@@ -105,13 +98,13 @@ const CoverDesigner = ({
             storeOpts={storeOpts}
             setStoreOpts={setStoreOpts}
             path={"cover.content_horizontal_position"}
-            value="right"
+            value="end"
             icon="fa fa-arrow-right"
           />
         </div>
       </div>
       <hr />
-      {/* <div className="d-flex align-items-center justify-content-between my-2">
+      <div className="d-flex align-items-center justify-content-between my-2">
         <p className="m-0 ml-2">Content vertical position</p>
 
         <div
@@ -124,7 +117,7 @@ const CoverDesigner = ({
             storeOpts={storeOpts}
             setStoreOpts={setStoreOpts}
             path={"cover.content_vertical_position"}
-            value="top"
+            value="start"
             icon="fa fa-arrow-up"
           />
           <SelectButton
@@ -138,11 +131,11 @@ const CoverDesigner = ({
             storeOpts={storeOpts}
             setStoreOpts={setStoreOpts}
             path={"cover.content_vertical_position"}
-            value="bottom"
+            value="end"
             icon="fa fa-arrow-down"
           />
         </div>
-      </div> */}
+      </div>
       <br />
       {/* =============================BACKGROUND IMAAAAAAAAGE============================== */}
       <h2 className="text-left mb-3">Background Image</h2>
@@ -280,6 +273,7 @@ const CoverDesigner = ({
         path="cover.headline.bg_color"
         withTransparency
       />
+
       {/* <SelectGroup
         text="Text align"
         opts={3}
@@ -287,6 +281,7 @@ const CoverDesigner = ({
         values={["left", "center", "right"]}
         icon={["fa fa-arrow-left", "fa fa-align-center", "fa fa-arrow-right"]}
       /> */}
+
       <div className="d-flex align-items-center justify-content-between my-2">
         <p className="m-0 ml-2">Text align</p>
 
@@ -319,289 +314,6 @@ const CoverDesigner = ({
           />
         </div>
       </div>
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Font Size</p>
-
-        <div
-          className="d-flex px-2"
-          style={{
-            flexWrap: "wrap",
-          }}
-        >
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="1rem"
-            icon="100%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="1.5rem"
-            icon="150%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="2rem"
-            icon="200%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="2.5rem"
-            icon="250%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="3rem"
-            icon="300%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.headline.font_size"}
-            value="3.5rem"
-            icon="350%"
-          />
-        </div>
-      </div>
-      {/* ============================= Description ============================== */}
-      <h2 className="text-left mb-3">Description</h2>
-      <ColorPicker
-        text="Description background color"
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        path="cover.description.bg_color"
-        withTransparency
-      />
-      <ColorPicker
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        text="Description color"
-        path="cover.description.color"
-      />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Font Size</p>
-
-        <div
-          className="d-flex px-2"
-          style={{
-            flexWrap: "wrap",
-          }}
-        >
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="1rem"
-            icon="100%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="1.5rem"
-            icon="150%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="2rem"
-            icon="200%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="2.5rem"
-            icon="250%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="3rem"
-            icon="300%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.font_size"}
-            value="3.5rem"
-            icon="350%"
-          />
-        </div>
-      </div>
-      <TextInput
-        text={"Description text"}
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        path={"cover.description.text"}
-      />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Text align</p>
-
-        <div
-          className="d-flex px-2"
-          style={{
-            flexWrap: "wrap",
-          }}
-        >
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.text_align"}
-            value="left"
-            icon="fa fa-arrow-left"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.text_align"}
-            value="center"
-            icon="fa fa-align-center"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.description.text_align"}
-            value="right"
-            icon="fa fa-arrow-right"
-          />
-        </div>
-      </div>
-      {/* ============================= Button ============================== */}
-      <h2 className="text-left mb-3">Button</h2>
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Text align</p>
-
-        <div
-          className="d-flex px-2"
-          style={{
-            flexWrap: "wrap",
-          }}
-        >
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.alignment"}
-            value="left"
-            icon="fa fa-arrow-left"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.alignment"}
-            value="center"
-            icon="fa fa-align-center"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.alignment"}
-            value="right"
-            icon="fa fa-arrow-right"
-          />
-        </div>
-      </div>
-      <ColorPicker
-        text="Button background color"
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        path="cover.button.bg_color"
-        withTransparency
-      />
-      <ColorPicker
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        text="button color"
-        path="cover.button.color"
-      />
-      <div className="d-flex align-items-center justify-content-between my-2">
-        <p className="m-0 ml-2">Font Size</p>
-
-        <div
-          className="d-flex px-2"
-          style={{
-            flexWrap: "wrap",
-          }}
-        >
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="1rem"
-            icon="100%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="1.5rem"
-            icon="150%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="2rem"
-            icon="200%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="2.5rem"
-            icon="250%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="3rem"
-            icon="300%"
-          />
-          <SelectButton
-            storeOpts={storeOpts}
-            setStoreOpts={setStoreOpts}
-            path={"cover.button.font_size"}
-            value="3.5rem"
-            icon="350%"
-          />
-        </div>
-      </div>
-      {/* ============================= Overlay ============================== */}
-      <h2 className="text-left mb-3">Overlay</h2>
-      <Opacity
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        text="Overlay color"
-        path="cover.overlay.color"
-      />
-      <BooleanButton
-        storeOpts={storeOpts}
-        setStoreOpts={setStoreOpts}
-        text="Overlay image"
-        path={"cover.overlay.exists"}
-      />
-      {/*=== Test ===*/}
-      {/* <hr />
-      <h2 className="text-left mb-3">Test</h2>
-      <SelectMenu
-      storeOpts={storeOpts}
-      setStoreOpts={setStoreOpts}
-      path={"cover.button.alignment"}
-      handleSelectValue={handleSelectValue}
-      value={selectValue}
-      /> */}
     </>
   );
 };
