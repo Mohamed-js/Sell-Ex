@@ -16,7 +16,7 @@ class Api::V1::ProductsController < Api::V1::ApiController
         headers['Access-Control-Request-Method'] = '*'
         headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         render json: Product.all,
-            only: [:id, :name, :selling_price, :image, :store_id, :variants],
+            only: [:id, :name, :selling_price, :image, :store_id, :variants, :description],
             include:{   
                         :store => {:only => [:id, :name, :image]},
                         :category => {:only => [:name]},
