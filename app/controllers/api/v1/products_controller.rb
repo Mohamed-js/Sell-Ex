@@ -7,7 +7,7 @@ class Api::V1::ProductsController < Api::V1::ApiController
     end
 
     def show
-        render json: Product.find(params[:id]), include: {:store => {:only => [:id, :name, :image]}}
+        render json: Product.find(params[:id]), include: {:store => {:only => [:id, :name, :image, :options]}}
     end
 
     def create
@@ -16,9 +16,9 @@ class Api::V1::ProductsController < Api::V1::ApiController
         headers['Access-Control-Request-Method'] = '*'
         headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
         render json: Product.all,
-            only: [:id, :name, :selling_price, :image, :store_id, :variants, :description, :options],
+            only: [:id, :name, :selling_price, :image, :store_id, :variants, :description],
             include:{   
-                        :store => {:only => [:id, :name, :image]},
+                        :store => {:only => [:id, :name, :image, :options]},
                         :category => {:only => [:name]},
                     }
     end
