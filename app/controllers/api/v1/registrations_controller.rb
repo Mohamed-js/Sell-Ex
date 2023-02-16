@@ -6,7 +6,7 @@ class Api::V1::RegistrationsController < Api::V1::ApiController
         return render json: {message: 'User already exists.'}, status: :unprocessable_entity if @client
 
         # User not found, => create User
-        @client = @store.clients.build(email: params[:email], password: params[:password])
+        @client = @store.clients.build(email: params[:email], password: params[:password], first_name: params[:first_name], last_name: params[:last_name])
         return render json: {message: 'User created successfully'}, status: :ok if @client.save
 
         # User has errors
