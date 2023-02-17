@@ -4,6 +4,11 @@ class SalesController < ApplicationController
 
   # GET /sales or /sales.json
   def index
+    @sales = @current_store.sales.includes(:bill).order("id DESC")
+  end
+
+  def dashboard
+    @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
     this_month = Date.today.beginning_of_month
     discounts = @current_store.sales.sum(:discount)
     month_discounts = @current_store.sales.month_discounts(this_month)
@@ -12,15 +17,10 @@ class SalesController < ApplicationController
 
     @products_value = @current_store.items.sum(:buying_price)
 
-    @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
     @total_sales = @sales.sum("sales.selling_price * sales.quantity") - discounts - debts
-    @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
+    # @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
     @month_sales = @sales.where("sales.created_at > ?", (this_month)).sum("sales.selling_price * sales.quantity") - month_discounts - month_debts
-    @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
-  end
-
-  def all
-    @sales = @current_store.sales.includes(:bill).order("id DESC")
+    # @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
   end
 
   # GET /sales/1 or /sales/1.json

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "sales#index"
+  root "sales#dashboard"
   resources :orders
   devise_for :users
   resources :stores do
