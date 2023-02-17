@@ -46,9 +46,18 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
+    if category_params[:image]
+      image = Cloudinary::Uploader.upload(category_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true)
+
+      @category.image = image['secure_url']
+      @category.image_id = image['public_id']
+    end
     respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to category_url(@category), notice: "Category was successfully updated." }
+      if @category.update(category_params.except(:image))
+        format.html { redirect_to categories_url(@category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }

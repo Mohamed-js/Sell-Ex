@@ -23,11 +23,7 @@
     <%= form.label "Selling Price" %>
     <%= form.number_field :selling_price, class:"form-control" , step: :any, placeholder: "Selling Price" %>
   </div>
-  <div class="field form-group">
-    <%= form.label "Wholesale Price" %>
-    <%= form.number_field :whole_sale_price, class:"form-control" , step: :any, placeholder: "Wholesale Price" %>
-  </div>
-  <% if @product.image.attached? %>
+  <% if @product.image %>
     <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded my-2" %>
   <% end %>
   <div class="field form-group mb-3">

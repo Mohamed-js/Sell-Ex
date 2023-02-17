@@ -60,10 +60,8 @@ class StoresController < ApplicationController
       @store.image_id = image['public_id']
     end
 
-    @store.name = store_params[:name]
-
     respond_to do |format|
-      if @store.save
+      if @store.update(store_params.except(:image))
         format.html { redirect_to stores_url, notice: "Store was successfully updated." }
         format.json { render :index, status: :ok }
       else

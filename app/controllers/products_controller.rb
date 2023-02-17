@@ -98,10 +98,19 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
 
   def update
+    if product_params[:image]
+      image = Cloudinary::Uploader.upload(product_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true)
 
+      @product.image = image['secure_url']
+      @product.image_id = image['public_id']
+    end
+    
     respond_to do |format|
 
-      if @product.update(product_params)
+      if @product.update(product_params.except(:image))
 
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
 

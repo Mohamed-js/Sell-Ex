@@ -1,8 +1,7 @@
 <div class="row align-items-center mb-2">
   <div class="text-center mb-1 col-sm-4">
-    <h3 class='white'><%= @product.name.capitalize %></h3>
-    
-    <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded" %>
+    <h3 class=''><%= @product.name.capitalize %></h3>
+    <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded" if @product.image %>
   </div>
   <div class="col-sm-8">
     <div class="p-2 text-center max-width white">
