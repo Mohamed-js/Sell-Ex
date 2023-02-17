@@ -50,8 +50,20 @@ class StoresController < ApplicationController
   end
 
   def update
+    if store_params[:image]
+      image = Cloudinary::Uploader.upload(store_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true)
+
+      @store.image = image['secure_url']
+      @store.image_id = image['public_id']
+    end
+
+    @store.name = store_params[:name]
+
     respond_to do |format|
-      if @store.update(store_params)
+      if @store.save
         format.html { redirect_to stores_url, notice: "Store was successfully updated." }
         format.json { render :index, status: :ok }
       else

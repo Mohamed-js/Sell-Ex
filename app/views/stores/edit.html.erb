@@ -15,7 +15,7 @@
     <%= form.label "Name" %>
     <%= form.text_field :name, class:"form-control" %>
   </div>
-  <% if @store.image.attached? %>
+  <% if @store.image %>
     <%= image_tag @store.image, :width=>180, :crop=>"fill", class: "rounded my-2" %>
   <% end %>
   <div class="field form-group mb-3">
