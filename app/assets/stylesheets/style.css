@@ -96,7 +96,6 @@ th[small="true"] {
 
 .table thead th {
   vertical-align: inherit;
-  color: #fff;
   background-color: #929eaa !important;
   border-color: #f8f7fc !important;
 }
@@ -130,11 +129,10 @@ label {
 }
 
 body {
-  /* background: #252c47; */
-  color: #672fa4;
-  background-color: white;
   overflow-x: hidden;
   overflow-y: scroll;
+  background-color: #f7f7f7;
+  color: #3b3eac;
 }
 
 a {
@@ -151,15 +149,15 @@ hr {
 }
 
 .danger {
-  color: #fc4b6c !important;
+  color: #f75165 !important;
 }
 
 .bg-danger {
-  background: #fc4b6c !important;
+  background: #f75165 !important;
 }
 
 .bg-gradient-danger {
-  background: linear-gradient(to left, #fc4b6c, #fc4b6c);
+  background: linear-gradient(to left, #f75165, #f75165);
 }
 
 .success {
@@ -183,11 +181,22 @@ hr {
 }
 
 .bg-gradient {
-  background: linear-gradient(to left, #672fa4, #672fa4);
+  background: linear-gradient(to left, #3b3eac, #3b3eac);
 }
 
 .text-center {
   text-align: center;
+}
+
+.bg-glass {
+  /* background: #0000004f;
+  border-radius: 4px !important;
+  box-shadow: -1px -2px 2px #3b3eac3d;
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px); */
+  box-shadow: 1px 1px 5px lightgrey;
+  border-radius: 4px !important;
+  background: white;
 }
 
 .bg-transparent {
@@ -195,7 +204,7 @@ hr {
 }
 
 .bg-primary {
-  background-color: #672fa4 !important;
+  background-color: #3b3eac !important;
 }
 
 .bg-secondary {
@@ -223,7 +232,7 @@ hr {
 }
 
 .primary {
-  color: #4617c9 !important;
+  color: #3b3eac !important;
 }
 
 .secondary {
@@ -264,9 +273,8 @@ hr {
   border: none;
   border-radius: 4px;
   text-align: center;
-  /* white-space: nowrap; */
-  padding: 0.2rem 0.5rem;
-  font-size: unset;
+
+  padding: 5px 20px !important;
 }
 
 .black {
@@ -474,6 +482,14 @@ hr {
   padding-bottom: 30px;
 }
 
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
 .mx-0 {
   margin-left: 0;
   margin-right: 0;
@@ -614,8 +630,8 @@ hr {
 }
 
 .profile-avatar {
-  width: 110px;
-  height: 110px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -685,8 +701,15 @@ hr {
   height: 100%;
   min-width: 220px;
   position: relative;
-  background: #672fa4;
+  background-color: white;
   z-index: 1;
+  /* From https://css.glass */
+  /* background: rgba(255, 255, 255, 0.42);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  border: 1px solid rgba(255, 255, 255, 0.26); */
 }
 
 .sidebar::after {
@@ -725,46 +748,46 @@ hr {
 }
 
 .sidebar-links {
-  padding-right: 20px;
+  padding: 1rem;
+  padding-left: 0;
 }
 
 .sidebar-links .sidebar-link {
   font-size: 0.8rem;
   position: relative;
   margin-bottom: 3px;
-  color: white;
+  padding: 0.5rem;
 }
 
 .sidebar-links .sidebar-link i {
   margin-right: 8px;
   width: 15px;
-  color: white;
 }
 
 .sidebar-links .sidebar-link:hover {
-  margin-left: 10px;
-  color: white;
+  padding-left: 20px;
 }
 
 .sidebar-links .active {
-  transform: scale(1.121) translateX(8px);
-  background-color: white;
-  color: #672fa4;
-  margin-left: 10px;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 10px;
+  background-color: #3b3eac !important;
+  /* margin-left: 10px; */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 1rem 0.75rem;
+  background-color: #ffffff3d;
+  box-shadow: 0 4px 15px #ffffff38;
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px);
+  font-weight: 600;
+  color: white;
 }
 
 .sidebar-links .active i {
   color: inherit;
 }
 
-.sidebar-links .active:hover {
-  color: #ff613d !important;
-}
-
 .sidebar-links .active::before {
-  content: "";
+  /* content: ""; */
   width: 20px;
   height: 20px;
   background-color: transparent;
@@ -777,7 +800,7 @@ hr {
 }
 
 .sidebar-links .active::after {
-  content: "";
+  /* content: ""; */
   width: 20px;
   height: 20px;
   background-color: transparent;
@@ -795,7 +818,7 @@ hr {
 
 .sidebar-dropdown.active {
   background: white;
-  color: #672fa4;
+  color: #3b3eac;
   margin-left: 33px;
   display: flex;
   border-top-left-radius: 0;
@@ -834,7 +857,13 @@ hr {
 
 .main {
   padding-top: 10px;
-  background-color: white;
+  /* background-color: white; */
+  /* From https://css.glass */
+  /* background: rgba(255, 255, 255, 0.42); */
+  /* border-radius: 16px; */
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.7px);
+  -webkit-backdrop-filter: blur(7.7px); */
 }
 
 #notice {
@@ -1107,8 +1136,8 @@ hr {
   .table thead th {
     vertical-align: inherit;
     /* color: #fff; */
-    background-color: #672fa4 !important;
-    border-color: #672fa4 !important;
+    background-color: #3b3eac !important;
+    border-color: #3b3eac !important;
   }
 
   .table thead {
@@ -1139,19 +1168,24 @@ hr {
 
 .table .thead-dark th {
   text-align: left;
-  background-color: #672fa4 !important;
-  border-color: #650cc4 !important;
+  background-color: white !important;
+  /* border-color: #650cc4 !important; */
 }
 
 .table-bordered td,
 .table-bordered th {
-  border: 1px solid #672fa4;
+  /* border: 1px solid #3b3eac; */
   /* background: transparent; */
-  /* color: white; */
+  color: #3b3eac !important;
+  border-color: #f8f7fc !important;
+}
+
+.table {
+  box-shadow: 1px 1px 5px lightgrey;
 }
 
 .table a {
-  /* color: #672fa4; */
+  /* color: #3b3eac; */
 }
 
 @media screen and (max-width: 800px) {

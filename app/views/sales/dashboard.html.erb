@@ -1,20 +1,93 @@
-<h1 class="text-center mb-3">
+<h5 class="mb-2 bg-glass p-3">
   Dashboard  
-</h1>
-<br>
-<div class="row m-1 max-width m-auto justify-content-center">
+</h5>
+
+<div class="row m-1  m-auto justify-content-center">
     <div class="col-12 justify-content-center row py-1 rounded p-0">
-      <div class="col-5 text-center p-1 bg-tertiary white rounded mr-2 white">
-        <p class="m-0">  Total  </p>
-        <h4>$<%= @total_sales %></h4>
+      <div class="col-3 p-2 pl-0">
+        <div class="flex-row p-1 py-3 bg-glass rounded ">
+          <div class="col-4 flex-row align-items-center justify-center">
+            <i class='fa fa-sack-dollar' style="font-size: 1.5rem"></i>
+          </div>
+          <div>
+            <p class="m-0">  Earnings  </p>
+            <h4>$<%= @total_sales %></h4>
+          </div>
+        </div>
       </div>
-      <div class="col-5 text-center p-1 bg-secondary white rounded mr-2 white">
-        <p class="m-0"> Month Sales </p>
-        <h4>$<%= @month_sales %></h4>
+      <div class="col-3 p-2">
+        <div class="flex-row p-1 py-3 bg-glass rounded ">
+          <div class="col-4 flex-row align-items-center justify-center">
+            <i class='fa fa-money-bill-1-wave' style="font-size: 1.5rem"></i>
+          </div>
+          <div>
+            <p class="m-0">  This Month  </p>
+            <h4>$<%= @total_sales %></h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 p-2">
+        <div class="flex-row p-1 py-3 bg-glass rounded ">
+          <div class="col-4 flex-row align-items-center justify-center">
+            <i class='fa fa-book' style="font-size: 1.5rem"></i>
+          </div>
+          <div>
+            <p class="m-0">  Products  </p>
+            <h4>$<%= @total_sales %></h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 p-2 pr-0">
+        <div class="flex-row p-1 py-3 bg-glass rounded ">
+          <div class="col-4 flex-row align-items-center justify-center">
+            <i class='fa fa-user' style="font-size: 1.5rem"></i>
+          </div>
+          <div>
+            <p class="m-0">  Customers  </p>
+            <h4>$<%= @total_sales %></h4>
+          </div>
+        </div>
       </div>
     </div>
 </div>
-<br>
-<br>
 
+<div class="row pt-1">
+  <div class="col-7">
+  <div class="bg-glass py-4 pr-4">
+    <%= line_chart Sale.group_by_day(:created_at).count,
+    colors: ["#00c5ff", "#666"],
+    xtitle: "Time",
+    ytitle: "Population"
+     %>
+  </div>
+  </div>
+  <div class="col-5 pl-0">
+  <div class="bg-glass p-4">
+    <%= pie_chart Product.group_by_day(:created_at).count, donut: true, dataset: {borderWidth: 1, color: 'red'} %>
+  </div>
+  </div>
+</div>
+
+<div class="row pt-3">
+  <div class="col-5 pr-0">
+  <div class="bg-glass p-4">
+    <%= area_chart Product.group_by_day(:created_at).count %>
+  </div>
+  </div>
+  <div class="col-7">
+  <div class="bg-glass py-4 pr-4">
+    <%= line_chart Product.all.map { |product|
+      {name: product.name, data: Sale.group_by_day(:created_at).count}
+    } %>
+  </div>
+  </div>
+</div>
+
+<div>
+
+</div>
+
+
+
+<br>
 <br>
