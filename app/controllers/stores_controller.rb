@@ -1,22 +1,10 @@
 class StoresController < ApplicationController
   skip_before_action :authenticate_user!
   before_action :set_store, only: %i[ destroy update edit design update_design ]
-  before_action :set_store_by_name, only: %i[show]
   before_action :default_store_options, only: :create
 
   def index
     @stores = Store.all
-  end
-
-  def show
-    @products = []
-    all_products = @store.products
-    all_products.each { |product|
-      @products.push({
-        product: product,
-        img: url_for(product.image),
-      })
-    }
   end
 
   def new
@@ -126,12 +114,6 @@ class StoresController < ApplicationController
 
   def set_store
     @store = Store.find(params[:id])
-  end
-
-  def set_store_by_name
-    subdomain = request.host.split('.')[0]
-    @store = Store.where('lower(name) = ?', subdomain.downcase).first 
-    render 'layouts/404' unless @store && @store.active
   end
 
   def default_store_options

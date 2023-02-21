@@ -18,16 +18,8 @@ current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
         <%= fa_icon "home" %> Dashboard
       </div>
     <% end %>
-    <%= link_to '/sales' do %>
-    <div class="sidebar-link flex-row align-center <%= sales %>">
-      <%= fa_icon "shopping-basket" %> Sales
-    </div>
-    <% end %> <%= link_to "/bills/new" do %>
-    <% end %> <%= link_to "/bills/search" do %>
-    <div class="sidebar-link flex-row align-center <%= bill %>">
-      <%= fa_icon "search" %> Search Bill
-    </div>
-    <% end %> <%= link_to "/orders" do %>
+ 
+   <%= link_to "/orders" do %>
     <div class="sidebar-link flex-row align-center <%= orders %>">
       <i class="fas fa-store"></i>
       Orders

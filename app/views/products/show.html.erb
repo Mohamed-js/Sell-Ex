@@ -1,10 +1,10 @@
 <div class="row align-items-center mb-2">
-  <div class="text-center mb-1 col-sm-4">
+  <div class="text-center mb-1 col-sm-6">
     <h3 class=''><%= @product.name.capitalize %></h3>
-    <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded" if @product.image %>
+    <%= image_tag @product.image, :width=>"100%", :crop=>"fill", class: "rounded" if @product.image %>
   </div>
-  <div class="col-sm-8">
-    <div class="p-2 text-center max-width white">
+  <div class="col-sm-6">
+    <div class="p-2 text-center max-width">
       <h4 class="text-center"><%= @product.category.name.capitalize %></h4>
     </div>
     <div class="row p-2 text-center max-width bg-gradient btn-dark">
@@ -12,7 +12,7 @@
       <h6 class="col-6 m-0"><%= @product.quantity %></h6>
     </div>
     <div class="row p-2 text-center max-width primary">
-      <h6 class="col-6 m-0">Selling Price</h6>
+      <h6 class="col-6 m-0">Price</h6>
       <h6 class="col-6 m-0">$<%= @product.selling_price %></h6>
     </div>
     <div class="p-2 max-width">

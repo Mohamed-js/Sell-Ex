@@ -6,14 +6,13 @@
 </h5>
 <br />
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Image</th>
       <th ></th>
-      <th small='true'></th>
-      <th small='true'></th>
+
     </tr>
   </thead>
   <tbody>
@@ -21,9 +20,19 @@
       <tr>
         <td><%= category.name.capitalize %></td>
         <td><%= image_tag category.image, height: 50  %></td>
-        <td><%= link_to 'Products', category, class:"btn bg-primary white" %></td>
-        <td><%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white" %></td>
-        <td><%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
+        <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Products', category, class:"btn bg-primary white mb-2 dropdown-item" %>
+            <%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white mb-2 dropdown-item" %>
+            <%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+            </div>
+          </div>
+        </td>
+
       </tr>
     <% end %>
   </tbody>

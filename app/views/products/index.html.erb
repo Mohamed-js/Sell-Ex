@@ -4,18 +4,15 @@
     <a href="/products/new" class="btn bg-primary white py-0 mr-1">New product</a>
   </div>
 </h5>
-<div class="container my-2 d-flex justify-content-between">
-  <button class="btn bg-primary white" onclick='printDiv("table")'>Print</button>
-</div>
+<br>
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Selling Price</th>
       <th scope="col" small='true'>Stock Amount</th>
       <th scope="col"></th>
-      <th scope="col" small='true'></th>
     </tr>
   </thead>
   <tbody id='table'>
@@ -24,10 +21,17 @@
         <td><%= product.name %></td>
         <td><%= product.selling_price %> </td>
         <td><%= product.quantity %> <%= product.quantity <= 1 ? 'Piece' : "Pieces" %></td>
-        <% if current_user.admin %>
-          <td><%= link_to 'Units', product, class:"btn bg-primary white" %></td>
-          <td><%= button_to 'Delete', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
-        <% end %>
+        <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Units', product, class:"btn bg-primary white mb-2 dropdown-item" %>
+            <%= button_to 'Delete', product, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+            </div>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

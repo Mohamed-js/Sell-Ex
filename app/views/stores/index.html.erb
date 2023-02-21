@@ -7,7 +7,7 @@
 
 <br />
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
 <thead class="thead-dark">
   <tr>
     <th scope="col">Store</th>
@@ -46,19 +46,25 @@
         href='/stores/<%= store.id %>/control' style="line-height: 1.4;">
         <%= store.id==session[:current_store_id].to_i ? 'Controlled' : 'Control' %>
       </a></td>
-    <td><a class="btn primary" href='/stores/<%= store.id %>' target="_blank">
-        <i class="fa fa-external-link"></i>
-      </a>
-      <a class="btn secondary" href='/stores/<%= store.id %>/edit'>
-        <i class="fa fa-edit"></i>
-      </a>
-      <span style="display: inline-block;">
-      <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?'
-        }, class:"btn danger" do %>
-        <i class="fa fa-trash"></i>
-        <% end %>
-        </span>
-    </td>
+      <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <a class="btn white bg-primary dropdown-item mb-2" href='https://www.<%= store.name.downcase %>.hostname.com' target="_blank">
+              <i class="fa fa-external-link "></i> Show
+            </a>
+            <a class="btn white bg-secondary dropdown-item mb-2" href='/stores/<%= store.id %>/edit'>
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?'}, class:"btn white bg-danger dropdown-item" do %>
+              <i class="fa fa-trash"></i> Delete
+            <% end %>
+            </div>
+          </div>
+        </td>
+    
   </tr>
   <% end %>
   </tbody>

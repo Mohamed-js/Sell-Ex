@@ -5,6 +5,7 @@
 
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
+// import { Turbo } from "@hotwired/turbo-rails";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "chartkick/chart.js";
@@ -16,7 +17,6 @@ ActiveStorage.start();
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
-// Support component names relative to this directory:
 var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);

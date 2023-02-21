@@ -7,7 +7,7 @@
 </h5>
 <br />
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
   <thead class="thead-dark">
     <tr>
       <th>Products</th>
@@ -18,7 +18,7 @@
       <th>City</th>
       <th>Address</th>
       <th>Status</th>
-      <th colspan="2"></th>
+      <th>Controls</th>
     </tr>
   </thead>
   <tbody id='table'>
@@ -42,8 +42,17 @@
             <i class="fas fa-times danger"></i>
           <% end %>
         </td>
-        <td><%= link_to 'Details', order, class:"btn bg-primary white" %></td>
-        <td><%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white" %></td>
+        <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'Details', order, class:"btn bg-primary white dropdown-item mb-2" %>
+              <%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+            </div>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

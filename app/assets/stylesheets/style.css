@@ -64,9 +64,10 @@
 td,
 table {
   border-bottom: 4px solid #6a3de8ab;
-  width: max-content !important;
+  /* width: max-content !important; */
   border-collapse: collapse;
   padding: 5px;
+  min-width: 900px;
 }
 
 td {
@@ -130,7 +131,6 @@ label {
 
 body {
   overflow-x: hidden;
-  overflow-y: scroll;
   background-color: #f7f7f7;
   color: #3b3eac;
 }
@@ -857,6 +857,7 @@ hr {
 
 .main {
   padding-top: 10px;
+  overflow-x: hidden;
   /* background-color: white; */
   /* From https://css.glass */
   /* background: rgba(255, 255, 255, 0.42); */
@@ -1169,19 +1170,18 @@ hr {
 .table .thead-dark th {
   text-align: left;
   background-color: white !important;
-  /* border-color: #650cc4 !important; */
+  padding: 15px 25px;
 }
 
 .table-bordered td,
 .table-bordered th {
-  /* border: 1px solid #3b3eac; */
-  /* background: transparent; */
   color: #3b3eac !important;
   border-color: #f8f7fc !important;
 }
 
 .table {
   box-shadow: 1px 1px 5px lightgrey;
+  min-height: 30vh;
 }
 
 .table a {
@@ -1212,4 +1212,20 @@ hr {
   background: transparent;
   border: none;
   position: relative;
+}
+
+.dropdown-menu.show {
+  animation: to-left 1s forwards;
+}
+
+@keyframes to-left {
+  0% {
+    transform: translateX(100px);
+    background-color: white;
+  }
+
+  100% {
+    transform: translateX(0px);
+    background-color: green !important;
+  }
 }
