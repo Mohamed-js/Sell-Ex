@@ -60,7 +60,8 @@ class ProductsController < ApplicationController
 
     @product.store_id = @current_store.id
 
-    @product.variants = JSON.parse(product_params[:variants]).deep_symbolize_keys
+    @product.variants = JSON.parse(product_params[:variants])
+    @product.variants = @product.variants.deep_symbolize_keys if @product.variants.length >= 1
 
     image = Cloudinary::Uploader.upload(product_params[:image], 
       use_filename:true, 

@@ -10,17 +10,27 @@ class SalesController < ApplicationController
   def dashboard
     @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
     this_month = Date.today.beginning_of_month
-    discounts = @current_store.sales.sum(:discount)
-    month_discounts = @current_store.sales.month_discounts(this_month)
-    debts = @current_store.debts.sum(:dept_value)
-    month_debts = @current_store.debts.month_debts(this_month)
-
-    @products_value = @current_store.items.sum(:buying_price)
-
-    @total_sales = @sales.sum("sales.selling_price * sales.quantity") - discounts - debts
-    # @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
-    @month_sales = @sales.where("sales.created_at > ?", (this_month)).sum("sales.selling_price * sales.quantity") - month_discounts - month_debts
+    # discounts = @current_store.sales.sum(:discount)
+    # month_discounts = @current_store.sales.month_discounts(this_month)
+    # debts = @current_store.debts.sum(:dept_value)
+    # month_debts = @current_store.debts.month_debts(this_month)
+    # @products_value = @current_store.items.sum(:buying_price)
     # @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
+    # @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
+    @total_sales = @sales.sum("sales.selling_price * sales.quantity") 
+    @month_sales = @sales.where("sales.created_at > ?", (this_month)).sum("sales.selling_price * sales.quantity")
+    @products_count = @current_store.products.count
+    @clients_count = @current_store.clients.count
+    @orders = @current_store.orders.count
+    @order_items = @current_store.order_items.count
+    @categories_count = @current_store.categories.count
+    # TODO
+    @stores_count = Store.count
+    @active_stores_count = Store.active.count
+
+    @sales_chart = (Sale.group_by_day(:created_at).count).merge(Order.group_by_day(:created_at).count){|k,o,n| o + n}
+    # TODO
+    @categories_chart = OrderItem.order(sum_order_items_price_all_order_items_quantity: :desc).limit(10).group(:product_id).sum("order_items.price * order_items.quantity")
   end
 
   # GET /sales/1 or /sales/1.json

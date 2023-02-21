@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_13_231005) do
+ActiveRecord::Schema.define(version: 2023_02_21_183802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -117,8 +117,7 @@ ActiveRecord::Schema.define(version: 2023_02_13_231005) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "color"
-    t.string "size"
+    t.text "variants"
   end
 
   create_table "orders", force: :cascade do |t|

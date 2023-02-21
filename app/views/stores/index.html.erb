@@ -32,11 +32,10 @@
    
     <td>
       <% if store.active %>
-        <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on success"></i></a>
+          <a href='/stores/<%= store.id %>/deactivate'><i class="fa fa-toggle-on success"></i></a>
         <% else %>
-          <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on danger"
-              style="transform: rotateZ(180deg);"></i></a>
-          <% end %>
+          <a href='/stores/<%= store.id %>/activate'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
+        <% end %>
     </td>
 
     <td><a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;" target="_blank">

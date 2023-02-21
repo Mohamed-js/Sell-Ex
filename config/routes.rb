@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   resources :stores do
     collection do
       get "/:id/control", to: "stores#control"
-      get "/:id/activation_toggle", to: "stores#activation_toggle"
+      get "/:id/activate", to: "stores#activate"
+      get "/:id/deactivate", to: "stores#deactivate"
       get '/:id/design', to: 'stores#design'
       patch '/:id/update_design', to: 'stores#update_design'
     end
@@ -28,7 +29,6 @@ Rails.application.routes.draw do
   get '/category/:id', to: 'categories#show', constraints: { subdomain: 'app' }
   resources :categories
 
-
   get "/stores/:id/*path", to: "stores#show"
   get "/refresher", to: "stores#refresher"
 
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       resources :products, only: %i[index show create]
       resources :sessions, only: %i[create]
       resources :registrations, only: %i[create]
-      resources :orders, only: %i[create]
+      resources :orders, only: %i[index create]
       resources :search, only: %i[index]
     end
   end

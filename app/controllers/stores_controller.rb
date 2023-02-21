@@ -83,12 +83,22 @@ class StoresController < ApplicationController
     end
   end
 
-  def activation_toggle
+  def activate
     s = Store.find params[:id]
-    s.active = !s.active
+    s.active = true
     s.save
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: "You #{"de" unless s.active}activated #{s.name}." }
+      format.html { redirect_to stores_url, notice: "You activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def deactivate
+    s = Store.find params[:id]
+    s.active = false
+    s.save
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "You deactivated #{s.name}." }
       format.json { render :index, status: :ok }
     end
   end

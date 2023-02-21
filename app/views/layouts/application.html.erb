@@ -37,6 +37,7 @@
 
         btn.addEventListener('blur', (e) => {
           console.log(e.relatedTarget)
+          e.relatedTarget.click();
           if(e.relatedTarget && e.relatedTarget.parentElement && e.relatedTarget.parentElement.classList.contains('dropdown-menu')){
             setTimeout(()=>{
               document.querySelectorAll(".dropdown-menu").forEach((menu) => {

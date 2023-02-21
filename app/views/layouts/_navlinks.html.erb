@@ -44,10 +44,10 @@ current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
       My Stores
     </div>
     <% end %>
-    <div class="logout-container d-flex justify-content-center">
+    <div class="logout-container d-flex justify-content-center mt-1">
       <%= button_to '/users/sign_out', class: "logout-btn" , method: :delete do
       %>
-      <div class="flex-row align-center white">
+      <div class="flex-row align-center white bg-danger p-1 rounded">
         <i class='fa fa-sign-out white'></i>
         <span class="px-1 white">Logout</span>
       </div>

@@ -1182,6 +1182,7 @@ hr {
 .table {
   box-shadow: 1px 1px 5px lightgrey;
   min-height: 30vh;
+  min-width: max-content;
 }
 
 .table a {
@@ -1229,3 +1230,23 @@ hr {
     background-color: green !important;
   }
 }
+
+.dashboard-card {
+  height: 100%;
+  align-items: center;
+}
+
+small {
+  font-size: 70%;
+}
+
+/* .product-row {
+  display: grid;
+  background: white;
+  padding: 10px;
+  margin-top: 5px;
+  grid-template-columns: minmax(300px, max-content) repeat(
+      auto-fill,
+      max-content
+    );
+} */

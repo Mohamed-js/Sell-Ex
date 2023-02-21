@@ -49,7 +49,7 @@
             </button>
             <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
               <%= link_to 'Details', order, class:"btn bg-primary white dropdown-item mb-2" %>
-              <%= link_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+              <%= button_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white dropdown-item" %>
             </div>
           </div>
         </td>
