@@ -1,13 +1,16 @@
 class Api::V1::OrdersController < Api::V1::ApiController
     skip_before_action :verify_authenticity_token
 
+    def index
+
+    end
 
     def create
         @order = Order.new(name: "#{params[:first_name]} #{params[:last_name]}", client_id: @client && @client.id, phone: params[:phone], country: params[:country], city: params[:city], address: params[:address], store_id: @store.id, items_count: 0, total_price: 0)
     
         params[:order_items].each do |order_item|
           product = Product.find_by(id: order_item[:product_id])
-          # Add variants
+
           if product
             variants = JSON.parse order_item[:variants]
 
@@ -18,7 +21,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
         end
 
         if @order.save
-          render json: "Order created."
+          render json: {message: "Order created."}, status: :created
         else
           render json: {errors: @order.errors.full_messages}
         end
