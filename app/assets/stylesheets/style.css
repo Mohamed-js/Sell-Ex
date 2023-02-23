@@ -1250,3 +1250,8 @@ small {
       max-content
     );
 } */
+
+.table-striped tbody > tr:nth-child(even) > td,
+.table-striped tbody > tr:nth-child(even) > th {
+  background-color: #efefef96;
+}

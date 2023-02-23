@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
   def set_store
       unless session[:current_store_id]
 
-        store = Store.first
+        #  unless current_user
+        store = current_user.stores.first
   
         session[:current_store_id] = store.id if store
   
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
         return
       end
       
-      @current_store = Store.where(id: session[:current_store_id]).first
+      @current_store = current_user.stores.where(id: session[:current_store_id]).first
 
       redirect_to stores_path, notice: 'You have to create at least one two store...!' unless @current_store
   

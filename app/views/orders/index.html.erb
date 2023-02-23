@@ -1,8 +1,9 @@
 <h5 class="mb-2 bg-glass p-3 flex-row justify-between">
   Orders
   <div class="flex-row">
-    <a href="/bills/new" class="btn bg-primary white py-0 mr-1">Finished orders</a>
-    <a href="/bills/new" class="btn bg-primary white py-0">Pending orders</a>
+    <a href="/orders" class="btn bg-primary white py-0 mr-1">All orders</a>
+    <a href="/orders?q=pending" class="btn bg-primary white py-0 mr-1">Pending orders</a>
+    <a href="/orders?q=complete" class="btn bg-primary white py-0">Complete orders</a
   </div>
 </h5>
 <br />
@@ -26,7 +27,7 @@
       <tr scope="row">
         <td>
           <% order.order_items.each do |item| %>
-            <h6><%= link_to item.product.name, product_path(item.product_id) %></h6>
+            <h6 class="bg-primary white p-1 rounded"><%= link_to item.product.name, product_path(item.product_id) %></h6>
           <% end %>
         </td>
         <td><%= order.total_price %></td>
@@ -36,7 +37,7 @@
         <td><%= order.city %></td>
         <td><%= order.address %></td>
         <td>
-          <% if order.status_done  %>
+          <% if order.status == 'complete'  %>
             <i class="fas fa-check success"></i>
           <% else %>
             <i class="fas fa-times danger"></i>
@@ -48,6 +49,8 @@
               <i class="fa fa-gear"></i>
             </button>
             <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'Mark as complete', "/orders/#{order.id}/update_status/complete", class:"btn bg-success white dropdown-item mb-2" if order.status != "complete" %>
+              <%= link_to 'Mark as pending', "/orders/#{order.id}/update_status/pending", class:"btn bg-secondary white dropdown-item mb-2" if order.status != "pending"  %>
               <%= link_to 'Details', order, class:"btn bg-primary white dropdown-item mb-2" %>
               <%= button_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white dropdown-item" %>
             </div>

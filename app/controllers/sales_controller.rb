@@ -10,6 +10,7 @@ class SalesController < ApplicationController
   def dashboard
     @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
     this_month = Date.today.beginning_of_month
+    last_month = (Date.today.beginning_of_month - 1).beginning_of_month
     # discounts = @current_store.sales.sum(:discount)
     # month_discounts = @current_store.sales.month_discounts(this_month)
     # debts = @current_store.debts.sum(:dept_value)
@@ -24,13 +25,21 @@ class SalesController < ApplicationController
     @orders = @current_store.orders.count
     @order_items = @current_store.order_items.count
     @categories_count = @current_store.categories.count
-    # TODO
-    @stores_count = Store.count
-    @active_stores_count = Store.active.count
 
-    @sales_chart = (Sale.group_by_day(:created_at).count).merge(Order.group_by_day(:created_at).count){|k,o,n| o + n}
-    # TODO
-    @categories_chart = OrderItem.order(sum_order_items_price_all_order_items_quantity: :desc).limit(10).group(:product_id).sum("order_items.price * order_items.quantity")
+    @stores_count = current_user.stores.count
+    @active_stores_count = current_user.stores.active.count
+
+    # Orders every day count track
+    @orders_chart = @current_store.orders.group_by_day(:created_at).count
+    
+    # Revenue per category
+    @categories_chart = @current_store.order_items.joins(:product, :category).group('UPPER(categories.name)').sum('order_items.quantity * price')
+
+    # Users every day count track
+    @users_chart = @current_store.clients.group_by_day(:created_at).count
+
+    # Finished to un finished orders
+    @finished_orders_chart = {'Pending'=> Order.pending.count, 'Complete'=> Order.complete.count}
   end
 
   # GET /sales/1 or /sales/1.json

@@ -70,7 +70,7 @@
             <i class='fa fa-boxes-packing' style="font-size: 1.5rem"></i>
           </div>
           <div>
-            <p class="m-0">  Sold items   </p>
+            <p class="m-0">  Sold units   </p>
 
             <h4><%= @order_items %></h4>
           </div>
@@ -103,34 +103,51 @@
 
 <div class="row pt-1">
   <div class="col-7">
-  <div class="bg-glass py-4 pr-4">
-    <%= line_chart @sales_chart,
-    colors: ["#3b3eac", "#00c5ff"],
+  <div class="bg-glass py-2 pr-3 pl-1">
+    <%= line_chart @orders_chart,
+    download: {filename: "orders_track", background: "white"},
+    colors: ["#3b3eac", "#f75165", "#00c5ff", '#00ee9f'],
+    label: "Orders",
+    title: "Daily Orders",
     xtitle: "Time",
     ytitle: "Sales",
-    empty: "No sales"
+    empty: "No orders"
      %>
   </div>
   </div>
   <div class="col-5 pl-0">
-  <div class="bg-glass p-4">
-    <%= pie_chart @categories_chart, donut: true, dataset: {borderWidth: 1, color: 'red'}, empty: "No categories with sales" %>
+  <div class="bg-glass p-2">
+    <%= pie_chart @categories_chart, download: {filename: "categories_track", background: "white"}, title: "Categories Sales", donut: true, dataset: {borderWidth: 5}, empty: "No categories with sales", prefix: "$", thousands: ",", legend: 'right', colors: ["#3b3eac", "#f75165", "#00c5ff", '#00ee9f'] %>
   </div>
   </div>
 </div>
 
 <div class="row pt-3">
   <div class="col-5 pr-0">
-  <div class="bg-glass p-4">
-    <%= area_chart Product.group_by_day(:created_at).count %>
+  <div class="bg-glass p-2">
+  
+    <%= pie_chart @finished_orders_chart, download: {filename: "categories_track", background: "white"}, title: "Categories Sales", dataset: {borderWidth: 5}, empty: "No categories with sales", prefix: "$", thousands: ",", legend: 'right', colors: [ "#f75165", "#00c5ff", '#00ee9f', "#3b3eac"] %>
   </div>
   </div>
   <div class="col-7">
-  <div class="bg-glass py-4 pr-4">
-    <%= line_chart Product.all.map { |product|
-      {name: product.name, data: Sale.group_by_day(:created_at).count}
-    } %>
+  <div class="bg-glass py-2 pr-3 pl-1">
+  <%= area_chart @users_chart,
+  download: {filename: "orders_track", background: "white"},
+  colors: ["#3b3eac", "#f75165", "#00c5ff", '#00ee9f'],
+  label: "Users",
+  title: "Store Users",
+  xtitle: "Time",
+  ytitle: "Users",
+  empty: "No users"
+  %>
   </div>
+  <%#
+  <div class="bg-glass py-4 pr-4">
+    <%= line_chart current_user.stores.map { |store|
+      {name: store.name, data: store.orders.group_by_day(:created_at).count}
+    }, colors: ["#3b3eac", "#f75165", "#00c5ff", '#00ee9f'] %>
+  </div>
+  
   </div>
 </div>
 

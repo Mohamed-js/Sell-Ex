@@ -1,12 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show update destroy ]
+  before_action :set_order, only: %i[ show update destroy update_status]
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
   skip_before_action :set_store
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.includes(:order_items)
+    q = params[:q]
+    return @orders = Order.includes(:order_items).order(id: :desc) unless q
+    @orders = Order.includes(:order_items).where(status: q)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -51,6 +53,15 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def update_status
+    if @order.update(status: params[:status])
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: "Order was successfully marked as complete." }
+        format.json { head :no_content }
+      end
     end
   end
 

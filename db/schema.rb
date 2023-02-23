@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_21_183802) do
+ActiveRecord::Schema.define(version: 2023_02_22_232501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2023_02_21_183802) do
     t.integer "store_id"
     t.text "image"
     t.string "image_id"
+    t.boolean "active", default: true
   end
 
   create_table "clients", force: :cascade do |t|
@@ -129,7 +130,7 @@ ActiveRecord::Schema.define(version: 2023_02_21_183802) do
     t.string "country"
     t.string "city"
     t.text "address"
-    t.boolean "status_done", default: false
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
@@ -141,7 +142,7 @@ ActiveRecord::Schema.define(version: 2023_02_21_183802) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "open_to_store", default: false
+    t.boolean "active", default: true
     t.integer "store_id"
     t.integer "category_id"
     t.text "variants"
@@ -175,6 +176,7 @@ ActiveRecord::Schema.define(version: 2023_02_21_183802) do
     t.boolean "active", default: false
     t.text "image"
     t.string "image_id"
+    t.integer "user_id"
   end
 
   create_table "transactions", force: :cascade do |t|

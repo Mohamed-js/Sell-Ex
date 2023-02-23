@@ -1,10 +1,9 @@
 class StoresController < ApplicationController
-  skip_before_action :authenticate_user!
   before_action :set_store, only: %i[ destroy update edit design update_design ]
   before_action :default_store_options, only: :create
 
   def index
-    @stores = Store.all
+    @stores = current_user.stores.all
   end
 
   def new
@@ -15,7 +14,7 @@ class StoresController < ApplicationController
   end
 
   def create
-    @store = Store.new(store_params)
+    @store = current_user.stores.build(store_params)
     @store.options = @store_options.to_json
 
     image = Cloudinary::Uploader.upload(store_params[:image], 
@@ -63,7 +62,6 @@ class StoresController < ApplicationController
     @store.options = params[:store_options].to_json
 
     respond_to do |format|
-      p format
       if @store.save
         format.html { render json: {success: true}, notice: "Store design was successfully updated." }
         format.json { render :index, status: :ok }
@@ -76,7 +74,7 @@ class StoresController < ApplicationController
 
   def control
     session[:current_store_id] = params[:id]
-    s = Store.find params[:id]
+    s = current_user.stores.find params[:id]
     respond_to do |format|
       format.html { redirect_to stores_url, notice: "You now control #{s.name}." }
       format.json { render :index, status: :ok }
@@ -84,7 +82,7 @@ class StoresController < ApplicationController
   end
 
   def activate
-    s = Store.find params[:id]
+    s = current_user.stores.find params[:id]
     s.active = true
     s.save
     respond_to do |format|
@@ -94,7 +92,7 @@ class StoresController < ApplicationController
   end
 
   def deactivate
-    s = Store.find params[:id]
+    s = current_user.stores.find params[:id]
     s.active = false
     s.save
     respond_to do |format|
@@ -123,7 +121,7 @@ class StoresController < ApplicationController
   private
 
   def set_store
-    @store = Store.find(params[:id])
+    @store = current_user.stores.find(params[:id])
   end
 
   def default_store_options

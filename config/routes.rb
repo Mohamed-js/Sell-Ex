@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root "sales#dashboard"
-  resources :orders
+  resources :orders do
+    collection do
+      get '/:id/update_status/:status', to: "orders#update_status"
+    end
+  end
   devise_for :users
   resources :stores do
     collection do
@@ -34,7 +38,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :stores, only: %i[show]
+      resources :stores, only: %i[show index]
       resources :clients, only: %i[show]
       resources :products, only: %i[index show create]
       resources :sessions, only: %i[create]
