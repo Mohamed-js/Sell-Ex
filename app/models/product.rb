@@ -10,4 +10,8 @@ class Product < ApplicationRecord
 
   validates :selling_price, presence: true
   validates :image, presence: true
+
+
+  scope :active, -> { where(active: true) }
+  scope :with_discount, -> { where("discount > 0") }
 end

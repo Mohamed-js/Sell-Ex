@@ -10,7 +10,9 @@ current_page?(products_url) || current_page?(new_item_url)||
 current_page?(new_product_url) ? "active": "" %> <% categories =
 current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
 %> <% stores = current_page?(stores_url) || current_page?(new_store_url) ?
-"active": "" %> <% orders = current_page?(orders_url) ? "active": "" %>
+"active": "" %>
+ <% orders = current_page?(orders_url) ? "active": "" %>
+ <% clients = current_page?(clients_url) ? "active": "" %>
 <div class="flex-col mt-2 h-100">
   <div class="sidebar-links flex-col mt-2 w-100">
     <%= link_to root_url do %>
@@ -36,12 +38,19 @@ current_page?(categories_url) || current_page?(new_category_url) ? "active": ""
     
     <%= link_to products_url do %>
     <div class="sidebar-link flex-row align-center <%= products %>">
-      <%= fa_icon "diamond" %> Products
+      <%= fa_icon "cube" %> Products
     </div>
-    <% end %>   <%# <% end %> <%= link_to "/stores" do %>
+    <% end %>   <%# <% end %> 
+    <%= link_to "/stores" do %>
     <div class="sidebar-link flex-row align-center <%= stores %>">
       <i class="fas fa-store"></i>
       My Stores
+    </div>
+    <% end %>
+    <%= link_to "/clients" do %>
+    <div class="sidebar-link flex-row align-center <%= clients %>">
+      <i class="fas fa-user"></i>
+      My Clients
     </div>
     <% end %>
     <div class="logout-container d-flex justify-content-center mt-1">

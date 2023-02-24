@@ -6,7 +6,7 @@ class Api::V1::OrdersController < Api::V1::ApiController
     end
 
     def create
-        @order = Order.new(name: "#{params[:first_name]} #{params[:last_name]}", client_id: @client && @client.id, phone: params[:phone], country: params[:country], city: params[:city], address: params[:address], store_id: @store.id, items_count: 0, total_price: 0)
+        @order = Order.new(name: "#{params[:first_name]} #{params[:last_name]}", client_id: @client && @client.id, phone: params[:phone], country: params[:country], city: params[:city], address: params[:address], store_id: @store.id, items_count: 0, total_price: 0, discount: 0)
     
         params[:order_items].each do |order_item|
           product = Product.find_by(id: order_item[:product_id])
@@ -14,9 +14,10 @@ class Api::V1::OrdersController < Api::V1::ApiController
           if product
             variants = JSON.parse order_item[:variants]
 
-            @order.order_items.build(store_id: @store.id, product_id: order_item[:product_id], quantity: order_item[:quantity], price: product.selling_price, variants: variants)
+            @order.order_items.build(store_id: @store.id, product_id: order_item[:product_id], quantity: order_item[:quantity], price: product.selling_price, variants: variants, discount: product.discount)
             @order.items_count += order_item[:quantity].to_i
             @order.total_price += product.selling_price * order_item[:quantity].to_i
+            @order.discount += product.discount if product.discount > 0  
           end
         end
 

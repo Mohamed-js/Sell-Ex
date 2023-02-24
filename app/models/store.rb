@@ -9,7 +9,7 @@ class Store < ApplicationRecord
   has_many :items, through: :products, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :order_items, dependent: :destroy  
-  has_many :active_products, -> { where(open_to_store: true) }, class_name: "Product" 
+  has_many :active_products, -> { where(active: true) }, class_name: "Product" 
   belongs_to :user
 
   scope :active, -> { where(active: true) }

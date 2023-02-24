@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 
   # GET /clients or /clients.json
   def index
-    @clients = @current_store.clients.all
+    @clients = @current_store.clients
   end
 
   # GET /clients/1 or /clients/1.json

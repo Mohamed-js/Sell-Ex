@@ -1,9 +1,10 @@
-<h5 class="mb-2 bg-glass p-3 flex-row justify-between">
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
   Orders
-  <div class="flex-row">
-    <a href="/orders" class="btn bg-primary white py-0 mr-1">All orders</a>
-    <a href="/orders?q=pending" class="btn bg-primary white py-0 mr-1">Pending orders</a>
-    <a href="/orders?q=complete" class="btn bg-primary white py-0">Complete orders</a
+  <div class="flex-row flex-wrap">
+    <a href="/orders" class="btn bg-primary white py-0 mr-1 mt-1">All orders</a>
+    <a href="/orders?q=pending" class="btn bg-primary white py-0 mr-1 mt-1">Pending orders</a>
+    <a href="/orders?q=complete" class="btn bg-primary white py-0 mr-1 mt-1">Complete orders</a>
+    <a href="/orders?q=return" class="btn bg-primary white py-0 mt-1">Returned orders</a>
   </div>
 </h5>
 <br />
@@ -13,6 +14,7 @@
     <tr>
       <th>Products</th>
       <th>Total Price</th>
+      <th>Final Price After Discount</th>
       <th>Items Count</th>
       <th>Phone</th>
       <th>Country</th>
@@ -30,7 +32,8 @@
             <h6 class="bg-primary white p-1 rounded"><%= link_to item.product.name, product_path(item.product_id) %></h6>
           <% end %>
         </td>
-        <td><%= order.total_price %></td>
+        <td>$<%= order.total_price %></td>
+        <td>$<%= order.total_price - order.discount %></td>
         <td><%= order.items_count %></td>
         <td><%= order.phone %></td>
         <td><%= order.country %></td>
@@ -45,12 +48,13 @@
         </td>
         <td>
           <div class="dropdown dropleft">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-gear"></i>
             </button>
             <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
               <%= link_to 'Mark as complete', "/orders/#{order.id}/update_status/complete", class:"btn bg-success white dropdown-item mb-2" if order.status != "complete" %>
               <%= link_to 'Mark as pending', "/orders/#{order.id}/update_status/pending", class:"btn bg-secondary white dropdown-item mb-2" if order.status != "pending"  %>
+              <%= link_to 'Mark as return', "/orders/#{order.id}/update_status/return", class:"btn bg-danger white dropdown-item mb-2" if order.status != "return" && order.status == 'complete'  %>
               <%= link_to 'Details', order, class:"btn bg-primary white dropdown-item mb-2" %>
               <%= button_to 'Delete', order, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn bg-gradient-danger white dropdown-item" %>
             </div>

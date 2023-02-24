@@ -761,7 +761,8 @@ hr {
 
 .sidebar-links .sidebar-link i {
   margin-right: 8px;
-  width: 15px;
+  width: 22px;
+  font-size: 20px;
 }
 
 .sidebar-links .sidebar-link:hover {

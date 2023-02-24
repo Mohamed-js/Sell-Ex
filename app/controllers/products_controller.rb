@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
   def index
 
-    @products = @current_store.products.order('name')
+    @products = @current_store.products.includes(:category).order('name')
 
   end
 
@@ -150,6 +150,27 @@ class ProductsController < ApplicationController
   end
 
 
+  def activate
+    s = @current_store.products.find params[:id]
+    s.active = true
+    s.save
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "You activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def deactivate
+    s = @current_store.products.find params[:id]
+    s.active = false
+    s.save
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "You deactivated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+
 
   private
 
@@ -171,7 +192,7 @@ class ProductsController < ApplicationController
 
     params.require(:product).permit(:name, :selling_price, :quantity, :image, :description,
 
-                                    :open_to_store, :category_id, :variants)
+                                    :open_to_store, :category_id, :variants, :discount)
 
   end
 

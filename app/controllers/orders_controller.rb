@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
   def update_status
     if @order.update(status: params[:status])
       respond_to do |format|
-        format.html { redirect_to orders_url, notice: "Order was successfully marked as complete." }
+        format.html { redirect_to orders_url, notice: "Order was successfully marked as #{params[:status]}." }
         format.json { head :no_content }
       end
     end

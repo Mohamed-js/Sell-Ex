@@ -94,7 +94,7 @@
           </div>
           <div>
             <p class="m-0">  Stores  </p>
-            <h4><%= @stores_count %><small class="primary"> > </small> <small class="tertiary">1 active</small> </h4>
+            <h4><%= @stores_count %><small class="primary"> > </small> <small class="tertiary"><%= @active_stores_count %> active</small> </h4>
           </div>
         </div>
       </div>
@@ -126,7 +126,7 @@
   <div class="col-5 pr-0">
   <div class="bg-glass p-2">
   
-    <%= pie_chart @finished_orders_chart, download: {filename: "categories_track", background: "white"}, title: "Categories Sales", dataset: {borderWidth: 5}, empty: "No categories with sales", prefix: "$", thousands: ",", legend: 'right', colors: [ "#f75165", "#00c5ff", '#00ee9f', "#3b3eac"] %>
+    <%= pie_chart @finished_orders_chart, download: {filename: "categories_track", background: "white"}, title: "Store orders", dataset: {borderWidth: 5}, empty: "No orders", suffix: " Orders", thousands: ",", legend: 'right', colors: [ "#f75165", "#00c5ff", '#00ee9f', "#3b3eac"] %>
   </div>
   </div>
   <div class="col-7">

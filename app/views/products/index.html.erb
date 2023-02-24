@@ -1,7 +1,7 @@
-<h5 class="mb-2 bg-glass p-3 flex-row justify-between">
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
   Products
-  <div class="flex-row">
-    <a href="/products/new" class="btn bg-primary white py-0 mr-1">New product</a>
+  <div class="flex-row flex-wrap">
+    <a href="/products/new" class="btn bg-primary white py-0 mr-1 mt-1">New product</a>
   </div>
 </h5>
 <br>
@@ -10,8 +10,12 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Selling Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Price</th>
+      <th scope="col">Discount</th>
       <th scope="col">Stock Amount</th>
+      <th scope="col">Activate</th>
+      <th scope="col">Category</th>
       <th scope="col">Controls</th>
     </tr>
   </thead>
@@ -19,11 +23,21 @@
     <% @products.each do |product| %>
       <tr scope="row">
         <td><%= product.name %></td>
+        <td style="text-align: center;"><%= image_tag product.image, height: 50, alt: product.name  %></td>
         <td><%= product.selling_price %> </td>
+        <td><%= product.discount %> </td>
         <td><%= product.quantity %> <%= product.quantity <= 1 ? 'Piece' : "Pieces" %></td>
         <td>
+          <% if product.active %>
+              <a href='/products/<%= product.id %>/deactivate'><i class="fa fa-toggle-on success"></i></a>
+            <% else %>
+              <a href='/products/<%= product.id %>/activate'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
+            <% end %>
+        </td>
+        <td><%= product.category.name.upcase %> </td>
+        <td>
           <div class="dropdown dropleft">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-gear"></i>
             </button>
             <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">

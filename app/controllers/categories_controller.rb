@@ -77,6 +77,27 @@ class CategoriesController < ApplicationController
     end
   end
 
+
+  def activate
+    s = @current_store.categories.find params[:id]
+    s.active = true
+    s.save
+    respond_to do |format|
+      format.html { redirect_to categories_url, notice: "You activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def deactivate
+    s = @current_store.categories.find params[:id]
+    s.active = false
+    s.save
+    respond_to do |format|
+      format.html { redirect_to categories_url, notice: "You deactivated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

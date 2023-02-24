@@ -7,8 +7,7 @@
       <div class="profile-avatar">
         <% @store = Store.where(id:session[:current_store_id]).first %> <% if
         @store && current_user && @store.image %> <%= image_tag @store.image ,
-        class: "full-img" %> <% else %> <%= image_tag 'sellex_logo.png' , class:
-        "full-img" %> <% end %>
+        class: "full-img" %><% end %>
       </div>
       <% if @store && current_user && @store.image %>
         <h5 class="text-center m-0 ml-2"><%= @store.name if @store %></h5>
@@ -17,11 +16,12 @@
   </div>
   
   <% if current_user %> <%= render 'layouts/navlinks'%> <% else %>
-    <div class="flex-col h-100">
+    <div class="flex-col h-100 text-center">
+      <div class=''> <%= image_tag 'sellex_logo.png' , class:
+      "full-img" %> </div>
       <br />
-      <br />
-      <h5 class="text-center white">Welcome To</h5>
-      <h4 class="text-center white">Sell<span class="secondary">Ex</span> Systems</h4>
+      <h5 class="text-center">Welcome To</h5>
+      <h4 class="text-center">Sell<span class="secondary">Ex</span> Systems</h4>
     </div>
   <% end %>
 </div>

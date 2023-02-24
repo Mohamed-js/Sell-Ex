@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
   scope :pending, -> { where(status: "pending") }
   scope :complete, -> { where(status: "complete") }
+  scope :return, -> { where(status: "return") }
 
   def client
     Client.find_by(id: client_id) || 'No registered client'

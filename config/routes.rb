@@ -28,10 +28,20 @@ Rails.application.routes.draw do
       get :search
     end
   end
-  resources :products
+  resources :products do
+    collection do
+      get '/:id/activate', to: "products#activate"
+      get '/:id/deactivate', to: "products#deactivate"
+    end
+  end
+  resources :categories do
+    collection do
+      get '/:id/activate', to: "categories#activate"
+      get '/:id/deactivate', to: "categories#deactivate"
+    end
+  end
   resources :clients
   get '/category/:id', to: 'categories#show', constraints: { subdomain: 'app' }
-  resources :categories
 
   get "/stores/:id/*path", to: "stores#show"
   get "/refresher", to: "stores#refresher"
@@ -40,7 +50,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :stores, only: %i[show index]
       resources :clients, only: %i[show]
-      resources :products, only: %i[index show create]
+      resources :products, only: %i[index show create] do
+        collection do
+          get '/with_discount', to: "products#with_discount"
+        end
+      end
+      resources :categories, only: %i[index show]
       resources :sessions, only: %i[create]
       resources :registrations, only: %i[create]
       resources :orders, only: %i[index create]
