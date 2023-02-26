@@ -20,14 +20,14 @@
     <%= select_tag "product[#{:category_id}]", options_from_collection_for_select(@categories, "id", "name"), class:"form-control" %>
   </div>
   <div class="field form-group">
-    <%= form.label "Selling Price" %>
+    <%= form.label "Price" %>
     <%= form.number_field :selling_price, class:"form-control" , step: :any, placeholder: "Selling Price" %>
   </div>
   <div class="field form-group">
-    <%= form.label "Wholesale Price" %>
-    <%= form.number_field :whole_sale_price, class:"form-control" , step: :any, placeholder: "Wholesale Price" %>
+    <%= form.label "Discount" %>
+    <%= form.number_field :discount, class:"form-control" , step: :any, placeholder: "Discount" %>
   </div>
-  <% if @product.image.attached? %>
+  <% if @product.image %>
     <%= image_tag @product.image, :width=>180, :crop=>"fill", class: "rounded my-2" %>
   <% end %>
   <div class="field form-group mb-3">

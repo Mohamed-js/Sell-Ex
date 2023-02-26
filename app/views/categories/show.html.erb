@@ -10,7 +10,6 @@
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Selling Price</th>
-      <th scope="col">Wholesale Price</th>
       <th scope="col" small='true'>Stock Amount</th>
       <th scope="col"></th>
       <th scope="col" small='true'></th>
@@ -21,7 +20,6 @@
       <tr scope="row">
         <td><%= product.name %></td>
         <td><%= product.selling_price %> </td>
-        <td><%= product.whole_sale_price %> </td>
         <td><%= product.items.count %> <%= product.items.count <= 1 ? 'Piece' : "Pieces" %></td>
         <% if current_user.admin %>
           <td><%= link_to 'Show Pieces', product, class:"btn bg-gradient-tertiary white" %></td>

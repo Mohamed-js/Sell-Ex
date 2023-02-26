@@ -33,7 +33,8 @@ a:hover {
 }
 
 .table-container {
-  overflow-x: scroll;
+  overflow-x: auto;
+  min-height: 20vh;
 }
 
 .table-container::-webkit-scrollbar {

@@ -1,22 +1,9 @@
 class StoresController < ApplicationController
-  skip_before_action :authenticate_user!
   before_action :set_store, only: %i[ destroy update edit design update_design ]
-  before_action :set_store_by_name, only: %i[show]
   before_action :default_store_options, only: :create
 
   def index
-    @stores = Store.all
-  end
-
-  def show
-    @products = []
-    all_products = @store.products
-    all_products.each { |product|
-      @products.push({
-        product: product,
-        img: url_for(product.image),
-      })
-    }
+    @stores = current_user.stores.all
   end
 
   def new
@@ -27,7 +14,7 @@ class StoresController < ApplicationController
   end
 
   def create
-    @store = Store.new(store_params)
+    @store = current_user.stores.build(store_params)
     @store.options = @store_options.to_json
 
     image = Cloudinary::Uploader.upload(store_params[:image], 
@@ -50,8 +37,18 @@ class StoresController < ApplicationController
   end
 
   def update
+    if store_params[:image]
+      image = Cloudinary::Uploader.upload(store_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true)
+
+      @store.image = image['secure_url']
+      @store.image_id = image['public_id']
+    end
+
     respond_to do |format|
-      if @store.update(store_params)
+      if @store.update(store_params.except(:image))
         format.html { redirect_to stores_url, notice: "Store was successfully updated." }
         format.json { render :index, status: :ok }
       else
@@ -65,7 +62,6 @@ class StoresController < ApplicationController
     @store.options = params[:store_options].to_json
 
     respond_to do |format|
-      p format
       if @store.save
         format.html { render json: {success: true}, notice: "Store design was successfully updated." }
         format.json { render :index, status: :ok }
@@ -78,19 +74,29 @@ class StoresController < ApplicationController
 
   def control
     session[:current_store_id] = params[:id]
-    s = Store.find params[:id]
+    s = current_user.stores.find params[:id]
     respond_to do |format|
       format.html { redirect_to stores_url, notice: "You now control #{s.name}." }
       format.json { render :index, status: :ok }
     end
   end
 
-  def activation_toggle
-    s = Store.find params[:id]
-    s.active = !s.active
+  def activate
+    s = current_user.stores.find params[:id]
+    s.active = true
     s.save
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: "You #{"de" unless s.active}activated #{s.name}." }
+      format.html { redirect_to stores_url, notice: "You activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def deactivate
+    s = current_user.stores.find params[:id]
+    s.active = false
+    s.save
+    respond_to do |format|
+      format.html { redirect_to stores_url, notice: "You deactivated #{s.name}." }
       format.json { render :index, status: :ok }
     end
   end
@@ -115,13 +121,7 @@ class StoresController < ApplicationController
   private
 
   def set_store
-    @store = Store.find(params[:id])
-  end
-
-  def set_store_by_name
-    subdomain = request.host.split('.')[0]
-    @store = Store.where('lower(name) = ?', subdomain.downcase).first 
-    render 'layouts/404' unless @store && @store.active
+    @store = current_user.stores.find(params[:id])
   end
 
   def default_store_options

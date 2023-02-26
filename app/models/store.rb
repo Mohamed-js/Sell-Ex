@@ -9,13 +9,8 @@ class Store < ApplicationRecord
   has_many :items, through: :products, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :order_items, dependent: :destroy  
-  
+  has_many :active_products, -> { where(active: true) }, class_name: "Product" 
+  belongs_to :user
 
-  after_initialize :serialize_options, unless: :new_record?
-  def serialize_options
-    # options = JSON.parse options
-    # this.options = JSON.parse options
-    # self.options  = JSON.parse options
-  end
-
+  scope :active, -> { where(active: true) }
 end

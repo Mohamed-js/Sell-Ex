@@ -17,7 +17,7 @@ class BillsController < ApplicationController
   # GET /bills/new
   def new
     @bill = Bill.new
-    @products = @current_store.products.all.select(:id, :name, :selling_price, :whole_sale_price).order(:name)
+    @products = @current_store.products.all.select(:id, :name, :selling_price).order(:name)
   end
 
   # GET /bills/1/edit
@@ -26,68 +26,7 @@ class BillsController < ApplicationController
 
   # POST /bills or /bills.json
   def create
-    notes = ""
-    @store = @current_store
-    buyer = params["buyer"] ? params["buyer"] : nil
-    paid_amount = params["paid_amount"] ? params["paid_amount"].to_i : nil
-    @bill = Bill.create(buyer: buyer, store_id: @current_store.id)
-    @bill.seller = current_user.name
-    bill_count = 0
-    params.to_enum.each_with_index do |pair, index|
-      is_sale = pair[0] =~ /sale_[0-9]/
-      if is_sale == 0
-        # Extract values
-        i = index + 1
-        discount = (pair[1]["sale#{i}[discount]"] ? pair[1]["sale#{i}[discount]"] : 0).to_i
-        quantity = (pair[1]["sale#{i}[quantity]"]).to_i
-        product_id = pair[1]["sale#{i}[id]"]
-        product = @current_store.products.find(product_id)
-        item = Item.where(product_id: product_id).order("created_at ASC").first
-        price_to_use = pair[1]["sale#{i}[type]"] === "selling_price" ? product.selling_price : product.whole_sale_price
-
-        sale_type = pair[1]["sale#{i}[type]"] === "selling_price" ? "public" : "wholesale"
-
-        # Create sale
-        sale = Sale.new(store_id: @current_store.id, bill_id: @bill.id, product_id: product_id, quantity: quantity, name: product.name, buying_price: item.buying_price, selling_price: price_to_use, validity: product.validity, discount: discount, sale_type: sale_type)
-
-        # If a valid sale ==> Add to bill
-        if quantity <= product.items.count
-          if sale.save
-            bill_count += 1
-            if @bill.total
-              @bill.total = @bill.total + price_to_use * quantity - discount
-            else
-              @bill.total = price_to_use * quantity - discount
-            end
-            quantity.times do
-              item = Item.where(product_id: product_id).order("created_at ASC").first
-              item.destroy
-            end
-            product.quantity -= quantity
-            product.save
-          else
-            redirect_to "/sell", notice: "Something went wrong..!"
-          end
-        else
-          notes += "الكمية التي تريد بيعها من #{product.name} ليست متاحه في المخزن. || "
-        end
-      end
-    end
-
-    # Handle Store Selling Dorge && Save
-    @store.dorg += @bill.total
-
-    if paid_amount && @bill.total > paid_amount
-      Debt.create(store_id: @current_store.id, debtor: buyer, bill_id: @bill.id, dept_value: @bill.total - paid_amount)
-      @store.dorg -= @bill.total - paid_amount
-    end
-
-    if bill_count == 0
-      @bill.destroy
-    else
-      @store.save
-      @bill.save
-    end
+    # We have product quantity, bill create, sale create, assign to store, 
 
     render json: { message: "Saved" }
   end

@@ -1,23 +1,46 @@
-<h1 class="text-center mb-3">Categories</h1>
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
+  Categories
+  <div class="flex-row flex-wrap">
+    <a href="/categories/new" class="btn bg-primary white py-0 mr-1 mt-1">New category</a>
+  </div>
+</h5>
+<br />
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Image</th>
-      <th ></th>
-      <th small='true'></th>
-      <th small='true'></th>
+      <th scope="col">Activate</th>
+      <th>Controls</th>
+
     </tr>
   </thead>
   <tbody>
     <% @categories.each do |category| %>
       <tr>
         <td><%= category.name.capitalize %></td>
-        <td><%= image_tag category.image, height: 50  %></td>
-        <td><%= link_to 'Products', category, class:"btn bg-primary white" %></td>
-        <td><%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white" %></td>
-        <td><%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white" %></td>
+        <td style="text-align: center;"><%= image_tag category.image, height: 50, alt: category.name %></td>
+        <td>
+          <% if category.active %>
+              <a href='/categories/<%= category.id %>/deactivate'><i class="fa fa-toggle-on success"></i></a>
+            <% else %>
+              <a href='/categories/<%= category.id %>/activate'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
+            <% end %>
+        </td>
+        <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <%= link_to 'Products', category, class:"btn bg-primary white mb-2 dropdown-item" %>
+            <%= link_to 'Edit', edit_category_path(category), class:"btn bg-gradient-secondary white mb-2 dropdown-item" %>
+            <%= button_to 'Delete', category, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+            </div>
+          </div>
+        </td>
+
       </tr>
     <% end %>
   </tbody>

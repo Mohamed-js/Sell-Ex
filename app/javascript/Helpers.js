@@ -1,10 +1,7 @@
-// const base = 'http://computech-management-system.herokuapp.com';
-const base = 'http://127.0.0.1:3000/';
-
 export const newBill = (bill) => {
   const response = fetch(`/bills`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
     body: JSON.stringify(bill),
   })
     .then((res) => res.json())
@@ -15,8 +12,8 @@ export const newBill = (bill) => {
 
 export const newOrder = (order) => {
   const response = fetch(`/orders`, {
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    method: "POST",
     body: JSON.stringify(order),
   })
     .then((res) => res.json())

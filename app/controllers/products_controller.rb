@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
   def index
 
-    @products = @current_store.products.order('name')
+    @products = @current_store.products.includes(:category).order('name')
 
   end
 
@@ -60,7 +60,8 @@ class ProductsController < ApplicationController
 
     @product.store_id = @current_store.id
 
-    @product.variants = JSON.parse(product_params[:variants]).deep_symbolize_keys
+    @product.variants = JSON.parse(product_params[:variants])
+    @product.variants = @product.variants.deep_symbolize_keys if @product.variants.length >= 1
 
     image = Cloudinary::Uploader.upload(product_params[:image], 
       use_filename:true, 
@@ -98,10 +99,19 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
 
   def update
+    if product_params[:image]
+      image = Cloudinary::Uploader.upload(product_params[:image], 
+      use_filename:true, 
+      unique_filename:true,
+      overwrite:true)
 
+      @product.image = image['secure_url']
+      @product.image_id = image['public_id']
+    end
+    
     respond_to do |format|
 
-      if @product.update(product_params)
+      if @product.update(product_params.except(:image))
 
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
 
@@ -140,6 +150,27 @@ class ProductsController < ApplicationController
   end
 
 
+  def activate
+    s = @current_store.products.find params[:id]
+    s.active = true
+    s.save
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "You activated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+  def deactivate
+    s = @current_store.products.find params[:id]
+    s.active = false
+    s.save
+    respond_to do |format|
+      format.html { redirect_to products_url, notice: "You deactivated #{s.name}." }
+      format.json { render :index, status: :ok }
+    end
+  end
+
+
 
   private
 
@@ -161,7 +192,7 @@ class ProductsController < ApplicationController
 
     params.require(:product).permit(:name, :selling_price, :quantity, :image, :description,
 
-                                    :open_to_store, :category_id, :variants)
+                                    :open_to_store, :category_id, :variants, :discount)
 
   end
 

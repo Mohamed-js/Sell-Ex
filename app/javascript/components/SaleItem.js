@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const SaleItem = ({ index, products, setSales }) => {
   const [productsToShow, setProductsToShow] = useState();
@@ -6,10 +6,10 @@ const SaleItem = ({ index, products, setSales }) => {
   const [changingSearch, setChangingSearch] = useState(false);
   const sale = `sale_` + index;
   const handleClick = (e) => {
-    const sellingId = e.target.getAttribute('product-id');
-    const sellingPrice = e.target.getAttribute('selling-price');
-    const wholePrice = e.target.getAttribute('whole-selling-price');
-    setProd({ selling_price: sellingPrice, whole_selling_price: wholePrice });
+    const sellingId = e.target.getAttribute("product-id");
+    const sellingPrice = e.target.getAttribute("selling-price");
+    // const wholePrice = e.target.getAttribute('whole-selling-price');
+    setProd({ selling_price: sellingPrice });
     document.getElementById(`search${index}`).remove();
     document.getElementById(`item${index}`).textContent = e.target.textContent;
     setSales((prev) => {
@@ -17,7 +17,7 @@ const SaleItem = ({ index, products, setSales }) => {
         ...prev,
         [sale]: {
           [`sale${index}[id]`]: sellingId,
-          [`sale${index}[type]`]: 'selling_price',
+          [`sale${index}[type]`]: "selling_price",
         },
       };
     });
@@ -67,7 +67,8 @@ const SaleItem = ({ index, products, setSales }) => {
           <h4
             className="mr-2 white"
             id={`item${index}`}
-            onChange={handleSearchChange}></h4>
+            onChange={handleSearchChange}
+          ></h4>
 
           <input
             onChange={handleChange}
@@ -96,11 +97,12 @@ const SaleItem = ({ index, products, setSales }) => {
                   product-id={product.id}
                   selling-price={product.selling_price}
                   whole-selling-price={product.whole_sale_price}
-                  className="row col-12 border-bottom product-select m-0 p-1">
+                  className="row col-12 border-bottom product-select m-0 p-1"
+                >
                   {product.name}
                 </p>
               ))}
-            {prod && (
+            {/* {prod && (
               <div className="row w-100">
                 <div className="col-6">
                   <input
@@ -114,18 +116,9 @@ const SaleItem = ({ index, products, setSales }) => {
                   />
                   <span>Selling price ${prod.selling_price}</span>
                 </div>
-                <div className="col-6">
-                  <input
-                    type="radio"
-                    name={`sale${index}[type]`}
-                    onChange={handleChange}
-                    value="whole_sale_price"
-                    className="m-2"
-                  />
-                  <span>Wholesale price ${prod.whole_selling_price}</span>
-                </div>
+                
               </div>
-            )}
+            )} */}
           </div>
         )}
       </div>

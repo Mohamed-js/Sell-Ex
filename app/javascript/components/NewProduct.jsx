@@ -98,6 +98,18 @@ const NewProduct = ({ categories, variants }) => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="discount">Discount</label>
+          <input
+            id="discount"
+            className="form-control"
+            type="number"
+            name="product[discount]"
+            placeholder="Discount"
+            maxLength={20}
+            defaultValue={0}
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="category">Product category</label>
           <select
             name="product[category_id]"

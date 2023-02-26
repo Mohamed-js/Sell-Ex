@@ -4,23 +4,44 @@ class SalesController < ApplicationController
 
   # GET /sales or /sales.json
   def index
-    this_month = Date.today.beginning_of_month
-    discounts = @current_store.sales.sum(:discount)
-    month_discounts = @current_store.sales.month_discounts(this_month)
-    debts = @current_store.debts.sum(:dept_value)
-    month_debts = @current_store.debts.month_debts(this_month)
-
-    @products_value = @current_store.items.sum(:buying_price)
-
-    @sales = @current_store.sales.includes(:bill, :product).order("id DESC").limit(25)
-    @total_sales = @sales.sum("sales.selling_price * sales.quantity") - discounts - debts
-    @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
-    @month_sales = @sales.where("sales.created_at > ?", (this_month)).sum("sales.selling_price * sales.quantity") - month_discounts - month_debts
-    @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
+    @sales = @current_store.sales.includes(:bill).order("id DESC")
   end
 
-  def all
-    @sales = @current_store.sales.includes(:bill).order("id DESC")
+  def dashboard
+    @sales = @current_store.sales.includes(:bill, :product).order("id DESC")
+    @store_order_items = @current_store.order_items
+    this_month = Date.today.beginning_of_month
+    last_month = (Date.today.beginning_of_month - 1).beginning_of_month
+    # discounts = @current_store.sales.sum(:discount)
+    # month_discounts = @current_store.sales.month_discounts(this_month)
+    # debts = @current_store.debts.sum(:dept_value)
+    # month_debts = @current_store.debts.month_debts(this_month)
+    # @products_value = @current_store.items.sum(:buying_price)
+    # @month_profit = @month_sales - @sales.where("sales.created_at > ?", (this_month)).sum("sales.buying_price * sales.quantity")
+    # @total_profit = @total_sales - @sales.sum("sales.buying_price * sales.quantity")
+    @total_sales = @store_order_items.sum("(price - discount) * quantity") 
+    @month_sales = @store_order_items.where("created_at > ?", (this_month)).sum("(price - discount) * quantity") 
+    @products_count = @current_store.products.count
+    @clients_count = @current_store.clients.count
+    @orders = @current_store.orders.count
+    @order_items = @current_store.order_items.count
+    @categories_count = @current_store.categories.count
+
+    @stores_count = current_user.stores.count
+    @active_stores_count = current_user.stores.active.count
+
+    # Orders every day count track
+    @store_orders = @current_store.orders
+    @orders_chart = @store_orders.group_by_day(:created_at).count
+    
+    # Revenue per category
+    @categories_chart = @current_store.order_items.joins(:product, :category).group('UPPER(categories.name)').sum('order_items.quantity * (price - order_items.discount)')
+
+    # Users every day count track
+    @users_chart = @current_store.clients.group_by_day(:created_at).count
+
+    # Finished to un finished orders
+    @finished_orders_chart = @store_orders.count > 0 ? @finished_orders_chart = {'Pending'=> @store_orders.pending.count, 'Complete'=> @store_orders.complete.count, 'Returned'=> @store_orders.return.count} : {}
   end
 
   # GET /sales/1 or /sales/1.json

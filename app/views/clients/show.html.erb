@@ -1,6 +1,14 @@
 <p>
   <strong>Name:</strong>
-  <%= @client.name %>
+  <%= @client.first_name && @client.first_name + " " + @client.last_name %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%= @client.email && @client.email %>
+</p>
+<p>
+  <strong>Phone:</strong>
+  <%= @client.phone && @client.phone %>
 </p>
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>

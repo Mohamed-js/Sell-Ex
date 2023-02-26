@@ -95,13 +95,14 @@ const Designer = ({ store }) => {
       </div>
       <div
         className="col-9"
-        style={{
-          // background: "#171717",
-          // overflowY: "scroll",
-          // overflowX: "hidden",
-          height: "100vh",
-          // maxWidth: 600,
-        }}
+        style={
+          {
+            // background: "#171717",
+            // overflowY: "scroll",
+            // overflowX: "hidden",
+            // maxWidth: 600,
+          }
+        }
       >
         <div className="tab-content mr-3" id="v-pills-tabContent">
           <div

@@ -1,74 +1,44 @@
-<h1 class="text-center mb-3">
-  Dashboard  
-</h1>
-<br>
-<div class="row m-1 max-width m-auto justify-content-center">
-  <div  class="col-12 justify-content-center row py-1 rounded p-0">
-    <div  class="col-5 text-center p-1 bg-gradient white rounded mr-2 white">
-      <p class="m-0"> Cash </p>
-      <h4>$<%= @current_store.dorg %></h4>
-    </div>
-    <div  class="col-5 text-center p-1 bg-gradient white rounded white">
-      <p class="m-0">  Products Capital </p>
-      <h4>$<%= @products_value %></h4>
-    </div>
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
+  Sales
+  <div class="flex-row flex-wrap">
+    <a href="/bills/new" class="btn bg-primary white py-0 mt-1">New sale</a>
   </div>
-  <% if current_user.admin %>
-    <div class="col-12 justify-content-center row py-1 rounded p-0">
-      <div class="col-5 text-center p-1 bg-secondary white rounded mr-2 white">
-        <p class="m-0"> Month Sales </p>
-        <h4>$<%= @month_sales %></h4>
-      </div>
-      <div  class="col-5 text-center p-1 bg-secondary white rounded white">
-        <p class="m-0">  Month Profits </p>
-        <h4>$<%= @month_profit %> </h4>
-      </div>
-    </div>
-    
-    <div class="col-12 justify-content-center row py-1 rounded p-0">
-      <div class="col-5 text-center p-1 bg-tertiary white rounded mr-2 white">
-        <p class="m-0">  Total  </p>
-        <h4>$<%= @total_sales %></h4>
-      </div>
-      <div class="col-5 text-center p-1 bg-tertiary white rounded white">
-        <p class="m-0">Total Profits </p>
-        <h4>$<%= @total_profit %></h4>
-      </div>
-    </div>
-  <% end %>
-</div>
+</h5>
+
 <br>
+
 <div class="table-container">
 <table class="table table-bordered table-sm table-striped">
   <thead class="thead-dark">
     <tr>
-      <th scope="col" >Bill</th>
-      <th scope="col">Name</th>
-      <th scope="col" >Quantity</th>
+      <th scope="col" small='true'>Bill</th>
+      <th scope="col">Product</th>
+      <th scope="col" small='true'>Quantity</th>
       <th scope="col">Selling Price</th>
-      <th scope="col" >After Discount</th>
+      <th scope="col">After Discount</th>
       <th scope="col">Seller</th>
       <th scope="col">Selling Date</th>
       <% if current_user.admin %>
-        <th colspan="2">Controls</th>
+      <th colspan="2">Controls</th>
       <% end %>
     </tr>
   </thead>
+
   <tbody>
     <% @sales.each do |sale| %>
-      <tr scope="row">
-        <td><%= button_to sale.bill.id , bill_path(sale.bill.id), method: "get", class:"btn primary" %> </td>
+      <tr  scope="row">
+        <td><%= button_to sale.bill.id , bill_path(sale.bill.id), method: "get", class:"btn blue-link" %> </td>
         <% if sale.product %>
-          <td><%= link_to sale.name , product_path(sale.product.id), method: "get", class:"btn primary" %></td>
+          <td><%= button_to sale.name , product_path(sale.product.id), method: "get", class:"btn blue-link" %></td>
         <% else %>
-          <td class="tertiary"><%= sale.name %></td>
+          <td><%= sale.name %></td>
         <% end %>
         <td><%= sale.quantity %></td>
-        <td>$<%= sale.selling_price %>  <%= " - " + sale.sale_type if sale.sale_type %> </td>
-        <td>$<%= sale.quantity * sale.selling_price - sale.discount %> </td>
+        <td>$<%= sale.selling_price %> <%= " - " + sale.sale_type if sale.sale_type %> </td>
+        <td>$<%= sale.quantity * sale.selling_price - sale.discount %></td>
         <% if sale.bill.seller %>
           <td><%= sale.bill.seller %></td>
-        <% else %>
+          <% else %>
           <td><%= sale.seller %></td>
         <% end %>
         <td><%= sale.created_at.strftime('%F || %I:%M || %p') %></td>
@@ -81,6 +51,3 @@
   </tbody>
 </table>
 </div>
-<br>
-
-<br>

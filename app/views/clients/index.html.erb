@@ -1,21 +1,37 @@
-<h1>Clients</h1>
-<table>
-  <thead>
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
+Clients
+  <div class="flex-row flex-wrap">
+  </div>
+</h5>
+<div class="table-container">
+<table class="table table-bordered table-sm table-striped">
+  <thead class="thead-dark">
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @clients.each do |client| %>
       <tr>
-        <td><%= client.name %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= client.first_name + " " + client.last_name if client.first_name %> <%= "-" unless client.first_name %></td>
+        <td><%= client.email %></td>
+        <td><%= client.phone && client.phone %></td>
+        <td><div class="dropdown dropleft">
+        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-gear"></i>
+        </button>
+        <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+        <%= link_to 'Show', client, class:"btn bg-primary white mb-2 dropdown-item" %>
+        <%= link_to 'Edit', edit_client_path(client), class:"btn bg-gradient-secondary white mb-2 dropdown-item" %>
+        <%= button_to 'Delete', client, method: :delete, data: { confirm: 'You sure..?' }, class:"btn bg-gradient-danger white dropdown-item" %>
+        </div>
+      </div></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<br>
-<%= link_to 'New Client', new_client_path %>
+</div>
+

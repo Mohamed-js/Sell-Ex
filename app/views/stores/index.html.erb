@@ -1,8 +1,13 @@
-<h1 class="text-center mb-3">My Stores</h1>
+<h5 class="mb-2 bg-glass p-3 flex-row justify-between flex-wrap">
+  My stores
+  <div class="flex-row flex-wrap">
+    <a href="/stores/new" class="btn bg-primary white py-0 mr-1 p-1 rounded mt-1">New store</a>
+  </div>
+</h5>
 
 <br />
 <div class="table-container">
-<table class="table table-bordered table-sm table-striped max-width">
+<table class="table table-bordered table-sm table-striped">
 <thead class="thead-dark">
   <tr>
     <th scope="col">Store</th>
@@ -19,7 +24,7 @@
   <tbody id='table'>
   <tr scope="row">
     <td>
-      <%= image_tag store.image, class: "rounded" , width: 45, height: 45 %>
+      <%= image_tag store.image, class: "rounded" , width: 45, height: 45, alt: store.name %>
     </td>
     <td>
       <%= store.name %>
@@ -27,11 +32,10 @@
    
     <td>
       <% if store.active %>
-        <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on success"></i></a>
+          <a href='/stores/<%= store.id %>/deactivate'><i class="fa fa-toggle-on success"></i></a>
         <% else %>
-          <a href='/stores/<%= store.id %>/activation_toggle'><i class="fa fa-toggle-on danger"
-              style="transform: rotateZ(180deg);"></i></a>
-          <% end %>
+          <a href='/stores/<%= store.id %>/activate'><i class="fa fa-toggle-on danger" style="transform: rotateZ(180deg);"></i></a>
+        <% end %>
     </td>
 
     <td><a class="btn white p-0" href='/stores/<%= store.id %>/design' style="line-height: 1;" target="_blank">
@@ -41,19 +45,25 @@
         href='/stores/<%= store.id %>/control' style="line-height: 1.4;">
         <%= store.id==session[:current_store_id].to_i ? 'Controlled' : 'Control' %>
       </a></td>
-    <td><a class="btn primary" href='/stores/<%= store.id %>' target="_blank">
-        <i class="fa fa-external-link"></i>
-      </a>
-      <a class="btn secondary" href='/stores/<%= store.id %>/edit'>
-        <i class="fa fa-edit"></i>
-      </a>
-      <span style="display: inline-block;">
-      <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?'
-        }, class:"btn danger" do %>
-        <i class="fa fa-trash"></i>
-        <% end %>
-        </span>
-    </td>
+      <td>
+          <div class="dropdown dropleft">
+            <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-gear"></i>
+            </button>
+            <div class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+            <a class="btn white bg-primary dropdown-item mb-2" href='https://www.<%= store.name.downcase %>.hostname.com' target="_blank">
+              <i class="fa fa-external-link "></i> Show
+            </a>
+            <a class="btn white bg-secondary dropdown-item mb-2" href='/stores/<%= store.id %>/edit'>
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            <%= button_to store, method: :delete, data: { confirm: 'You will lose everything related to this store, sure..?'}, class:"btn white bg-danger dropdown-item" do %>
+              <i class="fa fa-trash"></i> Delete
+            <% end %>
+            </div>
+          </div>
+        </td>
+    
   </tr>
   <% end %>
   </tbody>
