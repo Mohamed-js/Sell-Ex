@@ -7,103 +7,66 @@
 
 
 
-<div class="row m-1 m-auto justify-content-center">
-    <div class="col-12 justify-content-center row py-1 rounded p-0 gap-2">
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-sack-dollar' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Earnings  </p>
-            <h4>$<%= @total_sales %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-money-bill-1-wave' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Month  </p>
-            <h4>$<%= @month_sales %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-cube' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Products  </p>
-            <h4><%= @products_count %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-user' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Customers  </p>
-            <h4><%= @clients_count %></h4>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 
-<div class="row m-auto justify-content-center">
-    <div class="col-12 justify-content-center row pb-2 rounded p-0">
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-truck-fast' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Orders  </p>
-            <h4><%= @orders %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fa fa-boxes-packing' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Sold units   </p>
 
-            <h4><%= @order_items %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fas fa-th-large' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Categories  </p>
-            <h4><%= @categories_count %></h4>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="flex-row p-1 m-2 py-3 bg-glass rounded dashboard-card">
-          <div class="col-4 flex-row align-items-center justify-center">
-            <i class='fas fa-store' style="font-size: 1.5rem"></i>
-          </div>
-          <div>
-            <p class="m-0">  Stores  </p>
-            <h4><%= @stores_count %><small class="primary"> > </small> <small class="tertiary"><%= @active_stores_count %> active</small> </h4>
-          </div>
-        </div>
-      </div>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-sack-dollar' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Earnings  </p>
+      <h4 class="bold">$<%= @total_sales %></h4>
     </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-money-bill-1-wave' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Month  </p>
+      <h4 class="bold">$<%= @month_sales %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-cube' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Products </p>
+      <h4 class="bold">$<%= @products_count %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-user' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Customers  </p>
+      <h4 class="bold">$<%= @clients_count %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-truck-fast' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Orders  </p>
+      <h4 class="bold">$<%= @orders %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fa fa-boxes-packing' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Sold units  </p>
+      <h4 class="bold">$<%= @order_items %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fas fa-th-large' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Categories  </p>
+      <h4 class="bold">$<%= @categories_count %></h4>
+    </div>
+  </div>
+  <div class="p-2 flex bg-white rounded-md gap-2 items-center">
+    <i class='fas fa-store' style="font-size: 1.5rem"></i>
+    <div class="text-center flex-1">
+      <p>  Stores  </p>
+      <h4 class="bold">$<%= @stores_count %></h4>
+    </div>
+  </div>
 </div>
 
 <div class="row pt-1">
